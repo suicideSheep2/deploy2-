@@ -46,9 +46,9 @@ export default function Home() {
             .
           </h1>
           <p className='mt-6 text-lg max-w-prose text-muted-foreground'>
-            Welcome to DigitalHippo. Every asset on our
-            platform is verified by our team to ensure our
-            highest quality standards.
+            Welcome to UnwrittenPerhaps. Every asset on our
+            platform is focused for best user experience on exploring to publishing 
+            literature items.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 mt-6'>
             <Link
