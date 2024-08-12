@@ -11,7 +11,7 @@ const NavItems = () => {
   const [activeIndex, setActiveIndex] = useState<
     null | number
   >(null)
-// till here same
+
 
   // useEffect(() => {
   //   const handler = (e: KeyboardEvent) => {
