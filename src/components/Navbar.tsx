@@ -2,6 +2,7 @@ import Link from 'next/link'
 import MaxWidthWrapper from './MaxWidthWrapper'
 // import { Icons } from './Icons'
 import NavItems from './NavItems'
+import { buttonVariants } from './ui/button'
 // import { buttonVariants } from './ui/button'
 // import Cart from './Cart'
 // import { getServerSideUser } from '@/lib/payload-utils'
@@ -14,7 +15,8 @@ import NavItems from './NavItems'
 
 const Navbar =  () => {
   // const nextCookies = cookies()
-//   const { user } = await getServerSideUser(nextCookies)
+  const {user} = null;
+  // const { user } = await getServerSideUser(nextCookies)
 
   return (
     <div className='bg-white sticky z-50 top-0 inset-x-0 h-16'>
@@ -36,7 +38,10 @@ const Navbar =  () => {
                 <NavItems />
               </div>
 
-              {/* <div className='ml-auto flex items-center'>
+
+             
+
+              <div className='ml-auto flex items-center'>
                 <div className='hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
                   {user ? null : (
                     <Link
@@ -56,7 +61,8 @@ const Navbar =  () => {
                   )}
 
                   {user ? (
-                    <UserAccountNav user={user} />
+                    <p></p>
+                    // <UserAccountNav user={user} />
                   ) : (
                     <Link
                       href='/sign-up'
@@ -84,10 +90,10 @@ const Navbar =  () => {
                   )}
 
                   <div className='ml-4 flow-root lg:ml-6'>
-                    <Cart />
+                    {/* <Cart /> */}
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </MaxWidthWrapper>
