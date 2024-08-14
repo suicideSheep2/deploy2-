@@ -4,7 +4,7 @@ import MaxWidthWrapper from './MaxWidthWrapper'
 import NavItems from './NavItems'
 import { buttonVariants } from './ui/button'
 // import { buttonVariants } from './ui/button'
-// import Cart from './Cart'
+import Cart from './Cart'
 // import { getServerSideUser } from '@/lib/payload-utils'
 // import { cookies } from 'next/headers'
 // import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
@@ -15,7 +15,7 @@ import { buttonVariants } from './ui/button'
 
 const Navbar =  () => {
   // const nextCookies = cookies()
-  const {user} = null;
+  const user = null;
   // const { user } = await getServerSideUser(nextCookies)
 
   return (
