@@ -19,7 +19,7 @@ const perks = [
     Icon: ArrowDownToLine,
     
     description:
-      'Get your assets delivered to your email in seconds and download them right away.',
+      'Publish your poems and novels, and connect with fellow writers for collaboration and feedback.',
   },
   {
     // authorized posts
