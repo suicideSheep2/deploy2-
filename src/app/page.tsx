@@ -23,17 +23,17 @@ const perks = [
   },
   {
     // authorized posts
-    name: 'GAI-Assisted Inspiration',
+    name: 'AI-Assisted Inspiration',
     Icon: CheckCircle,
     description:
       'Spark your creativity with our AI poem generator. Input your ideas and watch inspiration unfold.',
   },
   {
     // publish your content on demand
-    name: 'For the Planet',
+    name: "Reader's Corner",
     Icon: Leaf,
     description:
-      "We've pledged 1% of sales to the preservation and restoration of the natural environment.",
+     "Immerse yourself in a diverse collection of user-submitted literature. Discover new voices and timelines.",
   },
 ]
 
