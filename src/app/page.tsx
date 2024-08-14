@@ -23,10 +23,10 @@ const perks = [
   },
   {
     // authorized posts
-    name: 'Guaranteed Quality',
+    name: 'GAI-Assisted Inspiration',
     Icon: CheckCircle,
     description:
-      'Every asset on our platform is verified by our team to ensure our highest quality standards. Not happy? We offer a 30-day refund guarantee.',
+      'Spark your creativity with our AI poem generator. Input your ideas and watch inspiration unfold.',
   },
   {
     // publish your content on demand
