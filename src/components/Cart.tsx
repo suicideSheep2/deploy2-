@@ -61,7 +61,26 @@ const Cart = () => {
                 {/* no need for me tbh */}
                   <span>{formatPrice(1)}</span>
                 </div>
+                <div className='flex'>
+                  <span className='flex-1'>
+                    Total
+                  </span>
+                {/* no need for me tbh */}
+                  <span>{formatPrice(1)}</span>
+                </div>
               </div>
+
+            <SheetFooter>
+              <SheetTrigger asChild> 
+                <Link 
+                href= '/cart'
+                className={buttonVariants({
+                className: 'w-full',
+         })}>
+         Continue to checkout
+                </Link>
+              </SheetTrigger>
+            </SheetFooter>
               </div>
 
           </>

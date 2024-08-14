@@ -1,4 +1,5 @@
 // tbh uselsess for my  kind of idea and need to write from scratch
+// this is for price which is kinda useless for my project haha
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
