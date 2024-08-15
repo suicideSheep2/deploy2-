@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env",
+    "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon ",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@payloadcms/db-mongodb": "^1.7.2",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
@@ -19,7 +20,7 @@
     "express": "^4.19.2",
     "lucide-react": "^0.427.0",
     "next": "14.2.5",
-    "payload": "^1.15.8",
+    "payload": "^2.26.0",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.4.0",
