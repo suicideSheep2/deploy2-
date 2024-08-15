@@ -33,7 +33,7 @@ const perks = [
     name: "Reader's Corner",
     Icon: Leaf,
     description:
-     "Immerse yourself in a diverse collection of user-submitted literature. Discover new voices and timelines.",
+     'Immerse yourself in a diverse collection of user-submitted literature. Discover new voices and timelines.',
   },
 ]
 
@@ -51,17 +51,15 @@ export default function Home() {
           </h1>
           <p className='mt-6 text-lg max-w-prose text-muted-foreground'>
           From AI-sparked verses to epic sagas, craft your literary legacy on a platform 
-          that turns readers into writers and dreams into digital ink."
+          that turns readers into writers and dreams into digital ink.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 mt-6'>
-            <Link
-              href='/products'
-              className={buttonVariants()}>
-              Browse Trending
-            </Link>
-            <Button variant='ghost'>
-              Our quality promise &rarr;
-            </Button>
+          <Link href="/products" className={buttonVariants()}>
+           Browse Trending
+          </Link>
+          <Button variant="ghost">
+           Our quality promise &rarr;
+          </Button>
           </div>
         </div>
 

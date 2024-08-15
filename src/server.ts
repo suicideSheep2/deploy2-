@@ -1,33 +1,34 @@
-// this is for admin dashboard
 import express from 'express'
-import { getPayloadClient } from './app/get-payload'
-import { nextApp, nextHandler } from './next-utilts'
-
+import { getPayloadClient } from './get-payload'
+import { nextApp, nextHandler } from './next-utils'
 
 const app = express()
 const PORT = Number(process.env.PORT) || 3000
 
 const start = async () => {
-    const payload = await getPayloadClient({
-        initOptions: {
-            express: app,
-            onInit: async (cms) => {
-                cms.logger.info('Admin URL ${cms.getAdminURL()}')
-            },
-        },
-    })
-    app.use((req, res) => nextHandler(req, res))
+  const payload = await getPayloadClient({
+    initOptions: {
+      express: app,
+      onInit: async (cms) => {
+        cms.logger.info(`Admin URL: ${cms.getAdminURL()}`)
+      },
+    },
+  })
 
-    nextApp.prepare().then(()=> {
-        payload.logger.info('Next.js started')
+  // Payload middleware must come before Next.js handler
+  app.use(payload.authenticate)
 
-        app.listen(PORT, async () => {
-            payload.logger.info ('next.js app URL: ${process.env.NEXT_PUBLIC_DERVER_URL}'
-                
-            )
-        })
+  app.use((req, res) => nextHandler(req, res))
+
+  nextApp.prepare().then(() => {
+    payload.logger.info('Next.js started')
+
+    app.listen(PORT, async () => {
+      payload.logger.info(
+        `Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`
+      )
     })
+  })
 }
 
 start()
-

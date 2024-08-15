@@ -1,7 +1,0 @@
-
-{
-    "watch": ["server.ts", "src/collections/**/*.ts", "src/trpc/index.ts"],
-    "exect": "ts-node --project tsconfig.server.json src/server.ts --I",
-    "ext": "js ts",
-    "stdin":false
-}
