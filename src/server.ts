@@ -1,6 +1,7 @@
 // this is for admin dashboard
 import express from 'express'
 import { getPayloadClient } from './app/get-payload'
+import { nextApp, nextHandler } from './next-utilts'
 
 
 const app = express()
@@ -15,7 +16,17 @@ const start = async () => {
             },
         },
     })
+    app.use((req, res) => nextHandler(req, res))
 
+    nextApp.prepare().then(()=> {
+        payload.logger.info('Next.js started')
+
+        app.listen(PORT, async () => {
+            payload.logger.info ('next.js app URL: ${process.env.NEXT_PUBLIC_DERVER_URL}'
+                
+            )
+        })
+    })
 }
 
 start()
