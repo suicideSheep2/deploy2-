@@ -1,28 +1,36 @@
-import { buildConfig } from 'payload/config'
+import { buildConfig, Config } from 'payload/config'
+import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-  collections: [], // Add your collections here
+  collections: [],
   routes: {
     admin: '/sell',
   },
   admin: {
-    user: 'users', // or whatever your users collection is called
+    user: 'users',
     bundler: webpackBundler(),
     meta: {
-      titleSuffix: '- Your App Name',
+      titleSuffix: '- DigitalHippo',
       favicon: '/favicon.ico',
       ogImage: '/thumbnail.jpg',
     },
+    components: {
+      views: {
+        Editor: slateEditor({})
+      }
+    }
   },
-  editor: slateEditor({}),
+  rateLimit: {
+    max: 2000,
+  },
   db: mongooseAdapter({
     url: process.env.MONGODB_URL!,
   }),
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
-})
+} as unknown as Config);

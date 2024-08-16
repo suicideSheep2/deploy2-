@@ -26,7 +26,7 @@
     "mongodb": "^6.8.0",
     "next": "14.2.5",
     "nodemailer": "^6.9.14",
-    "payload": "^2.26.0",
+    "payload": "^1.15.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "slate": "^0.103.0",
