@@ -5,6 +5,6 @@
     "src/trpc/index.ts"
   ],
   "exec": "ts-node --project tsconfig.server.json src/server.ts -- -I",
-  "ext": "js ts, tsx",
+  "ext": "js, ts,tsx",
   "stdin": false
 }

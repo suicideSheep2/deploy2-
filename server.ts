@@ -1,3 +1,5 @@
+// changed alll file here to see if it works 
+
 import express from 'express'
 import { getPayloadClient } from './get-payload'
 import { nextApp, nextHandler } from './next-utils'
@@ -6,6 +8,8 @@ const app = express()
 const PORT = Number(process.env.PORT) || 3000
 
 const start = async () => {
+  console.log('Starting server...')
+  
   const payload = await getPayloadClient({
     initOptions: {
       express: app,
@@ -15,20 +19,20 @@ const start = async () => {
     },
   })
 
-  // Payload middleware must come before Next.js handler
-  app.use(payload.authenticate)
+  // app.use(payload.authenticate)
 
   app.use((req, res) => nextHandler(req, res))
 
   nextApp.prepare().then(() => {
-    payload.logger.info('Next.js started')
+    console.log('Next.js started')
 
     app.listen(PORT, async () => {
-      payload.logger.info(
-        `Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`
-      )
+      console.log(`Server is running on http://localhost:${PORT}`)
+      console.log(`Admin URL: ${payload.getAdminURL()}`)
     })
   })
 }
 
-start()
+start().catch((err) => {
+  console.error('Error starting server:', err)
+})
