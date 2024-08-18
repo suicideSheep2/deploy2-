@@ -42,7 +42,7 @@ export const getPayloadClient = async ({
             cached.promise = payload.init({
                 secret: process.env.PAYLOAD_SECRET,
                 local: initOptions?.express ? false : true,
-                mongoURL: mongoURL, 
+                 mongoURL: mongoURL,
                 ...(initOptions || {}),
             })
         } catch (error) {
