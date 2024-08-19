@@ -1,4 +1,4 @@
-// get-payload.ts
+// get-payload.ts this file supposedly had worked dont't touch uffs
 
 import dotenv from 'dotenv'
 import path from 'path'
@@ -42,7 +42,7 @@ export const getPayloadClient = async ({
             cached.promise = payload.init({
                 secret: process.env.PAYLOAD_SECRET,
                 local: initOptions?.express ? false : true,
-                 mongoURL: mongoURL,
+                mongoURL: mongoURL, 
                 ...(initOptions || {}),
             })
         } catch (error) {
