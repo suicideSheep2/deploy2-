@@ -1,7 +1,7 @@
 'use client'
 
 import { Icons } from "@/components/Icons"
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { Label } from "@radix-ui/react-label"
@@ -49,9 +49,11 @@ const Page = () => {
                     className={cn({
                       'focus-visible:ring-red-500': true,
                     })}
-                    placeholder='you@example.com'
+                    placeholder='Password'
                   />
               </div>
+              
+              <Button>SIgn up</Button>
              </div>
           </div>
          </form>
