@@ -58,7 +58,7 @@ export const authRouter = router({
     .input(AuthCredentialsValidator)
     .mutation(async ({ input, ctx }) => {
       const { email, password } = input
-    //   const { res } = ctx
+      const { res } = ctx
 
       const payload = await getPayloadClient()
 
@@ -69,7 +69,7 @@ export const authRouter = router({
             email,
             password,
           },
-        //   res,
+          res,
         })
 
         return { success: true }

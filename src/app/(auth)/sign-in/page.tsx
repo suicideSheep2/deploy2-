@@ -1,3 +1,6 @@
+// here try to modify sign in as seller n buyer
+// sign in as reader or publisher/ sth along the way
+
 'use client'
 
 import { Icons } from '@/components/Icons'
