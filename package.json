@@ -32,6 +32,7 @@
     "express": "^4.19.2",
     "lucide-react": "^0.429.0",
     "next": "14.2.6",
+    "nodemailer": "^6.9.14",
     "payload": "^2.26.0",
     "react": "^18",
     "react-dom": "^18",
