@@ -24,8 +24,18 @@ const Page = () => {
               Already have an account? Sign-in
               <ArrowRight className='h-4 w-4' />
             </Link>
-             </div>
-         </div>
+          </div>
+
+             <div className='grid gap-6'>
+            <form onSubmit={}>
+              <div className='grid gap-2'>
+                <div className='grid gap-1 py-2'>
+
+              </div>
+          </div>
+         </form>
+      </div>
+     </div>
     </div>
     </>
     )
