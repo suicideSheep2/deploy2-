@@ -2,7 +2,8 @@ import dotenv from "dotenv"
 import path from "path"
 
 import type {InitOptions} from "payload/config"
-import payload from "payload" 
+import payload, { Payload } from "payload" 
+import { promises } from "dns"
 
 dotenv.config({
     path: path.resolve(__dirname, "../.env")
@@ -20,7 +21,8 @@ interface Args {
 }
 
 export const getPayloadClient = async ({
-    initOptions}: Args) => {
+    initOptions,
+}: Args ={}): Promise<Payload> => {
        if(!process.env.PAYLOAD_SECRET) {
         throw new Error('PAYLOAD_SECRET is missing')
        } 
