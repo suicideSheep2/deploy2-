@@ -58,8 +58,8 @@ const Page = () => {
   //       router.push('/verify-email?to=' + sentToEmail)
   //     },
   //   })
-  const {data} = trpc.anyApiRoute.useQuery()
-  console.log(data)
+  // const {data} = trpc.anyApiRoute.useQuery()
+  // console.log(data)
 
   const onSubmit = ({
     email,

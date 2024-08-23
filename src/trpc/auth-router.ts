@@ -1,7 +1,7 @@
-import { AuthCredentialsValidator } from "@/lib/validators/account-credentials-validator"
-import {router,publicProcedure } from "./trpc"
-import { getPayloadClient } from "@/get-payload"
-import { TRPCError } from "@trpc/server"
+import { AuthCredentialsValidator } from '../lib/validators/account-credentials-validator'
+import {router,publicProcedure } from './trpc'
+import { getPayloadClient } from '../get-payload'
+import { TRPCError } from '@trpc/server'
 
 export const authRouter = router ({
     createPayloadUser: publicProcedure
