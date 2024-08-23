@@ -6,5 +6,3 @@ const config = {
 };
 
 export default config;
-
-// this is different

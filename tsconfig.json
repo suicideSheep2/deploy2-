@@ -6,25 +6,21 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "commonjs",           // Change this from "esnext" to "commonjs"
-    "moduleResolution": "node",    // Use "node" for CommonJS modules
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    
     "plugins": [
       {
         "name": "next"
       }
     ],
-    // added to see if this works 
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  
-  "include": [ "src","next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
