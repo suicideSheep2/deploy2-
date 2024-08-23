@@ -1,22 +1,20 @@
 import Link from 'next/link'
 import MaxWidthWrapper from './MaxWidthWrapper'
-// import { Icons } from './Icons'
+import { Icons } from './Icons'
 import NavItems from './NavItems'
 import { buttonVariants } from './ui/button'
-// import { buttonVariants } from './ui/button'
 import Cart from './Cart'
-// import { getServerSideUser } from '@/lib/payload-utils'
-// import { cookies } from 'next/headers'
-// import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
-// import NavItems from './NavItems'
-// import { Icons } from './ui/icons'
+import { cookies } from 'next/headers'
+import { getServerSideUser } from '@/lib/payload-utils'
+import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
+import UserAccountNav from './UserAccountNav'
+
 // import UserAccountNav from './UserAccountNav'
 // import MobileNav from './MobileNav'
 
-const Navbar =  () => {
-  // const nextCookies = cookies()
-  const user = null;
-  // const { user } = await getServerSideUser(nextCookies)
+const Navbar =  async () => {
+  const nextCookies = cookies()
+  const { user } = await getServerSideUser(nextCookies)
 
   return (
     <div className='bg-white sticky z-50 top-0 inset-x-0 h-16'>
@@ -61,8 +59,8 @@ const Navbar =  () => {
                   )}
 
                   {user ? (
-                    <p></p>
-                    // <UserAccountNav user={user} />
+                    // <p></p>
+                    <UserAccountNav user={user} />
                   ) : (
                     <Link
                       href='/sign-up'
