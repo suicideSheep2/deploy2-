@@ -28,6 +28,9 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   })
 
+  const {mutate, isLoading} = 
+  trpc.auth.createPayloadUser.useMutation({})
+
   // const router = useRouter()
 
   // const { mutate, isLoading } =
@@ -65,7 +68,7 @@ const Page = () => {
     email,
     password,
   }: TAuthCredentialsValidator) => {
-    // mutate({ email, password })
+    mutate({ email, password })
   }
 
   return (
