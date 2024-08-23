@@ -17,10 +17,7 @@ import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
 } from '@/lib/validators/account-credentials-validator'
-// import { trpc } from '@/trpc/client'
-import { toast } from 'sonner'
-import { ZodError } from 'zod'
-import { useRouter } from 'next/navigation'
+import { trpc } from '@/trpc/client'
 
 const Page = () => {
   const {
@@ -61,6 +58,8 @@ const Page = () => {
   //       router.push('/verify-email?to=' + sentToEmail)
   //     },
   //   })
+  const {data} = trpc.anyApiRoute.useQuery()
+  console.log(data)
 
   const onSubmit = ({
     email,
