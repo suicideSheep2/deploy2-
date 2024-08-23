@@ -1,4 +1,8 @@
+'use client'
+
 import { Icons } from "@/components/Icons"
+import { buttonVariants } from "@/components/ui/button"
+import { ArrowRight, Link } from "lucide-react"
 
  
 const Page = () => {
@@ -11,6 +15,15 @@ const Page = () => {
             <h1 className='text-2xl font-semibold tracking-tight'>
               Create an account
          </h1>
+         <Link
+              className={buttonVariants({
+                variant: 'link',
+                className: 'gap-1.5',
+              })}
+              href='/sign-in'>
+              Already have an account? Sign-in
+              <ArrowRight className='h-4 w-4' />
+            </Link>
              </div>
          </div>
     </div>
