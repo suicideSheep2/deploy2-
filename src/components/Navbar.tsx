@@ -1,15 +1,20 @@
+
+// 
 import Link from 'next/link'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import { Icons } from './Icons'
 import NavItems from './NavItems'
 import { buttonVariants } from './ui/button'
 import Cart from './Cart'
-import { getServerSideUser } from '@/lib/payload-utils'
 import { cookies } from 'next/headers'
+import { getServerSideUser } from '@/lib/payload-utils'
+import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
 import UserAccountNav from './UserAccountNav'
+
+// import UserAccountNav from './UserAccountNav'
 // import MobileNav from './MobileNav'
 
-const Navbar = async () => {
+const Navbar =  async () => {
   const nextCookies = cookies()
   const { user } = await getServerSideUser(nextCookies)
 
@@ -21,15 +26,19 @@ const Navbar = async () => {
             <div className='flex h-16 items-center'>
               {/* <MobileNav /> */}
 
-              <div className='ml-4 flex lg:ml-0'>
+              <div className='ml-4 flex lg:ml-0 font-semibold'>
                 <Link href='/'>
-                  <Icons.logo className='h-10 w-10' />
-                </Link>
+                 
+                 <p className='ml-4 flex lg:ml-0'> Unwhispered<span className="text-green-600">Perhaps..</span>
+                  </p></Link>
               </div>
 
               <div className='hidden z-50 lg:ml-8 lg:block lg:self-stretch'>
                 <NavItems />
               </div>
+
+
+             
 
               <div className='ml-auto flex items-center'>
                 <div className='hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
@@ -51,6 +60,7 @@ const Navbar = async () => {
                   )}
 
                   {user ? (
+                    // <p></p>
                     <UserAccountNav user={user} />
                   ) : (
                     <Link
