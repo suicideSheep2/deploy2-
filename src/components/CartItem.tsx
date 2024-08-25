@@ -67,3 +67,4 @@ const CartItem = ({ product }: { product: Product }) => {
 }
 
 export default CartItem
+ 
