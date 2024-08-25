@@ -1,11 +1,16 @@
 'use client'
 
+{/*kinda make it to tip ... like our work ?
+     help us financially hahh
+     btt make user choose amout price themselves
+     to donate obv haha */}
+
 import { Button } from '@/components/ui/button'
 import { PRODUCT_CATEGORIES } from '@/config'
 import { useCart } from '@/hooks/use-cart'
 import { cn, formatPrice } from '@/lib/utils'
 import { trpc } from '@/trpc/client'
-import { Check, Loader2, X } from 'lucide-react'
+import { Check, Loader2, X } from 'lucide-react' 
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -67,10 +72,11 @@ const Page = () => {
                   />
                 </div>
                 <h3 className='font-semibold text-2xl'>
-                  Your cart is empty
+                  Your favourite is empty
                 </h3>
                 <p className='text-muted-foreground text-center'>
                   Whoops! Nothing to show here yet.
+                  {/* kinda some sassy message hai */}
                 </p>
               </div>
             ) : null}
@@ -208,7 +214,7 @@ const Page = () => {
             </div>
 
             <div className='mt-6'>
-              {/* <Button
+              <Button
                 disabled={items.length === 0 || isLoading}
                 onClick={() =>
                   createCheckoutSession({ productIds })
@@ -219,7 +225,7 @@ const Page = () => {
                   <Loader2 className='w-4 h-4 animate-spin mr-1.5' />
                 ) : null}
                 Checkout
-              </Button> */}
+              </Button>
             </div>
           </section>
         </div>
