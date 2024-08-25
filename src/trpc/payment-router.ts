@@ -21,6 +21,19 @@ export const paymentRouter = router({
 
         const payload = await getPayloadClient()
         
+        // tbh this is also useless cuz
+        // we are dreaming of a place where 
+        // donater can freely donate fkkk
+        // atleast thats the vision
+        const { docs: products } = await payload.find({
+            collection: 'products',
+            where: {
+              id: {
+                in: productIds,
+              },
+            },
+          })
+
     }),
 
 })
