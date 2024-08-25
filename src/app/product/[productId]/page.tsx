@@ -141,8 +141,8 @@ const Page = async ({ params }: PageProps) => {
          <div className='mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start'>
             <div>
               <div className='mt-10'>
-                {/* <AddToCartButton product={product} /> */}
-                <AddToCartButton />
+                <AddToCartButton product={product} />
+                {/* <AddToCartButton /> */}
               </div>
               <div className='mt-6 text-center'>
                 <div className='group inline-flex text-sm text-medium'>

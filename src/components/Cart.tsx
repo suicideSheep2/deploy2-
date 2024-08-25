@@ -20,11 +20,20 @@ import Image from 'next/image'
 // import CartItem from './CartItem'
 import { useEffect, useState } from 'react'
 import { formatPrice } from '@/lib/utils'
+import { useCart } from '@/hooks/use-cart'
 
 const Cart = () => {
-  const itemCount = 0
+  const { items} = useCart()
 
-  
+  const itemCount = items.length
+// kinda useless ???
+
+  const cartTotal = items.reduce((total, {product}) =>total + product.price,
+0
+)
+
+  const fee = 1
+
   return (
     <Sheet>
       <SheetTrigger className='group -m-2 flex items-center p-2'>
@@ -44,8 +53,17 @@ const Cart = () => {
          {itemCount > 0 ? (
           <>
             <div className='flex w-full flex-col pr-6'>
-             {/* todo : cart logic */}
-             cart items
+              {/* this is for cart items 
+              modify it  kkkk */}
+              
+            <ScrollArea>
+                {items.map(({ product }) => (
+                  <CartItem
+                    product={product}
+                    key={product.id}
+                  />
+                ))}
+              </ScrollArea>
             </div>
             <div className='space-y-4 pr-6'>
               <Separator />
@@ -59,14 +77,16 @@ const Cart = () => {
                     Transaction Fee
                   </span>
                 {/* no need for me tbh */}
-                  <span>{formatPrice(1)}</span>
+                  <span>{formatPrice(fee)}</span>
                 </div>
                 <div className='flex'>
                   <span className='flex-1'>
                     Total
                   </span>
                 {/* no need for me tbh */}
-                  <span>{formatPrice(1)}</span>
+                  <span>{formatPrice(cartTotal + fee)}
+
+                  </span>
                 </div>
               </div>
 
