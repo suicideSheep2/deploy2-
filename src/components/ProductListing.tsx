@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { cn, formatPrice } from '@/lib/utils'
 import { PRODUCT_CATEGORIES } from '@/config'
 import ImageSlider from './ImageSlider'
-
+import fetch from 'node-fetch';
 
 interface ProductListingProps {
   product: Product | null
