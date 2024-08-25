@@ -11,6 +11,7 @@ import { formatPrice } from '@/lib/utils'
 import { Check, Shield } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+// import AddToCartButton from '@/components/AddToCartButton';
 
 import fetch from 'node-fetch';
 
@@ -141,6 +142,7 @@ const Page = async ({ params }: PageProps) => {
             <div>
               <div className='mt-10'>
                 {/* <AddToCartButton product={product} /> */}
+                {/* <AddToCartButton /> */}
               </div>
               <div className='mt-6 text-center'>
                 <div className='group inline-flex text-sm text-medium'>
@@ -159,13 +161,14 @@ const Page = async ({ params }: PageProps) => {
 
         </div>
       </div>
-
+          {/* this is your recommendation code 
+          after a product selection */}
       <ProductReel
         href='/products'
         query={{ category: product.category, limit: 4 }}
         title={`Similar ${label}`}
-         //this label gives 'poems'/'novel' on screen
-        //  but maybe just say Similar Products/ Contents directly ??
+        //  this label gives 'poems'/'novel' on screen
+        // but maybe just say Similar Products/ Contents directly ??
         // obv for later modification
 
         // modify it a bit just on language
