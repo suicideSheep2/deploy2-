@@ -11,7 +11,7 @@ import { formatPrice } from '@/lib/utils'
 import { Check, Shield } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-// import AddToCartButton from '@/components/AddToCartButton';
+import AddToCartButton from '@/components/AddToCartButton';
 
 import fetch from 'node-fetch';
 
@@ -142,7 +142,7 @@ const Page = async ({ params }: PageProps) => {
             <div>
               <div className='mt-10'>
                 {/* <AddToCartButton product={product} /> */}
-                {/* <AddToCartButton /> */}
+                <AddToCartButton />
               </div>
               <div className='mt-6 text-center'>
                 <div className='group inline-flex text-sm text-medium'>
