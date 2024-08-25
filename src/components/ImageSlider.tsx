@@ -1,10 +1,11 @@
 "use client"
 // this gives the property of image sliding like aribian b n b 
 // modify it later to fit ypur preference duh for sure modify itt
+
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import "swiper/css"
-import "swiper/css/pagination"
+import 'swiper/css'
+import 'swiper/css/pagination'
 import type SwiperType from 'swiper'
 import { useEffect, useState } from 'react'
 import { Pagination } from 'swiper/modules'

@@ -1,19 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // reactStrictMode: true,
     images: {
-
         remotePatterns: [
             {
-                hostname: "localhost",
-                pathname: '**',
-                port: "3000",
-                protocol: 'http',
-               
+                hostname: 'localhost',
+                pathname: '**',  
+                port: '3000', 
+                protocol: 'http', 
             },
         ],
     },
-}
+    webpack: (config) => {
+        // Resolve ESM imports
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            'node-fetch': 'node-fetch/lib/index.js',
+        };
 
+        return config;
+    },
+};
 
-export default nextConfig;
+module.exports = nextConfig;

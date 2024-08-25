@@ -1,7 +1,14 @@
-import MaxWidthWrapper from "@/components/MaxWidthWrapper"
-import { getPayloadClient } from "@/get-payload"
-import  Link  from "next/link"
-import { notFound } from "next/navigation"
+// this page is causing fkin error 
+// to not even view the main homepage fkk
+// not in this ideally but due to addition of this neeeds to change all wrong "" and ''
+
+import ImageSlider from '@/components/ImageSlider'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import ProductReel from '@/components/ProductReel'
+import { getPayloadClient } from '@/get-payload'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+
 import fetch from 'node-fetch';
 
 interface PageProps {

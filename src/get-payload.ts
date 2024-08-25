@@ -1,13 +1,13 @@
-import dotenv from "dotenv"
-import path from "path"
+import fetch from 'node-fetch';
 
-import type {InitOptions} from "payload/config"
-import payload, { Payload } from "payload" 
-import { promises } from "dns"
+import dotenv from 'dotenv'
+import path from 'path'
+import type { InitOptions } from 'payload/config'
+import payload, { Payload } from 'payload'
 import nodemailer from 'nodemailer'
 
 dotenv.config({
-    path: path.resolve(__dirname, "../.env")
+  path: path.resolve(__dirname, '../.env'),
 })
 
 const transporter = nodemailer.createTransport({
