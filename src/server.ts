@@ -6,6 +6,10 @@ import * as trpcExpress from "@trpc/server/adapters/express"
 import { appRouter } from './trpc';
 import { inferAsyncReturnType } from '@trpc/server';
 
+// here must be some security fixes
+// mainly to use payment one must be signed in 
+// kinda odd for my vision btw think about it later
+
 const app = express()
 const PORT  = Number(process.env.PORT) || 3000
 
