@@ -3,6 +3,10 @@ import { PRODUCT_CATEGORIES } from '../../config'
 import { Product, User } from '../../payload-types'
 import { BeforeChangeHook } from 'payload/dist/collections/config/types'
 
+// mostly to add remove update products we also need stripe
+// side by side and need to keep track of
+// we haven't done it and left it 
+// video time around 9:46:18 josh
 
 const addUser: BeforeChangeHook<Product> = async ({req, data}) => {
   const user = req.user
@@ -18,7 +22,10 @@ export const Products: CollectionConfig = {
     access: {},
     hooks: {
       beforeChange: [addUser, async (args) => {
-
+        
+        // here we need some kind of stripe implementation 
+        // functionality to go with creation of price = no need for me
+        // updates deletes and so on 
       }],
     },
     fields: [

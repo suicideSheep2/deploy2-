@@ -1,5 +1,5 @@
 // stuck here cuz no stripe id
-// kkk
+// kkk should i just delete it or what uffs
 
 import { z } from 'zod'
 import {
