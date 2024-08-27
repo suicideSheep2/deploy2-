@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload/types'
+import { Access, CollectionConfig } from 'payload/types'
 import { PRODUCT_CATEGORIES } from '../../config'
-import { Product } from '@/payload-types'
+import { Product, User } from '../../payload-types'
 import { BeforeChangeHook } from 'payload/dist/collections/config/types'
 
 
