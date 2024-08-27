@@ -1,5 +1,9 @@
 'use client'
 
+// needs to be modified to suit page preference
+// no shit image fr sure 😂
+// maybe like Upperhaps or sth like that
+
 import { usePathname } from 'next/navigation'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import { Icons } from './Icons'
