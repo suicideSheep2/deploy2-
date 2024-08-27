@@ -8,12 +8,20 @@ import { BeforeChangeHook } from 'payload/dist/collections/config/types'
 // we haven't done it and left it 
 // video time around 9:46:18 josh
 
+
+// fkk cuz access is fucked here brr
+// need to write it oneself without stripe maybe ?? 
+// ahhh 
+
 const addUser: BeforeChangeHook<Product> = async ({req, data}) => {
   const user = req.user
 
   return {...data, user:user.id}
 }
+// added time 11:29.. 
 
+
+// till here
 export const Products: CollectionConfig = {
     slug: 'products',
     admin: {
