@@ -24,7 +24,7 @@ const Footer = () => {
           {pathsToMinimize.includes(pathname) ? null : (
             <div className='pb-8 pt-16'>
               <div className='flex justify-center'>
-                <Icons.logo className='h-12 w-auto' />
+                {/* <Icons.logo className='h-12 w-auto' /> */}
               </div>
             </div>
           )}
@@ -41,12 +41,10 @@ const Footer = () => {
 
                 <div className='text-center relative mx-auto max-w-sm'>
                   <h3 className='font-semibold text-gray-900'>
-                    Become a seller
+                    Publish your work
                   </h3>
                   <p className='mt-2 text-sm text-muted-foreground'>
-                    If you&apos;d like to sell high-quality
-                    digital products, you can do so in
-                    minutes.{' '}
+                    If you&apos;d like to display your work on our paltform .{' '}
                     <Link
                       href='/sign-in?as=seller'
                       className='whitespace-nowrap font-medium text-black hover:text-zinc-900'>
