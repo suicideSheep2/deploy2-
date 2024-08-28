@@ -1,46 +1,39 @@
-// import MaxWidthWrapper from '@/components/MaxWidthWrapper'
-
-import MaxWidthWrapper from "@/components/MaxWidthWrapper"
-import ProductReel from "@/components/ProductReel"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { ArrowDownToLine, CheckCircle, Leaf, Link } from "lucide-react"
-
-// // import ProductReel from '@/components/ProductReel'
-// import {
-//   Button,
-//   buttonVariants,
-// } from '@/components/ui/button'
-// import {
-//   ArrowDownToLine,
-//   CheckCircle,
-//   Leaf,
-// } from 'lucide-react'
-// import Link from 'next/link'
+import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import ProductReel from '@/components/ProductReel'
+import {
+  Button,
+  buttonVariants,
+} from '@/components/ui/button'
+import {
+  BookOpen,
+  Paintbrush,
+  Users,
+} from 'lucide-react'
+import Link from 'next/link'
 
 const perks = [
   {
-    // make it ai kinda interaction
-    name: 'Creative Space',
-    Icon: ArrowDownToLine,
-    
-    description:
-      'Publish your poems and novels, and connect with fellow writers for collaboration and feedback.',
-  },
-  {
-    // authorized posts
-    name: 'AI-Assisted Inspiration',
-    Icon: CheckCircle,
-    description:
-      'Spark your creativity with our AI poem generator. Input your ideas and watch inspiration unfold.',
-  },
-  {
-    // publish your content on demand
     name: "Reader's Corner",
-    Icon: Leaf,
+    Icon: BookOpen, 
     description:
-     'Immerse yourself in a diverse collection of user-submitted literature. Discover new voices and timelines.',
+    'Immerse yourself in a diverse library of literature. Discover new voices and timelines.',
   },
-]
+  {
+    name: 'Creative Studio',
+    Icon: Paintbrush, 
+    description:
+    'Publish your content  and connect with fellow writers for collaboration and feedback.',
+  },
+  {
+    name: 'Poetry Workshop',
+    Icon: Users, // Icon representing writing or poetry
+    description:
+      'Learn the art of poetry with guided lessons, interactive exercises, and tools to transform your thoughts into compelling literature.',
+      // past me here for future 
+  },
+];
+
+
 
 export default function Home() {
   return (
@@ -49,23 +42,28 @@ export default function Home() {
         <div className='py-20 mx-auto text-center flex flex-col items-center max-w-3xl'>
           <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
             Your platform for literary-expression{' '}
-            <span className='text-blue-600'>
+            <span className='text-green-600'>
               {/* change color to primary */}
                discovery
             </span>
             .
           </h1>
           <p className='mt-6 text-lg max-w-prose text-muted-foreground'>
-          From verses to epic sagas, craft your literary legacy on a platform 
-          that turns readers into writers and dreams into digital ink.
+          Welcome to UnwhisperedPerhaps; your literary legacy platform that turns readers into writers and dreams into digital ink.
           </p>
+          {/* From verses to epic sagas, craft your literary
+           legacy on a platform 
+          that turns readers into writers 
+          and dreams into digital ink. */}
           <div className='flex flex-col sm:flex-row gap-4 mt-6'>
-          <Link href="/products" className={buttonVariants()}>
-           Browse Trending
-          </Link>
-          <Button variant="ghost">
-           Our quality promise &rarr;
-          </Button>
+            <Link
+              href='/products'
+              className={buttonVariants()}>
+              Browse Trending
+            </Link>
+            <Button variant='ghost'>
+              Our quality promise &rarr;
+            </Button>
           </div>
         </div>
 
