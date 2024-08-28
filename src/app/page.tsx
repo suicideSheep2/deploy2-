@@ -28,8 +28,11 @@ const perks = [
     name: 'Poetry Workshop',
     Icon: Users, // Icon representing writing or poetry
     description:
-      'Learn the art of poetry with guided lessons, interactive exercises, and tools to transform your thoughts into compelling literature.',
-      // past me here for future 
+      'Learn the art of poetry with lessons and tools to shape your thoughts into compelling literature.',
+      // past me here from future 
+      // that website of ai poetry 
+      // connect that with here and
+      // give teaching and stuffs 
   },
 ];
 
