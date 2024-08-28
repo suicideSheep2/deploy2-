@@ -12,7 +12,7 @@ import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adap
 import UserAccountNav from './UserAccountNav'
 
 // import UserAccountNav from './UserAccountNav'
-// import MobileNav from './MobileNav'
+import MobileNav from './MobileNav'
 
 const Navbar =  async () => {
   const nextCookies = cookies()
@@ -24,7 +24,7 @@ const Navbar =  async () => {
         <MaxWidthWrapper>
           <div className='border-b border-gray-200'>
             <div className='flex h-16 items-center'>
-              {/* <MobileNav /> */}
+              <MobileNav />
 
               <div className='ml-4 flex lg:ml-0 font-semibold'>
                 <Link href='/'>
@@ -60,7 +60,6 @@ const Navbar =  async () => {
                   )}
 
                   {user ? (
-                    // <p></p>
                     <UserAccountNav user={user} />
                   ) : (
                     <Link
