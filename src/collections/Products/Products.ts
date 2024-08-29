@@ -66,6 +66,12 @@ export const Products: CollectionConfig = {
             type: 'number',
             required: true,
           },
+          { //added myself lets see what happens
+            name: 'author',
+            label: 'Author',
+            type: 'text',
+            required: true,
+          },
           {
             name: 'category',
             label: 'Category',

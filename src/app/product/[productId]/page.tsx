@@ -126,7 +126,7 @@ const Page = async ({ params }: PageProps) => {
               {/* Copyright section */}
               <div className='mt-6 flex items-center'>
                 <span className='text-sm text-muted-foreground'>
-                  ©
+                  © {product.author}
                 </span>
               </div>
             </section>
