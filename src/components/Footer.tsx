@@ -44,7 +44,7 @@ const Footer = () => {
                     Publish your work
                   </h3>
                   <p className='mt-2 text-sm text-muted-foreground'>
-                    If you&apos;d like to display your work on our paltform .{' '}
+                     Like to display your work on our paltform ?{' '}
                     <Link
                       href='/sign-in?as=seller'
                       className='whitespace-nowrap font-medium text-black hover:text-zinc-900'>

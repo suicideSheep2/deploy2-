@@ -60,7 +60,8 @@ const ProductListing = ({
             {label}
           </p>
           <p className='mt-1 font-medium text-sm text-gray-900'>
-            {formatPrice(product.price)}
+            {/* {formatPrice(product.price)} */}
+            @{product.author}
             {/* tbh this is completely useless for me duhh  */}
           </p>
         </div>
