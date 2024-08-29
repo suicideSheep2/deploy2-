@@ -22,6 +22,11 @@ interface PageProps {
   };
 }
 
+// Add this if it doesn't exist, or update the existing Product interface
+interface Product {
+  // ... existing fields ...
+  author: string;
+}
 
 const BREADCRUMBS = [
   { id: 1, name: "Home", href: "/" },
@@ -122,12 +127,16 @@ const Page = async ({ params }: PageProps) => {
               </div>
 
               <div className='mt-6 flex items-center'>
-                <Check
-                  aria-hidden='true'
-                  className='h-5 w-5 flex-shrink-0 text-green-500'
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5 text-muted-foreground"
+                >
+                  <path d="M10 9a3 3 0 100-6 3 3 0 000 6zM6 8a2 2 0 11-4 0 2 2 0 014 0zM1.49 15.326a.78.78 0 01-.358-.442 3 3 0 014.308-3.516 6.484 6.484 0 00-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 01-2.07-.655zM16.44 15.98a4.97 4.97 0 002.07-.654.78.78 0 00.357-.442 3 3 0 00-4.308-3.517 6.484 6.484 0 011.907 3.96 2.32 2.32 0 01-.026.654zM18 8a2 2 0 11-4 0 2 2 0 014 0zM5.304 16.19a.844.844 0 01-.277-.71 5 5 0 019.947 0 .843.843 0 01-.277.71A6.975 6.975 0 0110 18a6.974 6.974 0 01-4.696-1.81z" />
+                </svg>
                 <p className='ml-2 text-sm text-muted-foreground'>
-                 Free of use
+                  By {product.author}
                 </p>
               </div>
             </section>
@@ -138,18 +147,6 @@ const Page = async ({ params }: PageProps) => {
             <div>
               <div className='mt-10'>
                 <AddToCartButton product={product} />
-                {/* <AddToCartButton /> */}
-              </div>
-              <div className='mt-6 text-center'>
-                <div className='group inline-flex text-sm text-medium'>
-                  <Shield
-                    aria-hidden='true'
-                    className='mr-2 h-5 w-5 flex-shrink-0 text-gray-400'
-                  />
-                  <span className='text-muted-foreground hover:text-gray-700'>
-                    30 Day Return Guarantee
-                  </span>
-                </div>
               </div>
             </div>
           </div> 
@@ -163,12 +160,10 @@ const Page = async ({ params }: PageProps) => {
         href='/products'
         query={{ category: product.category as string, limit: 4 }}
         title={`Similar ${label}`}
-        //  this label gives 'poems'/'novel' on screen
-        // but maybe just say Similar Products/ Contents directly ??
-        // obv for later modification
+        
 
-        // modify it a bit just on language
-        subtitle={`Browse similar contents ${label} just like '${product.name}'`}
+        
+        subtitle={`Browse similar contents  just like '${product.name}'`}
       />
   </MaxWidthWrapper>
  )

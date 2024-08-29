@@ -151,6 +151,12 @@ export const Products: CollectionConfig = {
                 relationTo: 'media',
                 required: true,
               },
+              // to add author name
+              {
+                name: 'author',
+                type: 'text',
+                required: true,
+              },
             ],
           },
         ],
