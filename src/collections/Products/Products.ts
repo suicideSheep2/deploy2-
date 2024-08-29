@@ -65,6 +65,7 @@ export const Products: CollectionConfig = {
             max: 1000,
             type: 'number',
             required: true,
+            // change to fals
           },
           {
             name: 'category',

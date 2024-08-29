@@ -65,9 +65,16 @@ const Page = async ({ params }: PageProps) => {
   return (
     <MaxWidthWrapper className='bg-white'>
       <div className='bg-white'>
-        <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8'> 
-          {/* Product Details */}
-          <div className='lg:max-w-lg lg:self-end'>
+        <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8'>
+          {/* Product images - moved to the top */}
+          <div className='lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-start'>
+            <div className='aspect-square rounded-lg'>
+              <ImageSlider urls={validUrls} />
+            </div>
+          </div>
+
+          {/* Product Details - adjusted to start from the left */}
+          <div className='lg:col-start-1 lg:row-start-1 lg:max-w-lg lg:self-start'>
             <ol className='flex items-center space-x-2'>
               {BREADCRUMBS.map((breadcrumb, i) => (
                 <li key={breadcrumb.href}>
@@ -99,7 +106,8 @@ const Page = async ({ params }: PageProps) => {
             <section className='mt-4'>
               <div className='flex items-center'>
                 <p className='font-medium text-gray-900'>
-                  {formatPrice(product.price)}
+                  
+                <span className="text-muted-foreground">Category</span>                 
                 </p>
 
                 <div className='ml-4 border-l text-muted-foreground border-gray-300 pl-4'>
@@ -109,7 +117,7 @@ const Page = async ({ params }: PageProps) => {
 
               <div className='mt-4 space-y-6'>
                 <p className='text-base text-muted-foreground'>
-                  {product.description}
+                  {product.description as string}
                 </p>
               </div>
 
@@ -118,28 +126,15 @@ const Page = async ({ params }: PageProps) => {
                   aria-hidden='true'
                   className='h-5 w-5 flex-shrink-0 text-green-500'
                 />
-                {/* imagination add to favourite which will show in cart  
-                instead of tick maybe some kind of star to glow or sth property btw 
-                leave it for later buttt please work on it 
-                great conceptoverall*/}
                 <p className='ml-2 text-sm text-muted-foreground'>
-                  Add to favourite
+                 Free of use
                 </p>
               </div>
             </section>
           </div>
 
-        {/* Product images */}
-        <div className='mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center'>
-            <div className='aspect-square rounded-lg'>
-              <ImageSlider urls={validUrls} />
-            </div>
-          </div>
-
-         {/* add to cart part
-         make it add to favourites
-         or sth like that btt okay for now */}
-         <div className='mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start'>
+          {/* Add to cart part - moved below product details */}
+          <div className='mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start'>
             <div>
               <div className='mt-10'>
                 <AddToCartButton product={product} />
@@ -166,7 +161,7 @@ const Page = async ({ params }: PageProps) => {
           after a product selection */}
       <ProductReel
         href='/products'
-        query={{ category: product.category, limit: 4 }}
+        query={{ category: product.category as string, limit: 4 }}
         title={`Similar ${label}`}
         //  this label gives 'poems'/'novel' on screen
         // but maybe just say Similar Products/ Contents directly ??
