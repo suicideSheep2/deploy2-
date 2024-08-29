@@ -22,11 +22,6 @@ interface PageProps {
   };
 }
 
-// Add this if it doesn't exist, or update the existing Product interface
-interface Product {
-  // ... existing fields ...
-  author: string;
-}
 
 const BREADCRUMBS = [
   { id: 1, name: "Home", href: "/" },
@@ -73,6 +68,7 @@ const Page = async ({ params }: PageProps) => {
         <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8'>
           {/* Product Details */}
           <div className='lg:col-start-1 lg:row-start-1 lg:max-w-lg lg:self-start'>
+            {/* Breadcrumbs */}
             <ol className='flex items-center space-x-2'>
               {BREADCRUMBS.map((breadcrumb, i) => (
                 <li key={breadcrumb.href}>
@@ -94,16 +90,16 @@ const Page = async ({ params }: PageProps) => {
                 </div>
               </li>
               ))}
-            </ol>
+          </ol>
 
-            <div className='mt-4'>
+          <div className='mt-4'>
               <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
               {product.name}
               </h1>
             </div>
 
-            {/* Product Images - Now after the title */}
-            <div className='mt-6 mb-8 lg:hidden'>
+            {/* Image for small screens */}
+            <div className='mt-6 lg:hidden'>
               <div className='aspect-square rounded-lg'>
                 <ImageSlider urls={validUrls} />
               </div>
@@ -127,17 +123,17 @@ const Page = async ({ params }: PageProps) => {
                 </p>
               </div>
 
+              {/* Copyright section */}
               <div className='mt-6 flex items-center'>
-                <span className='text-muted-foreground'>©</span>
-                <p className='ml-2 text-sm text-muted-foreground'>
-                  {product.author}
-                </p>
+                <span className='text-sm text-muted-foreground'>
+                  ©
+                </span>
               </div>
             </section>
           </div>
 
-          {/* Product Images - For large screens */}
-          <div className='hidden lg:block lg:col-start-2 lg:row-span-2 lg:self-start'>
+          {/* Product images - for large screens */}
+          <div className='hidden lg:block lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-start'>
             <div className='aspect-square rounded-lg'>
               <ImageSlider urls={validUrls} />
             </div>
@@ -162,9 +158,7 @@ const Page = async ({ params }: PageProps) => {
         query={{ category: product.category as string, limit: 4 }}
         title={`Similar ${label}`}
         
-
-        
-        subtitle={`Browse similar contents  just like '${product.name}'`}
+        subtitle={`Browse similar contents just like '${product.name}'`}
       />
   </MaxWidthWrapper>
  )

@@ -65,7 +65,6 @@ export const Products: CollectionConfig = {
             max: 1000,
             type: 'number',
             required: true,
-            // change to fals
           },
           {
             name: 'category',
@@ -149,12 +148,6 @@ export const Products: CollectionConfig = {
                 name: 'image',
                 type: 'upload',
                 relationTo: 'media',
-                required: true,
-              },
-              // to add author name
-              {
-                name: 'author',
-                type: 'text',
                 required: true,
               },
             ],
