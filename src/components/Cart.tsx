@@ -1,6 +1,6 @@
 'use client'
 
-import { ShoppingCart } from 'lucide-react'
+import { Star } from 'lucide-react'
 import {
   Sheet,
   SheetContent,
@@ -44,13 +44,16 @@ useEffect(() => {
 
   return (
     <Sheet>
-      <SheetTrigger className='group -m-2 flex items-center p-2'>
-        <ShoppingCart
+      <SheetTrigger className='group -m-2 flex items-center p-2 relative'>
+        <Star
           aria-hidden='true'
           className='h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500'
         />
         <span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
-        {isMounted ? itemCount: 0}
+          {isMounted ? itemCount : 0}
+        </span>
+        <span className='absolute left-1/2 -translate-x-1/2 top-full mt-2 text-xs font-medium text-white bg-gray-800 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none'>
+          Favourites
         </span>
       </SheetTrigger>
       <SheetContent className='flex w-full flex-col pr-0 sm:max-w-lg'>
