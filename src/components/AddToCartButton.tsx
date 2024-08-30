@@ -24,7 +24,8 @@ const AddToFavoritesButton = ({
       size='sm'
       variant='ghost'
       className='group relative'
-      title='Add to Favorites'>
+      // title='Add to tff'
+      >
       <Star
         className={`h-5 w-5 transition-colors ${
           isSuccess ? 'fill-yellow-400 text-yellow-400' : 'text-gray-400 group-hover:text-yellow-400'
