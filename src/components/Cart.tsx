@@ -78,41 +78,18 @@ useEffect(() => {
             </div>
             <div className='space-y-4 pr-6'>
               <Separator />
-              <div className='space-y-1.5 text-sm'>
-                <div className='flex'>
-                  <span className='flex-1'>Shipping</span>
-                  <span>Free</span>
-                </div>
-                <div className='flex'>
-                  <span className='flex-1'>
-                    Transaction Fee
-                  </span>
-                {/* no need for me tbh */}
-                  <span>{formatPrice(fee)}</span>
-                </div>
-                <div className='flex'>
-                  <span className='flex-1'>
-                    Total
-                  </span>
-                {/* no need for me tbh */}
-                  <span>{formatPrice(cartTotal + fee)}
-
-                  </span>
-                </div>
-              </div>
-
-            <SheetFooter>
-              <SheetTrigger asChild> 
-                <Link 
-                href= '/cart'
-                className={buttonVariants({
-                className: 'w-full',
-         })}>
-         Continue to Checkout
-                </Link>
-              </SheetTrigger>
-            </SheetFooter>
-           </div>
+              <SheetFooter>
+                <SheetTrigger asChild> 
+                  <Link 
+                  href= '/cart'
+                  className={buttonVariants({
+                  className: 'w-full',
+                  })}>
+                  Buy me a coffee 
+                  </Link>
+                </SheetTrigger>
+              </SheetFooter>
+            </div>
           </>
         ) : (
       <div className='flex h-full flex-col items-center justify-center space-y-1'>

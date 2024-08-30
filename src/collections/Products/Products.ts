@@ -58,15 +58,16 @@ export const Products: CollectionConfig = {
             type: 'textarea',
             label: 'Product details',
           },
-          {
-            name: 'price',
-            label: 'Price in USD',
-            min: 0,
-            max: 1000,
-            type: 'number',
-            required: true,
-          },
+          // {
+          //   name: 'price',
+          //   label: 'Price in USD',
+          //   min: 0,
+          //   max: 1000,
+          //   type: 'number',
+          //   required: true,
+          // },
           { //added myself lets see what happens
+            // yay works
             name: 'author',
             label: 'Author',
             type: 'text',
@@ -85,7 +86,7 @@ export const Products: CollectionConfig = {
             name: 'product_files',
             label: 'Product file(s)',
             type: 'relationship',
-            required: true,
+            required: false,
             relationTo: 'product_files',
             hasMany: false,
           },

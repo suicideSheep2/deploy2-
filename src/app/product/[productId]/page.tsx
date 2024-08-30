@@ -123,6 +123,8 @@ const Page = async ({ params }: PageProps) => {
                 </p>
               </div>
 
+              {/* adding her for displaying product file directly */}
+
               {/* Copyright section and Add to Cart button */}
               <div className='mt-6 flex items-center justify-between'>
                 <div className='flex items-center space-x-4'>
