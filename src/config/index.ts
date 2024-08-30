@@ -5,17 +5,17 @@ export const PRODUCT_CATEGORIES = [
       featured: [
         {
           name: 'Editor Picks',
-          href: `/products?category=ui_kits`,
+          href: `/products?category=poems`,
           imageSrc: '/nav/ui-kits/mixed.jpg',
         },
         {
           name: 'Recently Added',
-          href: '/products?category=ui_kits&sort=desc',
+          href: '/products?category=poems&sort=desc',
           imageSrc: '/nav/ui-kits/blue.jpg',
         },
         {
           name: 'Best-rated',
-          href: '/products?category=ui_kits',
+          href: '/products?category=poems',
           imageSrc: '/nav/ui-kits/purple.jpg',
         },
       ],
@@ -26,17 +26,17 @@ export const PRODUCT_CATEGORIES = [
       featured: [
         {
           name: 'Editor Picks',
-          href: `/products?category=icons`,
+          href: `/products?category=novels`,
           imageSrc: '/nav/icons/picks.jpg',
         },
         {
           name: 'Recently Added',
-          href: '/products?category=icons&sort=desc',
+          href: '/products?category=novels&sort=desc',
           imageSrc: '/nav/icons/new.jpg',
         },
         {
           name: 'Best-rated',
-          href: '/products?category=icons',
+          href: '/products?category=novels',
           imageSrc: '/nav/icons/bestsellers.jpg',
         },
       ],
