@@ -3,7 +3,9 @@
 {/*kinda make it to tip ... like our work ?
      help us financially hahh
      btt make user choose amout price themselves
-     to donate obv haha */}
+     to donate obv haha 
+     this page is after continue to checkout 
+     completely modify it fr*/}
 
 import { Button } from '@/components/ui/button'
 import { PRODUCT_CATEGORIES } from '@/config'

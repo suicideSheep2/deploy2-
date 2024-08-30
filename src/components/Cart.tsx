@@ -55,7 +55,7 @@ useEffect(() => {
       </SheetTrigger>
       <SheetContent className='flex w-full flex-col pr-0 sm:max-w-lg'>
         <SheetHeader className='space-y-2.5 pr-6'>
-        <SheetTitle>Cart ({itemCount})</SheetTitle>
+        <SheetTitle>Favourites ({itemCount})</SheetTitle>
         </SheetHeader>
        
          {itemCount > 0 ? (
@@ -122,7 +122,7 @@ useEffect(() => {
           />
           </div> 
           <div className='text-xl font-semibold '>
-             Your cart is empty
+             Your favourites is empty
               </div>
           <SheetTrigger asChild>
             <Link 
@@ -133,7 +133,7 @@ useEffect(() => {
             className:
             'text-sm text-muted-foreground',
             })}>
-              Add items to your cart to checkout
+              Add items to your favourites
             </Link>
           </SheetTrigger>
         </div>
