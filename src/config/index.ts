@@ -1,3 +1,5 @@
+// gotta change here fr url for components 
+
 export const PRODUCT_CATEGORIES = [
     {
       label: 'Poems',
@@ -5,17 +7,17 @@ export const PRODUCT_CATEGORIES = [
       featured: [
         {
           name: 'Editor Picks',
-          href: `/products?category=poems`,
+          href: `/products?category=ui_kits`,
           imageSrc: '/nav/ui-kits/mixed.jpg',
         },
         {
           name: 'Recently Added',
-          href: '/products?category=poems&sort=desc',
+          href: '/products?category=ui_kits&sort=desc',
           imageSrc: '/nav/ui-kits/blue.jpg',
         },
         {
           name: 'Best-rated',
-          href: '/products?category=poems',
+          href: '/products?category=ui_kits',
           imageSrc: '/nav/ui-kits/purple.jpg',
         },
       ],
@@ -26,17 +28,17 @@ export const PRODUCT_CATEGORIES = [
       featured: [
         {
           name: 'Editor Picks',
-          href: `/products?category=novels`,
+          href: `/products?category=icons`,
           imageSrc: '/nav/icons/picks.jpg',
         },
         {
           name: 'Recently Added',
-          href: '/products?category=novels&sort=desc',
+          href: '/products?category=icons&sort=desc',
           imageSrc: '/nav/icons/new.jpg',
         },
         {
           name: 'Best-rated',
-          href: '/products?category=novels',
+          href: '/products?category=icons',
           imageSrc: '/nav/icons/bestsellers.jpg',
         },
       ],

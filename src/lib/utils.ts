@@ -60,7 +60,7 @@ export function formatPrice (
         title,
         description,
         images: [image],
-        creator: '@joshtriedcoding',
+        creator: '@bhabuk',
       },
       icons,
       metadataBase: new URL('https://digitalhippo.up.railway.app'),
