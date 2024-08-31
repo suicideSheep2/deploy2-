@@ -83,9 +83,11 @@ useEffect(() => {
                   <Link 
                   href= '/cart'
                   className={buttonVariants({
+                  variant: 'outline',
                   className: 'w-full',
                   })}>
-                  Buy me a coffee 
+                  <Star className="w-4 h-4 mr-2" />
+                  View All Favorites
                   </Link>
                 </SheetTrigger>
               </SheetFooter>

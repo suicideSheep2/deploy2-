@@ -49,7 +49,7 @@ const Page = () => {
     <div className='bg-white'>
       <div className='mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
         <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-          Shopping Cart
+        Your Favorites
         </h1>
 
         <div className='mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16'>
@@ -59,11 +59,11 @@ const Page = () => {
                 isMounted && items.length === 0,
             })}>
             <h2 className='sr-only'>
-              Items in your shopping cart
+              Your favourite Items 
             </h2>
 
             {isMounted && items.length === 0 ? (
-              <div className='flex h-full flex-col items-center justify-center space-y-1'>
+              <div className='bg-gray-50 flex h-full flex-col items-center justify-center space-y-1'>
                 <div
                   aria-hidden='true'
                   className='relative mb-4 h-40 w-40 text-muted-foreground'>
@@ -75,7 +75,7 @@ const Page = () => {
                   />
                 </div>
                 <h3 className='font-semibold text-2xl'>
-                  Your favourite is empty
+                  You have no favorites yet 😢
                 </h3>
                 <p className='text-muted-foreground text-center'>
                   Whoops! Nothing to show here yet.
@@ -100,7 +100,7 @@ const Page = () => {
                   return (
                     <li
                       key={product.id}
-                      className='flex py-6 sm:py-10'>
+                      className='flex py-6 sm:py-10 bg-gray-50 rounded-lg my-4'> {/* Added bg-gray-50 and rounded-lg */}
                       <div className='flex-shrink-0'>
                         <div className='relative h-24 w-24'>
                           {typeof image !== 'string' &&
@@ -135,7 +135,7 @@ const Page = () => {
                             </div>
 
                             <p className='mt-1 text-sm font-medium text-gray-900'>
-                              {formatPrice(product.price)}
+                              {/* {(product.author)} */}
                             </p>
                           </div>
 
@@ -157,11 +157,11 @@ const Page = () => {
                         </div>
 
                         <p className='mt-4 flex space-x-2 text-sm text-gray-700'>
-                          <Check className='h-5 w-5 flex-shrink-0 text-green-500' />
+                          {/* <Check className='h-5 w-5 flex-shrink-0 text-green-500' />
 
                           <span>
                             Eligible for instant delivery
-                          </span>
+                          </span> */}
                         </p>
                       </div>
                     </li>
@@ -170,75 +170,48 @@ const Page = () => {
             </ul>
           </div>
 
+
+           {/* this is another right side table */}
+
           <section className='mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>
-            <h2 className='text-lg font-medium text-gray-900'>
-              Order summary
-              {/* kinda modify it cuz 
-              we no need it if we r 
-              imagining my type of interaction wiht 
-              payment */}
+            <h2 className='text-lg font-medium text-gray-900 mb-4'>
+              Support Our Work
             </h2>
 
-            <div className='mt-6 space-y-4'>
+            <p className='text-sm text-gray-600 mb-6'>
+              If you've enjoyed using our service, consider buying us a coffee! Your support helps us continue improving and maintaining this platform.
+            </p>
+
+            <div className='space-y-4'>
               <div className='flex items-center justify-between'>
-                <p className='text-sm text-gray-600'>
-                  Subtotal
-                </p>
-                <p className='text-sm font-medium text-gray-900'>
-                  {isMounted ? (
-                    formatPrice(cartTotal)
-                  ) : (
-                    <Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
-                  )}
-                </p>
+                <label htmlFor="donationAmount" className='text-sm font-medium text-gray-900'>
+                  Enter amount (Rs):
+                </label>
+                <input
+                  type="number"
+                  id="donationAmount"
+                  min="1"
+                  step="1"
+                  defaultValue="5"
+                  className='rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-24'
+                  // Add state management for the donation amount
+                />
               </div>
 
-              <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
-                <div className='flex items-center text-sm text-muted-foreground'>
-                  <span>Flat Transaction Fee</span>
-                </div>
-                <div className='text-sm font-medium text-gray-900'>
-                  {isMounted ? (
-                    formatPrice(fee)
-                  ) : (
-                    <Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
-                  )}
-                </div>
-              </div>
-
-              <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
-                <div className='text-base font-medium text-gray-900'>
-                  Order Total
-                </div>
-                <div className='text-base font-medium text-gray-900'>
-                  {isMounted ? (
-                    formatPrice(cartTotal + fee)
-                  ) : (
-                    <Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className='mt-6'>
-              {/* gets modified due to stripe if added remember 
-              that shit if u update later okayy
-               */}
-               
               <Button
-                disabled={items.length === 0}
-                onClick={() =>(null)
-                  // createCheckoutSession({ productIds })
-                }
                 className='w-full'
-                size='lg'>
-                {/* {isLoading ? ( */}
-                  <Loader2 className='w-4 h-4 animate-spin mr-1.5' />
-                 {/* : null} */}
-                Checkout
+                size='lg'
+                // Add onClick handler for donation
+              >
+                Donate
               </Button>
             </div>
+
+            <p className='text-xs text-gray-500 mt-4 text-center'>
+              Your donation is greatly appreciated and helps us keep the coffee flowing and the code flowing!
+            </p>
           </section>
+          
         </div>
       </div>
     </div>
