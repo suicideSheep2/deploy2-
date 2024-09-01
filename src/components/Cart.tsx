@@ -84,7 +84,7 @@ useEffect(() => {
                   href= '/cart'
                   className={buttonVariants({
                   variant: 'outline',
-                  className: 'w-full',
+                  className: 'w-full bg-green-500 hover:bg-green-600 text-white',
                   })}>
                   <Star className="w-4 h-4 mr-2" />
                   View All Favorites

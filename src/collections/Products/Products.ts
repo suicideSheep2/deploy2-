@@ -55,6 +55,7 @@ export const Products: CollectionConfig = {
         },
         {
             name: 'description',
+            // here we need to add the editor
             type: 'textarea',
             label: 'Product details',
           },

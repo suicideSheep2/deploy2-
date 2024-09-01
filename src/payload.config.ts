@@ -1,5 +1,3 @@
-
-
 import { buildConfig, Config } from 'payload/config'
 import { Payload } from 'payload';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
@@ -12,6 +10,7 @@ import { Products } from './collections/Products/Products';
 import { Media } from './collections/Media';
 import { ProductFiles } from './collections/ProductFile';
 import { Orders } from './collections/Orders';
+import { lexicalEditor } from '@payloadcms/richtext-lexical'; // Add this import
 
 
 dotenv.config({
@@ -37,7 +36,8 @@ export default buildConfig({
     max:2000,
   },
 
-  editor:slateEditor({}),
+  // here we are changing the editor to lexical
+  editor:lexicalEditor({}),
   db:mongooseAdapter({
     url:process.env.MONGODB_URL!,
   },),
