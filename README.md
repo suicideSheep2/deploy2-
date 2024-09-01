@@ -1,4 +1,8 @@
-works to do and stuffs
+########
+stuffs and works to do on (from topmost priority to least one)
 
-after adding contents to cart make tnem not being able to add again in  addto cart logic
+1. don't let same content added to favourite twice .... => cart logic/ add to cart 
 
+2. explore how to use editor : lexical/ slate edioor ; first see yt vds then only implement one of them 
+
+3. Turns out product_file has too many other random added dependencies # create new one just like you did with #author (Author) maybe sth like #file (File) and try to display it below the description 
