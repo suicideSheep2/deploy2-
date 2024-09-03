@@ -94,7 +94,7 @@ const Page = async ({ params }: PageProps) => {
 
           <div className='mt-4'>
               <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-              {product.name}
+              {product.name as string}
               </h1>
             </div>
 
@@ -118,7 +118,7 @@ const Page = async ({ params }: PageProps) => {
               </div>
 
               <div className='mt-4 space-y-6'>
-                <p className='text-base text-muted-foreground'>
+                <p className='text-base text-muted-foreground whitespace-pre-wrap'>
                   {product.description as string}
                 </p>
               </div>
@@ -130,7 +130,7 @@ const Page = async ({ params }: PageProps) => {
                 <div className='flex items-center space-x-4'>
                   <div className="group relative">
                     <span className='text-sm text-muted-foreground'>
-                      © {product.author}
+                      © {product.author as string}
                     </span>
                     <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                     Copyright Content
@@ -149,15 +149,7 @@ const Page = async ({ params }: PageProps) => {
             </div>
           </div>
 
-          {/* Add to cart part */}
-          {/* <div className='mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start'>
-            <div>
-              <div className='mt-10'>
-                <AddToCartButton product={product} />
-              </div>
-            </div>
-          </div>  */}
-
+         
 
         </div>
       </div>
