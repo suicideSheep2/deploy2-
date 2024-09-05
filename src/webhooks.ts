@@ -97,6 +97,9 @@ export const stripeWebhookHandler = async (
       },
     })
 
+    // maybe we can implement somekind of backpup transaction with image/ qr code popping up and then email receipt
+    // thanking user insteda
+    
     // send receipt  kinda useless for me 
     
     // try {

@@ -42,7 +42,8 @@ export const Products: CollectionConfig = {
             name: 'description',
             // here we need to add the editor here
             type: 'textarea',
-            label: 'Product details',
+            required: true, //obv duh
+            label: 'Your Content',
           },
          
           {
@@ -59,14 +60,6 @@ export const Products: CollectionConfig = {
               ({ label, value }) => ({ label, value })
             ),
             required: true,
-          },
-          {
-            name: 'product_files',
-            label: 'Product file(s)',
-            type: 'relationship',
-            required: false,
-            relationTo: 'product_files',
-            hasMany: false,
           },
           {
             name: 'approvedForSale',
@@ -94,33 +87,9 @@ export const Products: CollectionConfig = {
             ],
           },
           {
-            name: 'priceId',
-            access: {
-              create: () => false,
-              read: () => false,
-              update: () => false,
-            },
-            type: 'text',
-            admin: {
-              hidden: true,
-            },
-          },
-          {
-            name: 'stripeId',
-            access: {
-              create: () => false,
-              read: () => false,
-              update: () => false,
-            },
-            type: 'text',
-            admin: {
-              hidden: true,
-            },
-          },
-          {
             name: 'images',
             type: 'array',
-            label: 'Product images',
+            label: 'Content images',
             minRows: 1,
             maxRows: 4,
             required: true,
