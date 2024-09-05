@@ -1,7 +1,13 @@
 ########
 stuffs and works to do on (from topmost priority to least one)
 
+
 1. don't let same content added to favourite twice .... => cart logic/ add to cart 
+working on this now 
+
+### DONE *2
+
+
 
 2. explore how to use editor : lexical/ slate edioor ; first see yt vds then only implement one of them 
 
