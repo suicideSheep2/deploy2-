@@ -132,8 +132,7 @@ const Page = async ({ params }: PageProps) => {
               </div>
 
               <div className='mt-4 space-y-6'>
-              <ProductDescription 
-              descriptionJson={product.description} />
+              <ProductDescription descriptionHtml={product.description_html} />
 
 
               </div>

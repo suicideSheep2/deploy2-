@@ -47,13 +47,6 @@ export const Products: CollectionConfig = {
           HTMLConverterFeature({}),
           
         ],
-        // nodes: [
-        //   // Ensure heading nodes are included and properly configured
-        //   {
-        //     type: 'heading',
-        //     levels: [1, 2, 3, 4, 5, 6],
-        //   },
-        // ],
         
       }),
     },
