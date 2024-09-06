@@ -1300,15 +1300,7 @@
     "@lexical/utils" "0.17.1"
     lexical "0.17.1"
 
-"@lexical/html@0.13.1":
-  version "0.13.1"
-  resolved "https://registry.npmjs.org/@lexical/html/-/html-0.13.1.tgz"
-  integrity sha512-XkZrnCSHIUavtpMol6aG8YsJ5KqC9hMxEhAENf3HTGi3ocysCByyXOyt1EhEYpjJvgDG4wRqt25xGDbLjj1/sA==
-  dependencies:
-    "@lexical/selection" "0.13.1"
-    "@lexical/utils" "0.13.1"
-
-"@lexical/html@0.17.1":
+"@lexical/html@^0.17.1", "@lexical/html@0.17.1":
   version "0.17.1"
   resolved "https://registry.npmjs.org/@lexical/html/-/html-0.17.1.tgz"
   integrity sha512-yGG+K2DXl7Wn2DpNuZ0Y3uCHJgfHkJN3/MmnFb4jLnH1FoJJiuy7WJb/BRRh9H+6xBJ9v70iv+kttDJ0u1xp5w==
@@ -1316,6 +1308,14 @@
     "@lexical/selection" "0.17.1"
     "@lexical/utils" "0.17.1"
     lexical "0.17.1"
+
+"@lexical/html@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.npmjs.org/@lexical/html/-/html-0.13.1.tgz"
+  integrity sha512-XkZrnCSHIUavtpMol6aG8YsJ5KqC9hMxEhAENf3HTGi3ocysCByyXOyt1EhEYpjJvgDG4wRqt25xGDbLjj1/sA==
+  dependencies:
+    "@lexical/selection" "0.13.1"
+    "@lexical/utils" "0.13.1"
 
 "@lexical/link@0.13.1":
   version "0.13.1"
