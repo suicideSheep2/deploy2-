@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Define the structure of a node in your JSON
 interface Node {
   type: string;
   text?: string;
@@ -9,14 +8,12 @@ interface Node {
   tag?: string;
 }
 
-// Define the props for your component
 interface ProductDescriptionProps {
   descriptionJson: any;
   name: string;
   images?: Array<{ image: { url: string } }>;
 }
 
-// Function to apply text formatting
 const applyFormatting = (text: string, format: number) => {
   let formattedText = <>{text}</>;
   if (format & 1) formattedText = <strong>{formattedText}</strong>;
@@ -25,7 +22,6 @@ const applyFormatting = (text: string, format: number) => {
   return formattedText;
 };
 
-// Recursive function to render each node of the JSON
 const renderNode = (node: Node): React.ReactNode => {
   switch (node.type) {
     case 'paragraph':
@@ -39,9 +35,17 @@ const renderNode = (node: Node): React.ReactNode => {
     case 'text':
       return node.text ? applyFormatting(node.text, node.format || 0) : null;
     case 'heading':
-      const HeadingTag = node.tag as keyof JSX.IntrinsicElements || 'h1';
+      const HeadingTag = `h${node.tag}` as keyof JSX.IntrinsicElements;
+      const headingClasses = {
+        h1: 'text-4xl font-bold my-6',
+        h2: 'text-3xl font-semibold my-5',
+        h3: 'text-2xl font-medium my-4',
+        h4: 'text-xl font-medium my-3',
+        h5: 'text-lg font-medium my-2',
+        h6: 'text-base font-medium my-2',
+      };
       return (
-        <HeadingTag className='my-4 font-bold'>
+        <HeadingTag className={headingClasses[HeadingTag]}>
           {node.children?.map((childNode, index) => (
             <React.Fragment key={index}>{renderNode(childNode)}</React.Fragment>
           ))}

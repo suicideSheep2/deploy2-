@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@lexical/html": "^0.17.1",
+    "@lexical/markdown": "^0.17.1",
     "@lexical/react": "^0.17.1",
     "@lexical/rich-text": "^0.17.1",
     "@payloadcms/bundler-webpack": "^1.0.3",
