@@ -35,8 +35,8 @@ const renderNode = (node: Node): React.ReactNode => {
     case 'text':
       return node.text ? applyFormatting(node.text, node.format || 0) : null;
     case 'heading':
-      const HeadingTag = `h${node.tag}` as keyof JSX.IntrinsicElements;
-      const headingClasses = {
+      const HeadingTag = `h${node.tag}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+      const headingClasses: Record<typeof HeadingTag, string> = {
         h1: 'text-4xl font-bold my-6',
         h2: 'text-3xl font-semibold my-5',
         h3: 'text-2xl font-medium my-4',
