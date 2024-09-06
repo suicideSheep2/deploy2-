@@ -7,7 +7,7 @@ interface ProductDescriptionProps {
 const ProductDescription: React.FC<ProductDescriptionProps> = ({ descriptionHtml }) => {
   return (
     <div 
-      className='text-base text-muted-foreground'
+      className='text-base '
       dangerouslySetInnerHTML={{ __html: descriptionHtml }}
     />
   );

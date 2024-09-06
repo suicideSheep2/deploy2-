@@ -45,6 +45,14 @@ const Page = () => {
 
   const fee = 1
 
+  const handleCategoryClick = (category: string) => {
+    router.push(`/products?category=${category}`)
+  }
+
+  const handleAuthorClick = (author: string) => {
+    router.push(`/products?author=${encodeURIComponent(author)}`)
+  }
+
   return (
     <div className='bg-white'>
       <div className='mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
@@ -100,11 +108,10 @@ const Page = () => {
                   return (
                     <li
                       key={product.id}
-                      className='flex py-6 sm:py-10 bg-gray-50 rounded-lg my-4'> {/* Added bg-gray-50 and rounded-lg */}
+                      className='flex py-6 sm:py-10 bg-gray-50 rounded-lg my-4'>
                       <div className='flex-shrink-0'>
-                        <div className='relative h-24 w-24'>
-                          {typeof image !== 'string' &&
-                          image.url ? (
+                        <Link href={`/product/${product.id}`} className='block relative h-24 w-24'>
+                          {typeof image !== 'string' && image.url ? (
                             <Image
                               fill
                               src={image.url}
@@ -112,30 +119,57 @@ const Page = () => {
                               className='h-full w-full rounded-md object-cover object-center sm:h-48 sm:w-48'
                             />
                           ) : null}
-                        </div>
+                        </Link>
                       </div>
 
                       <div className='ml-4 flex flex-1 flex-col justify-between sm:ml-6'>
                         <div className='relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0'>
                           <div>
                             <div className='flex justify-between'>
-                              <h3 className='text-sm'>
+                              <h3 className="text-sm">
                                 <Link
                                   href={`/product/${product.id}`}
-                                  className='font-medium text-gray-700 hover:text-gray-800'>
+                                  className="font-medium text-gray-700 hover:text-gray-900 transition-colors duration-150 ease-in-out flex items-center group"
+                                >
                                   {product.name}
+                                  <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    className="h-4 w-4 ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out" 
+                                    fill="none" 
+                                    viewBox="0 0 24 24" 
+                                    stroke="currentColor"
+                                  >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                  </svg>
                                 </Link>
                               </h3>
                             </div>
 
                             <div className='mt-1 flex text-sm'>
-                              <p className='text-muted-foreground'>
+                              <button
+                                onClick={() => handleCategoryClick(product.category)}
+                                className='text-muted-foreground hover:text-gray-700 transition-colors duration-150 ease-in-out'
+                              >
                                 Category: {label}
-                              </p>
+                              </button>
                             </div>
 
                             <p className='mt-1 text-sm font-medium text-gray-900'>
-                              {/* {(product.author)} */}
+                              <button
+                                onClick={() => handleAuthorClick(product.author)}
+                                className='hover:text-gray-700 transition-colors duration-150 ease-in-out flex items-center group'
+                              >
+                                {product.author}
+                                <svg 
+                                  xmlns="http://www.w3.org/2000/svg" 
+                                  className="h-4 w-4 ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out" 
+                                  fill="none" 
+                                  viewBox="0 0 24 24" 
+                                  stroke="currentColor"
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                              </button>
                             </p>
                           </div>
 
