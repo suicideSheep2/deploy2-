@@ -13,8 +13,22 @@ import { Check, Shield } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import AddToCartButton from '@/components/AddToCartButton';
+import ProductDescription from '@/components/ProductDescription'
+import React from 'react';
 
 import fetch from 'node-fetch';
+
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  description_html: string;
+  category: string;
+  author: string;
+  images: Array<{ image: string | { url: string } }>;
+  // Add any other fields your product has
+}
 
 interface PageProps {
   params: {
@@ -118,10 +132,14 @@ const Page = async ({ params }: PageProps) => {
               </div>
 
               <div className='mt-4 space-y-6'>
-                <p className='text-base text-muted-foreground whitespace-pre-wrap'>
-                  {product.description as string}
-                </p>
+              {product.description_html ? (
+                <ProductDescription descriptionHtml={product.description_html} />
+              ) : (
+                <p>No description available</p>
+)}
+
               </div>
+            
 
               {/* adding her for displaying product file directly */}
 
