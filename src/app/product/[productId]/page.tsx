@@ -132,11 +132,9 @@ const Page = async ({ params }: PageProps) => {
               </div>
 
               <div className='mt-4 space-y-6'>
-              {product.description_html ? (
-                <ProductDescription descriptionHtml={product.description_html} />
-              ) : (
-                <p>No description available</p>
-)}
+              <ProductDescription 
+              descriptionJson={product.description} />
+
 
               </div>
             

@@ -45,6 +45,7 @@ export const Products: CollectionConfig = {
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
           HTMLConverterFeature({}),
+          
         ],
       }),
     },
