@@ -14,6 +14,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ImageSliderProps {
   urls: string[]
+  className?: string; // Add the className prop
 }
 
 const ImageSlider = ({ urls }: ImageSliderProps) => {

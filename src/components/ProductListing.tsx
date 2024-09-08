@@ -7,17 +7,13 @@ import Link from 'next/link'
 import { cn, formatPrice } from '@/lib/utils'
 import { PRODUCT_CATEGORIES } from '@/config'
 import ImageSlider from './ImageSlider'
-import fetch from 'node-fetch';
 
 interface ProductListingProps {
   product: Product | null
   index: number
 }
 
-const ProductListing = ({
-  product,
-  index,
-}: ProductListingProps) => {
+const ProductListing = ({ product, index }: ProductListingProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
 
   useEffect(() => {
@@ -44,26 +40,33 @@ const ProductListing = ({
     return (
       <Link
         className={cn(
-          'invisible h-full w-full cursor-pointer group/main',
+          'invisible h-full w-full cursor-pointer group',
           {
             'visible animate-in fade-in-5': isVisible,
           }
         )}
-        href={`/product/${product.id}`}>
-        <div className='flex flex-col w-full'>
-          <ImageSlider urls={validUrls} />
-
-          <h3 className='mt-4 font-medium text-sm text-gray-700'>
-            {product.name}
-          </h3>
-          <p className='mt-1 text-sm text-gray-500'>
-            {label}
-          </p>
-          <p className='mt-1 font-medium text-sm text-gray-900'>
-            {/* {formatPrice(product.price)} */}
-            {/* @{product.author} */}
-            {/* would suit better if not shown haha */}
-          </p>
+        href={`/product/${product.id}`}
+      >
+        <div className="relative flex flex-col w-full rounded-lg overflow-hidden transition-all duration-300 ease-in-out shadow-sm group-hover:shadow-lg bg-transparent">
+          <div className="aspect-square overflow-hidden rounded-lg">
+            <div className="w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105">
+              <ImageSlider
+                urls={validUrls}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          <div className="mt-4 transition-all duration-300 ease-in-out group-hover:translate-x-2">
+            <h3 className="font-medium text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-300 ease-in-out">
+              {product.name}
+            </h3>
+            <p className="mt-1 text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300 ease-in-out">
+              {label}
+            </p>
+            {/* <p className="mt-2 font-semibold text-sm text-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+              View Details
+            </p> */}
+          </div>
         </div>
       </Link>
     )
@@ -72,13 +75,13 @@ const ProductListing = ({
 
 const ProductPlaceholder = () => {
   return (
-    <div className='flex flex-col w-full'>
-      <div className='relative bg-zinc-100 aspect-square w-full overflow-hidden rounded-xl'>
-        <Skeleton className='h-full w-full' />
+    <div className="flex flex-col w-full">
+      <div className="relative bg-zinc-100 aspect-square w-full overflow-hidden rounded-xl">
+        <Skeleton className="h-full w-full" />
       </div>
-      <Skeleton className='mt-4 w-2/3 h-4 rounded-lg' />
-      <Skeleton className='mt-2 w-16 h-4 rounded-lg' />
-      <Skeleton className='mt-2 w-12 h-4 rounded-lg' />
+      <Skeleton className="mt-4 w-2/3 h-4 rounded-lg" />
+      <Skeleton className="mt-2 w-16 h-4 rounded-lg" />
+      <Skeleton className="mt-2 w-12 h-4 rounded-lg" />
     </div>
   )
 }
