@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation'
 import AddToCartButton from '@/components/AddToCartButton';
 import ProductDescription from '@/components/ProductDescription'
 import React from 'react';
+import StyledProductDescription from '@/components/ui/styledPD'
 
 import fetch from 'node-fetch';
 
@@ -132,9 +133,7 @@ const Page = async ({ params }: PageProps) => {
               </div>
 
               <div className='mt-4 space-y-6'>
-              <ProductDescription descriptionHtml={product.description_html} />
-
-
+              <StyledProductDescription descriptionHtml={product.description_html} />
               </div>
             
 
