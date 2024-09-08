@@ -47,7 +47,7 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
         )}
         href={`/product/${product.id}`}
       >
-        <div className="relative flex flex-col w-full rounded-lg overflow-hidden transition-all duration-300 ease-in-out shadow-sm group-hover:shadow-lg bg-transparent">
+        <div className="relative flex flex-col w-full rounded-lg overflow-hidden transition-all duration-300 ease-in-out shadow-sm group-hover:shadow-lg bg-transparent group-hover:z-10">
           <div className="aspect-square overflow-hidden rounded-lg">
             <div className="w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105">
               <ImageSlider
@@ -63,9 +63,6 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
             <p className="mt-1 text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300 ease-in-out">
               {label}
             </p>
-            {/* <p className="mt-2 font-semibold text-sm text-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-              View Details
-            </p> */}
           </div>
         </div>
       </Link>
@@ -87,3 +84,5 @@ const ProductPlaceholder = () => {
 }
 
 export default ProductListing
+
+// Add this to your global styles or a parent component
