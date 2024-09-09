@@ -77,13 +77,13 @@ const Page = async ({ params }: PageProps) => {
     <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-3xl lg:px-8'>
 
       {/* Breadcrumbs */}
-      <ol className='flex items-center space-x-2'>
+      <ol className='flex items-center space-x-2 mb-2 mt-0'> {/* Set mt to 0 */}
         {BREADCRUMBS.map((breadcrumb, i) => (
           <li key={breadcrumb.href}>
-            <div className='flex items-center text-sm'>
+            <div className='flex items-center text-xl'> {/* Increased font size to text-xl */}
               <Link 
                 href={breadcrumb.href}
-                className='font-medium text-sm text-muted-foreground hover:text-gray-900'>
+                className='font-medium text-lg text-muted-foreground hover:text-gray-900'> {/* Changed text size to text-lg */}
                 {breadcrumb.name}
               </Link>
               {i !== BREADCRUMBS.length - 1 ? (
@@ -119,9 +119,9 @@ const Page = async ({ params }: PageProps) => {
         {/* Category */}
         <div className='mt-4 flex items-center'>
           <p className='font-medium text-gray-900'>
-            <span className="text-muted-foreground">Category:</span>
+            <span className="text-muted-foreground">Category</span>
           </p>
-          <div className='ml-4 border-l text-muted-foreground border-gray-300 pl-4'>
+          <div className='ml-4 border-l font-medium text-muted-foreground text-gray-900 pl-4'>
             {label}
           </div>
         </div>
