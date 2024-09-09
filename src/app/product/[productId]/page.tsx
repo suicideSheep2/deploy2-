@@ -154,7 +154,7 @@ const Page = async ({ params }: PageProps) => {
       href='/products'
       query={{ category: product.category as string, limit: 4 }}
       title={`Similar ${label}`}
-      subtitle={`Browse similar contents just like '${product.name}'`}
+      subtitle={`Browse similar contents  like '${product.name}'`}
     />
   </div>
 </MaxWidthWrapper>

@@ -52,7 +52,7 @@ export default function Home() {
             .
           </h1>
           <p className='mt-6 text-lg max-w-prose text-muted-foreground'>
-          Welcome to Uperhaps; your literary legacy platform that turns readers into writers and dreams into digital ink.
+          Welcome to Uperhaps, your literary legacy platform that turns readers into writers and dreams into digital ink.
           </p>
           {/* From verses to epic sagas, craft your literary
            legacy on a platform 
