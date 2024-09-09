@@ -11,6 +11,8 @@ stuffs and works to do on (from topmost priority to least one)
 
 ### in second page make content name a bit more unique 
 its just too blend to begain with 
+### DONE
+
 
 and work on overall layought configuration of view too 
 
@@ -18,3 +20,10 @@ and work on overall layought configuration of view too
 maybe some kind of svg line below category 
 
 or dynamic textbox with visual border  fr work on it 
+
+
+### while product lsiting make the buttom of the image blend-in/ fade away
+
+
+from database side to rendering description increase font
+size for  description cuz it too fkn small fr 
