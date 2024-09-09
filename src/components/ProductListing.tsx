@@ -1,5 +1,3 @@
-'use client'
-
 import { Product } from '@/payload-types'
 import { useEffect, useState } from 'react'
 import { Skeleton } from './ui/skeleton'
@@ -36,38 +34,37 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
     )
     .filter(Boolean) as string[]
 
-  if (isVisible && product) {
-    return (
-      <Link
-        className={cn(
-          'invisible h-full w-full cursor-pointer group',
-          {
-            'visible animate-in fade-in-5': isVisible,
-          }
-        )}
-        href={`/product/${product.id}`}
-      >
-        <div className="relative flex flex-col w-full rounded-lg overflow-hidden transition-all duration-300 ease-in-out shadow-sm group-hover:shadow-lg bg-transparent group-hover:z-10">
-          <div className="aspect-square overflow-hidden rounded-lg">
-            <div className="w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105">
-              <ImageSlider
-                urls={validUrls}
-                className="w-full h-full object-cover"
-              />
-            </div>
+  return (
+    <Link
+      className={cn(
+        'invisible h-full w-full cursor-pointer group',
+        {
+          'visible animate-in fade-in-5': isVisible,
+        }
+      )}
+      href={`/product/${product.id}`}
+    >
+      <div className="relative flex flex-col w-full rounded-lg overflow-hidden transition-all duration-300 ease-in-out shadow-lg bg-gray-50 hover:shadow-xl hover:scale-105">
+        <div className="aspect-square overflow-hidden rounded-lg relative">
+          <div className="w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-105">
+            <ImageSlider
+              urls={validUrls}
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div className="mt-4 transition-all duration-300 ease-in-out group-hover:translate-x-2">
-            <h3 className="font-medium text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-300 ease-in-out">
-              {product.name}
-            </h3>
-            <p className="mt-1 text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300 ease-in-out">
-              {label}
-            </p>
-          </div>
+          {/* Removed the gradient completely */}
         </div>
-      </Link>
-    )
-  }
+        <div className="mt-4 transition-all duration-300 ease-in-out group-hover:translate-x-2">
+          <h3 className="font-medium text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-300 ease-in-out">
+            {product.name}
+          </h3>
+          <p className="mt-1 text-sm text-gray-500 group-hover:text-gray-600 transition-colors duration-300 ease-in-out">
+            {label}
+          </p>
+        </div>
+      </div>
+    </Link>
+  )
 }
 
 const ProductPlaceholder = () => {
@@ -84,5 +81,3 @@ const ProductPlaceholder = () => {
 }
 
 export default ProductListing
-
-// Add this to your global styles or a parent component
