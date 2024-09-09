@@ -107,9 +107,14 @@ const Page = async ({ params }: PageProps) => {
 
       {/* Product Details */}
       <div className='mt-6'>
-        <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-          {product.name as string}
+     <h1 className='text-2xl font-serif font-bold text-grey-400;'>
+       {product.name as string}
         </h1>
+
+
+
+
+
 
         {/* Category */}
         <div className='mt-4 flex items-center'>
