@@ -65,3 +65,6 @@ Your Favourites gradient path is good btw change the font
 in 3000/cart the link is wrong remember 
 
 ### 
+
+###
+in front page make thr our q premise parallel wor as explore the collection and remove it from product reel
