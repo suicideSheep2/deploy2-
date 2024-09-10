@@ -54,7 +54,7 @@ const Page = () => {
   }
 
   return (
-    <div className='bg-white'>
+    <div className='bg-transparent'>
       <div className='mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
         <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
         Your Favorites
@@ -128,7 +128,7 @@ const Page = () => {
                             <div className='flex justify-between'>
                               <h3 className="text-sm">
                                 <Link
-                                  href={`/product/${product.id}`}
+                                  href={`/product/${product.id}`} // Ensure this link is correct
                                   className="font-medium text-gray-700 hover:text-gray-900 transition-colors duration-150 ease-in-out flex items-center group"
                                 >
                                   {product.name}
