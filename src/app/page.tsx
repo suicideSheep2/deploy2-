@@ -26,7 +26,7 @@ const perks = [
   },
 ];
 
-const PerkCard = ({ perk }) => (
+const PerkCard: React.FC<{ perk: { name: string; Icon: React.ElementType; description: string; gradient: string } }> = ({ perk }) => (
   <div className="flex flex-col items-center p-8 bg-white bg-opacity-10 rounded-2xl shadow-lg transition-all duration-300 hover:transform hover:scale-105 hover:bg-opacity-20" 
        style={{ border: '1px solid rgba(255, 255, 255, 0.2)' }}>
     <div className={`mb-6 p-4 rounded-full bg-gradient-to-br ${perk.gradient} shadow-lg`}>

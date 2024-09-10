@@ -3,9 +3,7 @@
 import { usePathname } from 'next/navigation'
 import MaxWidthWrapper from './MaxWidthWrapper'
 import Link from 'next/link'
-import {
- Twitter
-} from 'lucide-react'
+
 import { Icons } from './Icons'
 
 
@@ -18,7 +16,7 @@ const Footer = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-gray-200 opacity-70"></div>
       <div className="absolute inset-0 backdrop-blur-sm"></div>
       <MaxWidthWrapper>
-        <div className="relative border-t border-gray-200 py-12">
+        <div className="relative border-t border-gray-200 py-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Left Column - Discover and share */}
             <div className="text-center md:text-left">
@@ -52,7 +50,7 @@ const Footer = () => {
           </div>
           
           {/* Footer bottom section */}
-          <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
+          <div className="mt-6 pt-4 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
             <p className="text-xs text-gray-500 mb-4 md:mb-0">
               &copy; {new Date().getFullYear()} UnwhisperedPerhaps. All Rights Reserved.
             </p>
