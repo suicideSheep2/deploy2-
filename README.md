@@ -27,3 +27,13 @@ or dynamic textbox with visual border  fr work on it
 
 from database side to rendering description increase font
 size for  description cuz it too fkn small fr 
+
+
+######
+work on background color of whole website maybe lighter sades of blues and 
+for layought add glassy looks and transparent n trnaslucent layers
+
+in main page add random instead of o q p button
+
+
+need t ofix some misalignment on the page for navbar footer and that front page notes 
