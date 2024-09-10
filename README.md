@@ -32,17 +32,27 @@ size for  description cuz it too fkn small fr
 ######
 work on background color of whole website maybe lighter sades of blues and 
 for layought add glassy looks and transparent n trnaslucent layers
+###kinda done 
 
 in main page add random instead of o q p button
+###doneee
 
 
 change the RC CS PW into more calm and pleasing section overally 
+####donee
 
 change the fkin X into afficial X logo 
 
 change/ make the product listing suit a bit more with overall page theme on  color
+####doneee
 
 <!--  -->
 
 #####
-reomove footer from sign in and sign up page
+reomove footer from sign in and sign up page 
+### doenee yay
+
+
+
+### work on cart side cuz / its color is gone and 
+$###make the star permanent on small screen too 

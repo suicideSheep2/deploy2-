@@ -53,7 +53,7 @@ const ProductListing = ({ product, index }: ProductListingProps) => {
             />
           </div>
         </div>
-        <div className="mt-2 transition-all duration-300 ease-in-out group-hover:translate-x-2">
+        <div className=" pl-2 mt-2 transition-all duration-300 ease-in-out group-hover:translate-x-2">
           <h3 className="font-medium text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-300 ease-in-out">
             {product.name}
           </h3>
