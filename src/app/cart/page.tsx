@@ -56,13 +56,13 @@ const Page = () => {
   return (
     <div className='bg-transparent'>
       <div className='mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
-        <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+        <h1 className='text-4xl font-semibold tracking-tight text-green-600 sm:text-5xl'>
         Your Favorites
         </h1>
 
         <div className='mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16'>
           <div
-            className={cn('lg:col-span-7 bg-transparent bg-opacity-80 shadow-lg rounded-lg', {
+            className={cn('lg:col-span-7', {
               'rounded-lg border-2 border-dashed border-zinc-200 p-12':
                 isMounted && items.length === 0,
             })}>
@@ -96,8 +96,8 @@ const Page = () => {
               className={cn({
                 'divide-y divide-gray-200 border-b border-t border-gray-200':
                   isMounted && items.length > 0,
-               })}>
-               {isMounted &&
+              })}>
+              {isMounted &&
                 items.map(({ product }) => {
                   const label = PRODUCT_CATEGORIES.find(
                     (c) => c.value === product.category
@@ -108,7 +108,7 @@ const Page = () => {
                   return (
                     <li
                       key={product.id}
-                      className='flex py-6 sm:py-10 bg-gray-50 rounded-lg my-4 transition-shadow duration-300 hover:shadow-lg hover:bg-opacity-80 hover:bg-gray-200'>
+                      className='flex py-4 sm:py-8 bg-white bg-opacity-10 rounded-lg my-4 shadow-lg hover:shadow-xl transition-shadow duration-300'>
                       <div className='flex-shrink-0'>
                         <Link href={`/product/${product.id}`} className='block relative h-24 w-24'>
                           {typeof image !== 'string' && image.url ? (
@@ -126,7 +126,7 @@ const Page = () => {
                         <div className='relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0'>
                           <div>
                             <div className='flex justify-between'>
-                              <h3 className="text-sm">
+                              <h3 className="text-lg"> 
                                 <Link
                                   href={`/product/${product.id}`} // Ensure this link is correct
                                   className="font-medium text-gray-700 hover:text-gray-900 transition-colors duration-150 ease-in-out flex items-center group"
@@ -148,13 +148,13 @@ const Page = () => {
                             <div className='mt-1 flex text-sm'>
                               <button
                                 onClick={() => handleCategoryClick(product.category)}
-                                className='text-muted-foreground hover:text-gray-700 transition-colors duration-150 ease-in-out'
+                                className='text-muted-foreground hover:text-gray-700 transition-colors duration-150 ease-in-out text-lg' // Increased size
                               >
                                 Category: {label}
                               </button>
                             </div>
 
-                            <p className='mt-1 text-sm font-medium text-gray-900'>
+                            <p className='mt-1 text-lg font-medium text-gray-900'> 
                               <button
                                 onClick={() => handleAuthorClick(product.author)}
                                 className='hover:text-gray-700 transition-colors duration-150 ease-in-out flex items-center group'
@@ -208,8 +208,7 @@ const Page = () => {
            {/* this is another right side table */}
 
           <section
-           className='mt-16 rounded-lg bg-opacity-10 bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 
-           shadow-md transition-shadow duration-300 hover:shadow-lg hover:transform hover:scale-100 hover:bg-opacity-20'>
+           className='mt-16 rounded-lg bg-opacity-40 bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>
             <h2 className='text-lg font-medium text-gray-900 mb-4'>
               Support Our Work
             </h2>
@@ -221,7 +220,7 @@ const Page = () => {
             <div className='space-y-4'>
               <div className='flex items-center justify-between'>
                 <label htmlFor="donationAmount" className='text-sm font-medium text-gray-900'>
-                  Enter amount (Rs)
+                  Enter amount (Rs):
                 </label>
                 <input
                   type="number"
