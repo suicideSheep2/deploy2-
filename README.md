@@ -56,9 +56,12 @@ reomove footer from sign in and sign up page
 
 ### work on cart side cuz / its color is gone and 
 $###make the star permanent on small screen too 
+Your Favourites gradient path is good btw change the font 
 
 
 
 
 
 in 3000/cart the link is wrong remember 
+
+### 

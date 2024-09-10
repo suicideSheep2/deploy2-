@@ -55,10 +55,13 @@ const Page = () => {
 
   return (
     <div className='bg-transparent'>
-      <div className='mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
-        <h1 className='text-4xl font-semibold tracking-tight text-green-600 sm:text-5xl'>
-        Your Favorites
-        </h1>
+      <div className='px-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8'>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
+      <span className="text-muted-900">Your </span>
+      <span className="bg-gradient-to-r from-black via-green-800 to-green-600 inline-block text-transparent bg-clip-text">
+        Favorites
+      </span>
+    </h1>
 
         <div className='mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16'>
           <div
