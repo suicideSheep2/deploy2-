@@ -43,3 +43,6 @@ change the fkin X into afficial X logo
 change/ make the product listing suit a bit more with overall page theme on  color
 
 <!--  -->
+
+#####
+reomove footer from sign in and sign up page
