@@ -36,4 +36,10 @@ for layought add glassy looks and transparent n trnaslucent layers
 in main page add random instead of o q p button
 
 
-need t ofix some misalignment on the page for navbar footer and that front page notes 
+change the RC CS PW into more calm and pleasing section overally 
+
+change the fkin X into afficial X logo 
+
+change/ make the product listing suit a bit more with overall page theme on  color
+
+<!--  -->
