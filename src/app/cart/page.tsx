@@ -159,9 +159,11 @@ const Page = () => {
 
                             <p className='mt-1 text-lg font-medium text-gray-900'> 
                               <button
+                              // @ts-ignore
                                 onClick={() => handleAuthorClick(product.author)}
                                 className='hover:text-gray-700 transition-colors duration-150 ease-in-out flex items-center group'
                               >
+                                {/* @ts-ignore */}
                                 {product.author}
                                 <svg 
                                   xmlns="http://www.w3.org/2000/svg" 
@@ -194,11 +196,7 @@ const Page = () => {
                         </div>
 
                         <p className='mt-4 flex space-x-2 text-sm text-gray-700'>
-                          {/* <Check className='h-5 w-5 flex-shrink-0 text-green-500' />
-
-                          <span>
-                            Eligible for instant delivery
-                          </span> */}
+                         
                         </p>
                       </div>
                     </li>

@@ -16,7 +16,9 @@ const Navbar = async () => {
     <div className='sticky z-50 top-0 inset-x-0 h-16'>
       <header className='relative' style={{
         background: '#abbaab',
+        // @ts-ignore
         background: '-webkit-linear-gradient(to right, #ffffff, #abbaab)',
+         // @ts-ignore
         background: 'linear-gradient(to right, #ffffff, #abbaab)'
       }}>
         <MaxWidthWrapper>
