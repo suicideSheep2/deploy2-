@@ -62,7 +62,7 @@ const Page = () => {
 
         <div className='mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16'>
           <div
-            className={cn('lg:col-span-7', {
+            className={cn('lg:col-span-7 bg-transparent bg-opacity-80 shadow-lg rounded-lg', {
               'rounded-lg border-2 border-dashed border-zinc-200 p-12':
                 isMounted && items.length === 0,
             })}>
@@ -96,8 +96,8 @@ const Page = () => {
               className={cn({
                 'divide-y divide-gray-200 border-b border-t border-gray-200':
                   isMounted && items.length > 0,
-              })}>
-              {isMounted &&
+               })}>
+               {isMounted &&
                 items.map(({ product }) => {
                   const label = PRODUCT_CATEGORIES.find(
                     (c) => c.value === product.category
@@ -108,7 +108,7 @@ const Page = () => {
                   return (
                     <li
                       key={product.id}
-                      className='flex py-6 sm:py-10 bg-gray-50 rounded-lg my-4'>
+                      className='flex py-6 sm:py-10 bg-gray-50 rounded-lg my-4 transition-shadow duration-300 hover:shadow-lg hover:bg-opacity-80 hover:bg-gray-200'>
                       <div className='flex-shrink-0'>
                         <Link href={`/product/${product.id}`} className='block relative h-24 w-24'>
                           {typeof image !== 'string' && image.url ? (
@@ -207,7 +207,9 @@ const Page = () => {
 
            {/* this is another right side table */}
 
-          <section className='mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>
+          <section
+           className='mt-16 rounded-lg bg-opacity-10 bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 
+           shadow-md transition-shadow duration-300 hover:shadow-lg hover:transform hover:scale-100 hover:bg-opacity-20'>
             <h2 className='text-lg font-medium text-gray-900 mb-4'>
               Support Our Work
             </h2>
@@ -219,7 +221,7 @@ const Page = () => {
             <div className='space-y-4'>
               <div className='flex items-center justify-between'>
                 <label htmlFor="donationAmount" className='text-sm font-medium text-gray-900'>
-                  Enter amount (Rs):
+                  Enter amount (Rs)
                 </label>
                 <input
                   type="number"
