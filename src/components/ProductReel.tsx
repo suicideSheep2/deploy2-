@@ -48,7 +48,7 @@ const ProductReel = ({
   };
 
   const sortOptions = [
-    { value: 'recent', label: 'Most Recent' },
+    { value: 'recent', label: 'Recent' },
     { value: 'oldest', label: 'Oldest' },
     { value: 'alphabetical', label: 'A-Z' },
     { value: 'reverse-alphabetical', label: 'Z-A' },
