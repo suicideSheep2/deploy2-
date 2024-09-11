@@ -5,21 +5,27 @@ import { Product } from '@/payload-types'
 import { trpc } from '@/trpc/client'
 import Link from 'next/link'
 import ProductListing from './ProductListing'
-import { Label } from '@radix-ui/react-dropdown-menu';
+import { ChevronDown } from 'lucide-react'
 
 interface ProductReelProps {
   query: TQueryValidator;
   href?: string;
   title?: string;
   subtitle?: string;
-  isMainPage?: boolean;
-  showSorting?:boolean;
+  showSorting?: boolean;
 }
 
 const FALLBACK_LIMIT = 4;
 
-const ProductReel = ({ query: initialQuery, href, title,subtitle, showSorting =true }: ProductReelProps) => {
+const ProductReel = ({ 
+  query: initialQuery, 
+  href, 
+  title, 
+  subtitle,
+  showSorting = true
+}: ProductReelProps) => {
   const [query, setQuery] = useState<TQueryValidator>(initialQuery);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data: queryResults, isLoading } = trpc.getInfiniteProducts.useInfiniteQuery(
     {
@@ -38,6 +44,7 @@ const ProductReel = ({ query: initialQuery, href, title,subtitle, showSorting =t
       ...prevQuery,
       sort: newSort as TQueryValidator['sort']
     }));
+    setIsOpen(false);
   };
 
   const sortOptions = [
@@ -45,10 +52,6 @@ const ProductReel = ({ query: initialQuery, href, title,subtitle, showSorting =t
     { value: 'oldest', label: 'Oldest' },
     { value: 'alphabetical', label: 'A-Z' },
     { value: 'reverse-alphabetical', label: 'Z-A' },
-    // { value: 'most-read', label: 'Most Read' },
-    // { value: 'highest-rated', label: 'Highest Rated' },
-    // { value:  'random' , Label: 'Random'}
-    // ya fked up lol,
   ];
 
   return (
@@ -63,25 +66,36 @@ const ProductReel = ({ query: initialQuery, href, title,subtitle, showSorting =t
           )}
         </div>
         
-        <div className='flex items-center justify-between mt-4 md:mt-0'>
+        <div className='flex items-center justify-between mt-4 md:mt-0 px-4 md:px-0'>
           {showSorting && (
-            <select 
-              value={query.sort} 
-              onChange={(e) => handleSortChange(e.target.value)}
-              className='block w-full rounded-full px-4 py-2 text-sm font-medium text-green-600 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg border border-green-600 focus:outline-bold focus:ring-2 focus:ring-green-600 focus:border-transparent transition duration-300 ease-in-out hover:bg-transparent'
-            >
-              {sortOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center justify-between w-full md:w-48 px-4 py-2 text-sm font-medium text-green-600 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg border border-green-600 rounded-full focus:outline-none focus:ring-2 focus:ring-green-600 transition duration-300 ease-in-out hover:bg-opacity-30 shadow-md"
+              >
+                {sortOptions.find(option => option.value === query.sort)?.label || 'Sort by'}
+                <ChevronDown className={`ml-2 h-4 w-4 transition-transform duration-200 ${isOpen ? 'transform rotate-180' : ''}`} />
+              </button>
+              {isOpen && (
+                <div className="absolute z-10 w-full mt-2 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg border border-green-600 rounded-lg shadow-lg overflow-hidden">
+                  {sortOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-green-100 transition duration-200"
+                      onClick={() => handleSortChange(option.value)}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           )}
 
           {href && (
             <Link
               href={href}
-              className='hidden text-sm font-medium text-green-600 hover:text-green-700 md:block px-4 py-2 ml-4'
+              className='hidden text-sm font-medium text-green-600 hover:text-green-700 md:block px-4 py-2 ml-4 transition duration-300 ease-in-out hover:underline'
             >
               Browse the collection
               <span aria-hidden='true'> &rarr;</span>
