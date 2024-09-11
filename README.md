@@ -68,6 +68,8 @@ reomove footer from sign in and sign up page
 ### work on cart side cuz / its color is gone and 
 $###make the star permanent on small screen too 
 Your Favourites gradient path is good btw change the font 
+### palcement of star ?? maybe star after menu open or sth loke that 
+% cant think of it rn 
 
 
 
@@ -88,3 +90,7 @@ in front page make thr our q premise parallel wor as explore the collection and 
 
 and need to fix it for small screen too 
 ##donee
+
+#####
+working on fixing fav sidebar theme n mid device too 
+## bg done and glossy look kinda done

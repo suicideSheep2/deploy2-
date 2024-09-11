@@ -53,7 +53,7 @@ useEffect(() => {
           Favourites
         </span>
       </SheetTrigger>
-      <SheetContent className='flex w-full flex-col pr-0 sm:max-w-lg'>
+      <SheetContent className='flex w-full flex-col pr-0 sm:max-w-lg bg-gradient-to-r from-white to-[#abbaab] bg-opacity-80 shadow-lg transition-shadow duration-300 hover:shadow-xl'>
         <SheetHeader className='space-y-2.5 pr-6'>
         <SheetTitle>Favourites ({itemCount})</SheetTitle>
         </SheetHeader>
@@ -69,6 +69,7 @@ useEffect(() => {
                   <CartItem
                     product={product}
                     key={product.id}
+                    className='bg-white bg-opacity-70 shadow-md transition-shadow duration-300 hover:shadow-lg'
                   />
                 ))}
               </ScrollArea>
@@ -81,7 +82,7 @@ useEffect(() => {
                   href= '/cart'
                   className={buttonVariants({
                   variant: 'outline',
-                  className: 'w-full bg-green-500 hover:bg-green-600 text-white',
+                  className: 'w-full bg-green-500 hover:bg-green-600 text-gray',
                   })}>
                   <Star className="w-4 h-4 mr-2" />
                   View All Favorites
