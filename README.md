@@ -94,3 +94,6 @@ and need to fix it for small screen too
 #####
 working on fixing fav sidebar theme n mid device too 
 ## bg done and glossy look kinda done
+
+####
+see the navitem and change the use onclick and gb preferances 
