@@ -68,3 +68,5 @@ in 3000/cart the link is wrong remember
 
 ###
 in front page make thr our q premise parallel wor as explore the collection and remove it from product reel
+
+% z-a isnt working rightfully 

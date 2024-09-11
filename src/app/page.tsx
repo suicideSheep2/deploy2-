@@ -2,7 +2,7 @@ import React from 'react';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import ProductReel from '@/components/ProductReel';
 import { Button, buttonVariants } from '@/components/ui/button';
-import { BookOpen, Paintbrush, Users } from 'lucide-react';
+import { BookOpen, Ghost, Paintbrush, Users } from 'lucide-react';
 import Link from 'next/link';
 
 const perks = [
@@ -53,19 +53,22 @@ export default function Home() {
             <Link href='/products' className={buttonVariants()}>
               Browse Trending
             </Link>
-            <Button variant='ghost'>
+            <Link 
+              href='/products?sort=recent' 
+              className={buttonVariants({ variant: 'ghost' })}
+            >
               Our quality promise &rarr;
-            </Button>
+            </Link>
           </div>
         </div>
 
         <ProductReel
-          query={{ sort: 'desc', limit: 4 }}
+          query={{ sort: 'recent', limit: 4 }}
           href='/products?sort=recent'
-          title='Brand new'
+          showSorting={false} 
         />
       </MaxWidthWrapper>
-
+      
       <section className='border-t border-transparent py-28' style={{
         background: 'linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.1) 100%)',
         backdropFilter: 'blur(16px)',

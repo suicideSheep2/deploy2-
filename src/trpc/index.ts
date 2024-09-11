@@ -1,13 +1,10 @@
 import { z } from 'zod'
-import { authRouter } from './auth-router'
 import { publicProcedure, router } from './trpc'
 import { QueryValidator } from '../lib/validators/query-validator'
 import { getPayloadClient } from '../get-payload'
-// import { paymentRouter } from './payment-router'
 
 export const appRouter = router({
-  auth: authRouter,
-//   payment: paymentRouter,
+  // ... other routers
 
   getInfiniteProducts: publicProcedure
     .input(
@@ -23,10 +20,7 @@ export const appRouter = router({
 
       const payload = await getPayloadClient()
 
-      const parsedQueryOpts: Record<
-        string,
-        { equals: string }
-      > = {}
+      const parsedQueryOpts: Record<string, { equals: string }> = {}
 
       Object.entries(queryOpts).forEach(([key, value]) => {
         parsedQueryOpts[key] = {
@@ -36,19 +30,44 @@ export const appRouter = router({
 
       const page = cursor || 1
 
+      let sortOption = '-createdAt' // Default to most recent
+
+      switch (sort) {
+        case 'recent':
+          sortOption = '-createdAt'
+          break
+        case 'oldest':
+          sortOption = 'createdAt'
+          break
+        case 'alphabetical':
+          sortOption = 'title'
+          break
+        case 'reverse-alphabetical':
+          sortOption = '-title'
+          break
+          // this would be useful to dispaly 
+          // content lsting in front page
+          // yup its kded up
+        case 'random':
+           sortOption = '-id'
+           break
+          
+       
+      }
+
       const {
         docs: items,
         hasNextPage,
         nextPage,
       } = await payload.find({
-        collection: 'products',
+        collection: 'products',  // You might want to rename this to 'poems' or 'literature'
         where: {
           approvedForSale: {
             equals: 'approved',
           },
           ...parsedQueryOpts,
         },
-        sort,
+        sort: sortOption,
         depth: 1,
         limit,
         page,

@@ -31,6 +31,14 @@ interface PageProps {
   };
 }
 
+// Add subtitle to ProductReelProps interface
+interface ProductReelProps {
+  href: string;
+  query: { category: string; limit: number; };
+  title: string;
+  isMainPage: boolean;
+  subtitle: string; // {{ edit_1 }} Ensure this is defined
+}
 
 const BREADCRUMBS = [
   { id: 1, name: "Home", href: "/" },
@@ -128,7 +136,7 @@ const Page = async ({ params }: PageProps) => {
 
         {/* Product Description */}
         <div className='mt-4 space-y-6'>
-          <StyledProductDescription descriptionHtml={product.description_html} />
+          <StyledProductDescription descriptionHtml={product.description_html as string} />
         </div>
 
         {/* Author and Add to Cart Button */}
@@ -154,7 +162,8 @@ const Page = async ({ params }: PageProps) => {
       href='/products'
       query={{ category: product.category as string, limit: 4 }}
       title={`Similar ${label}`}
-      subtitle={`Browse similar contents  like '${product.name}'`}
+      subtitle={`Browse similar contents like '${product.name}'`} // {{ edit_2 }}
+      showSorting={false} 
     />
   </div>
 </MaxWidthWrapper>
