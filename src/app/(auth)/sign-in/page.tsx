@@ -21,9 +21,6 @@ import { trpc } from '@/trpc/client'
 import { toast } from 'sonner'
 import { ZodError } from 'zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { TRPCError } from '@trpc/server'
-import { DefaultErrorShape } from '@trpc/server' // Adjust the import path as necessary
-import { TRPCClientError } from '@trpc/client' // Add this import
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -52,7 +49,12 @@ const Page = () => {
       onSuccess: async () => {
         toast.success('Signed in successfully')
 
-        router.refresh()
+       await router.refresh()
+
+
+      //  force hard reload of page worked lol 
+      // does the job done but is kinda laggy lol
+       window.location.reload()
 
         if (origin) {
           router.push(`/${origin}`)
@@ -66,10 +68,8 @@ const Page = () => {
 
         router.push('/')
       },
-      // @ts-ignore-error
-      onError: (error: TRPCClientError<DefaultErrorShape>) => { // Update the type here
-        const trpcError = error as TRPCClientError<DefaultErrorShape> & { data?: { code?: string } }
-        if (trpcError.data?.code === 'UNAUTHORIZED') {
+      onError: (err) => {
+        if (err.data?.code === 'UNAUTHORIZED') {
           toast.error('Invalid email or password.')
         }
       },
@@ -169,14 +169,14 @@ const Page = () => {
                 onClick={continueAsBuyer}
                 variant='secondary'
                 disabled={isLoading}>
-                Continue as customer
+                Continue as reader
               </Button>
             ) : (
               <Button
                 onClick={continueAsSeller}
                 variant='secondary'
                 disabled={isLoading}>
-                Continue as seller
+                Continue as publisher
               </Button>
             )}
           </div>
