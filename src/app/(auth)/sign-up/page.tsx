@@ -54,7 +54,8 @@ const Page = () => {
           'Something went wrong. Please try again.'
         )
       },
-      onSuccess: ({ sentToEmail }) => {
+      onSuccess: (data: { sentToEmail: string }) => {
+        const { sentToEmail } = data
         toast.success(
           `Verification email sent to ${sentToEmail}.`
         )

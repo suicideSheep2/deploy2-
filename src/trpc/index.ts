@@ -2,8 +2,11 @@ import { z } from 'zod'
 import { publicProcedure, router } from './trpc'
 import { QueryValidator } from '../lib/validators/query-validator'
 import { getPayloadClient } from '../get-payload'
+import { authRouter } from './auth-router'
 
 export const appRouter = router({
+  auth: authRouter,
+  
   // ... other routers
 
   getInfiniteProducts: publicProcedure

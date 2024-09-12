@@ -1,6 +1,3 @@
-// here try to modify sign in as seller n buyer
-// sign in as reader or publisher/ sth along the way
-
 'use client'
 
 import { Icons } from '@/components/Icons'
@@ -24,6 +21,9 @@ import { trpc } from '@/trpc/client'
 import { toast } from 'sonner'
 import { ZodError } from 'zod'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { TRPCError } from '@trpc/server'
+import { DefaultErrorShape } from '@trpc/server' // Adjust the import path as necessary
+import { TRPCClientError } from '@trpc/client' // Add this import
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -66,8 +66,10 @@ const Page = () => {
 
         router.push('/')
       },
-      onError: (err) => {
-        if (err.data?.code === 'UNAUTHORIZED') {
+      // @ts-ignore-error
+      onError: (error: TRPCClientError<DefaultErrorShape>) => { // Update the type here
+        const trpcError = error as TRPCClientError<DefaultErrorShape> & { data?: { code?: string } }
+        if (trpcError.data?.code === 'UNAUTHORIZED') {
           toast.error('Invalid email or password.')
         }
       },
