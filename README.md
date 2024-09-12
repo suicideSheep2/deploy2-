@@ -97,3 +97,10 @@ working on fixing fav sidebar theme n mid device too
 
 ####
 see the navitem and change the use onclick and gb preferances 
+
+
+
+####
+Cart make it for small screen ;;;;  img desc and stuffs wrong randomly lol
+for optimal link of images and category and stuffs see 3000/cart page 
+modify  gradient a bit -- spacing of list a bit more
