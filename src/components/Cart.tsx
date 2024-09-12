@@ -1,6 +1,6 @@
 'use client'
 
-import { Star } from 'lucide-react'
+import { Star, X } from 'lucide-react'
 import {
   Sheet,
   SheetContent,
@@ -16,28 +16,49 @@ import { buttonVariants } from './ui/button'
 import Image from 'next/image'
 import { ScrollArea } from './ui/scroll-area'
 import { useEffect, useState } from 'react'
-import { formatPrice } from '@/lib/utils'
 import { useCart } from '@/hooks/use-cart'
-import CartItem from './CartItem'
+import { cn } from '@/lib/utils'
+
+const CartItem = ({ product, className }: { product: any; className?: string }) => {
+  const { removeItem } = useCart()
+
+  return (
+    <div className={cn(
+      "flex items-center space-x-4 rounded-lg p-4 transition-all duration-200 ease-in-out",
+      "bg-white bg-opacity-20 backdrop-blur-lg shadow-lg hover:shadow-xl",
+      "border border-gray-200 hover:border-gray-300",
+      className
+    )}>
+      <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
+        <Image
+          src={product.image}
+          alt={product.name}
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
+      <div className="flex-grow">
+        <h3 className="text-sm font-medium text-gray-900">{product.name}</h3>
+        <p className="mt-1 text-sm text-gray-500">{product.category}</p>
+      </div>
+      <button
+        onClick={() => removeItem(product.id)}
+        className="text-gray-400 hover:text-gray-500 transition-colors duration-200"
+      >
+        <X className="h-5 w-5" />
+      </button>
+    </div>
+  )
+}
 
 const Cart = () => {
-  const { items} = useCart()
-
+  const { items } = useCart()
   const itemCount = items.length
-// kinda useless ??? 
-// maybe show total favourites haha 
+  const [isMounted, setIsMounted] = useState<boolean>(false)
 
-const [isMounted, setIsMounted] = useState<boolean>(false)
-
-useEffect(() => {
-  setIsMounted(true)
-}, [])
-
-  const cartTotal = items.reduce((total, {product}) =>total + product.price,
-0
-)
-
-  const fee = 1
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   return (
     <Sheet>
@@ -53,71 +74,71 @@ useEffect(() => {
           Favourites
         </span>
       </SheetTrigger>
-      <SheetContent className='flex w-full flex-col pr-0 sm:max-w-lg bg-gradient-to-r from-white to-[#abbaab] bg-opacity-80 shadow-lg transition-shadow duration-300 hover:shadow-xl'>
+      <SheetContent className='flex w-full flex-col pr-0 sm:max-w-lg bg-gradient-to-r from-white to-[#abbaab] bg-opacity-80'>
         <SheetHeader className='space-y-2.5 pr-6'>
-        <SheetTitle>Favourites ({itemCount})</SheetTitle>
+          <SheetTitle>Favourites ({itemCount})</SheetTitle>
         </SheetHeader>
        
-         {itemCount > 0 ? (
+        {itemCount > 0 ? (
           <>
-            <div className='flex w-full flex-col pr-6'>
-              {/* this is for cart items 
-              modify it  kkkk */}
-
-            <ScrollArea>
+            <ScrollArea className='flex-grow'>
+              <div className='space-y-4 pr-6 pt-4'>
                 {items.map(({ product }) => (
-                  <CartItem
+                  // wrong here lol 
+                  // have correct link
+                   <Link href={`/products/${product.id}`} key={product.id}>
+                    <CartItem
                     product={product}
                     key={product.id}
-                    className='bg-white bg-opacity-70 shadow-md transition-shadow duration-300 hover:shadow-lg'
                   />
+                  </Link>
                 ))}
-              </ScrollArea>
-            </div>
-            <div className='space-y-4 pr-6'>
+              </div>
+            </ScrollArea>
+            <div className='mt-auto space-y-4 pr-6'>
               <Separator />
               <SheetFooter>
-                <SheetTrigger asChild> 
+                <SheetTrigger asChild>
                   <Link 
-                  href= '/cart'
-                  className={buttonVariants({
-                  variant: 'outline',
-                  className: 'w-full bg-green-500 hover:bg-green-600 text-gray',
-                  })}>
-                  <Star className="w-4 h-4 mr-2" />
-                  View All Favorites
+                    href='/cart'
+                    className={buttonVariants({
+                      variant: 'outline',
+                      className: 'w-full bg-green-500 hover:bg-green-600 text-gray',
+                    })}
+                  >
+                    <Star className="w-4 h-4 mr-2" />
+                    View All Favorites
                   </Link>
                 </SheetTrigger>
               </SheetFooter>
             </div>
           </>
         ) : (
-      <div className='flex h-full flex-col items-center justify-center space-y-1'>
-        <div 
-        aria-hidden="true" className= 'relative mb-4 h-60 w-60 text-muted-foreground'>
-          <Image 
-          src='/hippo-empty-cart.png' 
-          fill 
-          alt='empty-shopping-cart-hippo-photo' 
-          />
-          </div> 
-          <div className='text-xl font-semibold '>
-             Your favourites is empty
-              </div>
-          <SheetTrigger asChild>
-            <Link 
-            href= '/products'
-            className= {buttonVariants ({
-            variant:'link',
-            size: 'sm',
-            className:
-            'text-sm text-muted-foreground',
-            })}>
-              Add items to your favourites
-            </Link>
-          </SheetTrigger>
-        </div>
-          )}
+          <div className='flex h-full flex-col items-center justify-center space-y-1'>
+            <div aria-hidden="true" className='relative mb-4 h-60 w-60 text-muted-foreground'>
+              <Image 
+                src='/hippo-empty-cart.png' 
+                fill 
+                alt='empty-shopping-cart-hippo-photo' 
+              />
+            </div> 
+            <div className='text-xl font-semibold'>
+              Your favourites is empty
+            </div>
+            <SheetTrigger asChild>
+              <Link 
+                href='/products'
+                className={buttonVariants({
+                  variant: 'link',
+                  size: 'sm',
+                  className: 'text-sm text-muted-foreground',
+                })}
+              >
+                Add items to your favourites
+              </Link>
+            </SheetTrigger>
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   )

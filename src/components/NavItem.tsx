@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from './ui/button'
-import { ChevronDown } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -44,9 +44,9 @@ const NavItem = ({
           onClick={handleClick} // Updated to use handleClick
           variant={isOpen ? 'secondary' : 'ghost'}>
           {category.label}
-          <ChevronDown
+          <ChevronRight
             className={cn(
-              'h-4 w-4 transition-all text-muted-foreground opacity-100 group-hover:opacity-100', // Updated for hover effect
+              'h-4 w-4 transition-all  opacity-10 group-hover:opacity-100', // Updated for hover effect
               {
                 'rotate-180': isOpen, // Change rotation to point right
               }
