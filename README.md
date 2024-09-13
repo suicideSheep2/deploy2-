@@ -104,3 +104,14 @@ see the navitem and change the use onclick and gb preferances
 Cart make it for small screen ;;;;  img desc and stuffs wrong randomly lol
 for optimal link of images and category and stuffs see 3000/cart page 
 modify  gradient a bit -- spacing of list a bit more
+
+
+%#######
+leave it as it is for cart , make star useable for small device too 
+make the the menu for small devices with categories/ recently updated/ ohh nooo 
+since peoms n novels are officially hidden in samm dev make only two simple category there and keep sign options 
+
+
+####
+maybe in fab page we would pjust view all contents of product description directly 
+yeah cuz then it would be diff from cart and that's what we want full fav reading page
