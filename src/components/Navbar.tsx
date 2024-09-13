@@ -18,26 +18,27 @@ const Navbar = async () => {
         background: '#abbaab',
         // @ts-ignore
         background: '-webkit-linear-gradient(to right, #ffffff, #abbaab)',
-         // @ts-ignore
+        // @ts-ignore
         background: 'linear-gradient(to right, #ffffff, #abbaab)'
       }}>
         <MaxWidthWrapper>
-          <div className='flex h-16 items-center'>
-            <MobileNav />
-
-            <div className='ml-4 flex lg:ml-0 font-semibold'>
-              <Link href='/'>
-                <p className='ml-4 flex lg:ml-0 text-gray-800'>
-                  Unwhispered<span className="text-green-600">Perhaps..</span>
-                </p>
-              </Link>
+          <div className='flex h-16 items-center justify-between'>
+            <div className='flex items-center'>
+              <MobileNav />
+              <div className='ml-4 flex lg:ml-0 font-semibold'>
+                <Link href='/'>
+                  <p className='ml-4 flex lg:ml-0 text-gray-800'>
+                    Unwhispered<span className="text-green-600">Perhaps..</span>
+                  </p>
+                </Link>
+              </div>
             </div>
 
             <div className='hidden z-50 lg:ml-8 lg:block lg:self-stretch'>
               <NavItems />
             </div>
 
-            <div className='ml-auto flex items-center'>
+            <div className='flex items-center'>
               <div className='hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6'>
                 {user ? (
                   <UserAccountNav user={user} />
@@ -63,12 +64,16 @@ const Navbar = async () => {
                       })}>
                       Create account
                     </Link>
+                    <span
+                     className='h-6 w-px bg-gray-300 mr-2' // Added margin-right for spacing
+                     aria-hidden='true'
+                    />
                   </>
                 )}
-
-                <div className='ml-4 flow-root lg:ml-6'>
-                  <Cart />
-                </div>
+              </div>
+              {/* Cart component moved outside of the hidden div */}
+              <div className='ml-4 flow-root'>
+                <Cart />
               </div>
             </div>
           </div>
