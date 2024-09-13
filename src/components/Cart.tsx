@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react'
 import { useCart } from '@/hooks/use-cart'
 import { cn } from '@/lib/utils'
 
-const CartItem = ({ product, className, onClose }: { product: any; className?: string; onClose: () => void }) => {
+const CartItem = ({ product, className }: { product: any; className?: string }) => {
   const { removeItem } = useCart()
 
   return (
@@ -30,15 +30,7 @@ const CartItem = ({ product, className, onClose }: { product: any; className?: s
       "border border-gray-200 hover:border-gray-300",
       className
     )}>
-      <Link 
-        href={`/product/${product.id}`} 
-        className="flex-grow flex items-center space-x-4"
-        onClick={(e) => {
-          e.preventDefault();
-          onClose();
-          window.location.href = `/product/${product.id}`;
-        }}
-      >
+      <Link href={`/product/${product.id}`} className="flex-grow flex items-center space-x-4">
         <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
           <Image
             src={product.images[0].image.url || '/placeholder-image.jpg'}
@@ -75,11 +67,6 @@ const Cart = () => {
     setIsMounted(true)
   }, [])
 
-  const closeSheet = () => {
-    const closeButton = document.querySelector('[data-radix-collection-item]') as HTMLButtonElement | null;
-    if (closeButton) closeButton.click();
-  }
-
   return (
     <Sheet>
       <SheetTrigger className='group -m-2 flex items-center p-2 relative'>
@@ -105,30 +92,34 @@ const Cart = () => {
             <>
               <ScrollArea className='flex-grow pr-6'>
                 <div className='space-y-4 pt-4'>
-                  {items.map(({ product }) => (
-                    <CartItem
-                      product={product}
-                      key={product.id}
-                      onClose={closeSheet}
-                    />
-                  ))}
+                  <SheetClose asChild> 
+                     {/* // Wrapped entire list in SheetClose */}
+                    <div>
+                      {items.map(({ product }) => (
+                        <CartItem
+                          product={product}
+                          key={product.id}
+                        />
+                      ))}
+                    </div>
+                  </SheetClose>
                 </div>
               </ScrollArea>
               <div className='mt-6 space-y-4 pr-6'>
                 <Separator />
                 <SheetFooter>
-                  <SheetClose asChild>
-                    <Link 
-                      href='/cart'
-                      className={buttonVariants({
-                        variant: 'outline',
-                        className: 'w-full bg-green-500 hover:bg-green-600 text-gray',
-                      })}
-                    >
-                      <Star className="w-4 h-4 mr-2" />
-                      View All Favorites
-                    </Link>
-                  </SheetClose>
+                <SheetTrigger asChild>
+                  <Link 
+                    href='/cart'
+                    className={buttonVariants({
+                      variant: 'outline',
+                      className: 'w-full bg-green-500 hover:bg-green-600 text-gray',
+                    })}
+                  >
+                    <Star className="w-4 h-4 mr-2" />
+                    View All Favorites
+                  </Link>
+                </SheetTrigger>
                 </SheetFooter>
               </div>
             </>

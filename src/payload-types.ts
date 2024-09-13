@@ -48,6 +48,7 @@ export interface Product {
   name: string;
   description?: string | null;
   price: number;
+  // maybe we need to change here lol
   category: 'ui_kits' | 'icons';
   product_files: string | ProductFile;
   approvedForSale?: ('pending' | 'approved' | 'denied') | null;
