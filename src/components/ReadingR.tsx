@@ -26,7 +26,7 @@ const ReadingRecommendations = () => {
         </p>
         <ul className="space-y-4 mb-6">
           {visibleRecommendations.map((book, index) => (
-            <li key={index} className="flex items-center p-2 rounded-md hover:bg-gray-100 transition-colors duration-200">
+            <li key={index} className="flex items-center p-2 rounded-md transition-colors duration-200 hover:bg-gray-200">
               <Book className="h-5 w-5 mr-3 text-gray-500" />
               <span className="text-sm font-medium text-gray-900">{book.title}</span>
               <span className="text-xs text-gray-500 ml-2">by {book.author}</span>
