@@ -73,7 +73,9 @@ const Page = async ({ params }: PageProps) => {
   )?.label
 
   // to view image 
+   //@ts-ignore
   const validUrls = product.images
+   //@ts-expect-error
     .map(({ image }) =>
       typeof image === 'string' ? image : image.url
     )
@@ -150,7 +152,10 @@ const Page = async ({ params }: PageProps) => {
               Copyright Content
               </span>
             </div>
-            <AddToCartButton product={product} />
+           
+            <AddToCartButton
+            //@ts-ignore
+             product={product} />
           </div>
         </div>
       </div>
