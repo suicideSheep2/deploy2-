@@ -26,7 +26,7 @@ const CartItem = ({ product, className }: { product: any; className?: string }) 
   return (
     <div className={cn(
       "flex items-center space-x-4 rounded-lg p-4 transition-all duration-200 ease-in-out mb-4",
-      "bg-white bg-opacity-20 backdrop-blur-lg shadow-lg hover:shadow-xl",
+      "bg-white bg-opacity-10 backdrop-blur-lg shadow-lg hover:shadow-xl",
       "border border-gray-200 hover:border-gray-300",
       className
     )}>
