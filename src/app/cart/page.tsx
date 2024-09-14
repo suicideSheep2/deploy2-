@@ -1,12 +1,5 @@
 'use client'
 
-{/*kinda make it to tip ... like our work ?
-     help us financially hahh
-     btt make user choose amout price themselves
-     to donate obv haha 
-     this page is after continue to checkout 
-     completely modify it fr*/}
-
 import { Button } from '@/components/ui/button'
 import { PRODUCT_CATEGORIES } from '@/config'
 import { useCart } from '@/hooks/use-cart'
@@ -38,12 +31,6 @@ const Page = () => {
     setIsMounted(true)
   }, [])
 
-  const cartTotal = items.reduce(
-    (total, { product }) => total + product.price,
-    0
-  )
-
-  const fee = 1
 
   const handleCategoryClick = (category: string) => {
     router.push(`/products?category=${category}`)
@@ -244,7 +231,7 @@ const Page = () => {
             </div>
 
             <p className='text-xs text-gray-500 mt-4 text-center'>
-              Your donation is greatly appreciated and helps us keep the coffee flowing and the code flowing!
+              Your donation is greatly appreciated!
             </p>
           </section>
           

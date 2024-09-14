@@ -50,15 +50,15 @@ export default function Home() {
             Welcome to Uperhaps, your literary legacy platform that turns readers into writers and dreams into digital ink.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 mt-6'>
-            <Link href='/products' className={buttonVariants()}>
+            <Link href='/products' className={buttonVariants()} style={{ color: '' }}>
               Browse Trending
             </Link>
-            <Link 
+            {/* <Link 
               href='/products?sort=recent' 
               className={buttonVariants({ variant: 'ghost' })}
             >
               Our quality promise &rarr;
-            </Link>
+            </Link> */}
           </div>
         </div>
 
