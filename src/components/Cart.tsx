@@ -76,7 +76,8 @@ const Cart = () => {
           className='h-6 w-6 flex-shrink-0 text-green-600 group-hover:text-green-700'
         />
         <span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
-          {isMounted && itemCount > 0 ? itemCount : ''} {/* Updated to show empty string if itemCount is 0 */}
+          {/* {isMounted && itemCount > 0 ? itemCount : ''}  */}
+          {/* Updated to show empty string if itemCount is 0 */}
         </span>
         <span className='absolute left-1/2 -translate-x-1/2 top-full mt-2 text-xs font-medium text-white bg-gray-800 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none'>
           Favourites

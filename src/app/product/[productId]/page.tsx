@@ -73,18 +73,9 @@ const Page = async ({ params }: PageProps) => {
   )?.label
 
   // to view image 
-<<<<<<< HEAD
-   //@ts-ignore
-  const validUrls = product.images
-   //@ts-expect-error
-    .map(({ image }) =>
-      typeof image === 'string' ? image : image.url
-    )
-=======
   const validUrls = (product.images as Array<{ image: string | { url: string } }>).map(({ image }) =>
     typeof image === 'string' ? image : image.url
   )
->>>>>>> 076187a07877e44a60acd714d05ead14ee4efd56
     .filter(Boolean) as string[]
 
   return (
@@ -158,16 +149,9 @@ const Page = async ({ params }: PageProps) => {
               Copyright Content
               </span>
             </div>
-<<<<<<< HEAD
-           
-            <AddToCartButton
-            //@ts-ignore
-             product={product} />
-=======
             <AddToCartButton
             //@ts-ignore
             product={product} />
->>>>>>> 076187a07877e44a60acd714d05ead14ee4efd56
           </div>
         </div>
       </div>

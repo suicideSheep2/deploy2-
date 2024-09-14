@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import StyledProductDescription from '@/components/ui/styledPD'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import ReadingRecommendations from '@/components/ReadingR'
 
 const Page = () => {
   const { items, removeItem } = useCart()
@@ -40,7 +41,7 @@ const Page = () => {
             </span>
           </h1>
 
-          <div className='flex flex-col lg:flex-row lg:space-x-8'>
+          <div className='flex flex-col'>
             {/* Main content area */}
             <div className='flex-grow'>
               {isMounted && items.length === 0 ? (
@@ -146,38 +147,8 @@ const Page = () => {
             </div>
 
             {/* Donation Section */}
-            <div className='lg:w-1/3 mt-8 lg:mt-0'>
-              <div className='sticky top-4'>
-                <section className='rounded-lg bg-gray-50 bg-opacity-40 px-6 py-8 shadow-md'>
-                  <h2 className='text-2xl font-semibold text-gray-900 mb-4'>
-                    Support Our Work
-                  </h2>
-                  <p className='text-sm text-gray-600 mb-6'>
-                   Buy me a coffee!
-                  </p>
-                  <div className='space-y-4'>
-                    <div className='flex items-center justify-between'>
-                      <label htmlFor="donationAmount" className='text-sm font-medium text-gray-900'>
-                        Enter amount (Rs):
-                      </label>
-                      <input
-                        type="number"
-                        id="donationAmount"
-                        min="1"
-                        step="1"
-                        defaultValue="5"
-                        className='rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 w-24'
-                      />
-                    </div>
-                    <Button className='w-full' size='lg'>
-                      Donate
-                    </Button>
-                  </div>
-                  <p className='text-xs text-gray-500 mt-4 text-center'>
-                    Your donation is greatly appreciated!
-                  </p>
-                </section>
-              </div>
+            <div className='mt-8'>
+             <ReadingRecommendations/>
             </div>
           </div>
         </div>
