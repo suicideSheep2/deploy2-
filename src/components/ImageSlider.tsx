@@ -1,4 +1,5 @@
 "use client"
+// completely useless remove the whole damn page  fr
 // this gives the property of image sliding like aribian b n b 
 // modify it later to fit ypur preference duh for sure modify itt
 

@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import StyledProductDescription from '@/components/ui/styledPD'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import ReadingRecommendations from '@/components/ReadingR'
+import EnhancedHeading from '@/components/EnhancedHeading'
 
 const Page = () => {
   const { items, removeItem } = useCart()
@@ -34,12 +35,7 @@ const Page = () => {
     <MaxWidthWrapper>
       <div className='bg-transparent'>
         <div className='px-4 py-16 sm:px-6 lg:px-8'>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-center mb-12">
-            <span className="text-muted-900">Your </span>
-            <span className="bg-gradient-to-r from-black via-green-800 to-green-600 inline-block text-transparent bg-clip-text">
-              Favorites
-            </span>
-          </h1>
+        <EnhancedHeading  />
 
           <div className='flex flex-col'>
             {/* Main content area */}
