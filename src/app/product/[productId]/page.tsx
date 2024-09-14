@@ -73,10 +73,9 @@ const Page = async ({ params }: PageProps) => {
   )?.label
 
   // to view image 
-  const validUrls = product.images
-    .map(({ image }) =>
-      typeof image === 'string' ? image : image.url
-    )
+  const validUrls = (product.images as Array<{ image: string | { url: string } }>).map(({ image }) =>
+    typeof image === 'string' ? image : image.url
+  )
     .filter(Boolean) as string[]
 
   return (
@@ -150,7 +149,9 @@ const Page = async ({ params }: PageProps) => {
               Copyright Content
               </span>
             </div>
-            <AddToCartButton product={product} />
+            <AddToCartButton
+            //@ts-ignore
+            product={product} />
           </div>
         </div>
       </div>
