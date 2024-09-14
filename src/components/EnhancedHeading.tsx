@@ -8,7 +8,7 @@ const bookQuotes = [
   { text: "Once you learn to read, you will be forever free.", author: "Frederick Douglass" }
 ];
 
-const RefinedHeading: React.FC<{ userName?: string }> = ({ userName }) => {
+const RefinedHeading: React.FC = () => {
   const [currentQuote, setCurrentQuote] = useState(bookQuotes[0]);
 
   useEffect(() => {
@@ -23,23 +23,20 @@ const RefinedHeading: React.FC<{ userName?: string }> = ({ userName }) => {
   }, []);
 
   return (
-    <div className="text-center mt-auto">
+    <div className="text-center mt">
       <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight mb-4">
-      <span className="font-semibold relative">
-        <span className="bg-gradient-to-r from-[#ffffff] to-[#abbaab] bg-clip-text text-transparent">
-          Bookshelf
+        <span className="font-semibold relative">
+          <motion.span
+            className="absolute bottom-0 left-0 w-full h-1"
+            style={{ background: 'linear-gradient(to right, #ffffff, #abbaab)' }}
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          />
         </span>
-        <motion.span
-          className="absolute bottom-0 left-0 w-full h-1"
-          style={{ background: 'linear-gradient(to right, #ffffff, #abbaab)' }} // Updated gradient
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        />
-      </span>
       </h1>
       <p className="text-xl text-gray-500 mb-6">
-        {userName ? `Welcome back, ${userName}` : 'Discover your literary journey'}
+        Discover your literary journey
       </p>
       <motion.div
         initial={{ opacity: 0 }}

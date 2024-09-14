@@ -34,9 +34,8 @@ const Page = () => {
   return (
     <MaxWidthWrapper>
       <div className='bg-transparent'>
+      <EnhancedHeading  />
         <div className='px-4 py-16 sm:px-6 lg:px-8'>
-        <EnhancedHeading  />
-
           <div className='flex flex-col'>
             {/* Main content area */}
             <div className='flex-grow'>

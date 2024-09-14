@@ -115,3 +115,6 @@ since peoms n novels are officially hidden in samm dev make only two simple cate
 ####
 maybe in fab page we would pjust view all contents of product description directly 
 yeah cuz then it would be diff from cart and that's what we want full fav reading page
+
+
+##### keep the quotes floating and a simpletext thats all
