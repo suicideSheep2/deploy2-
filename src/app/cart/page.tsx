@@ -37,6 +37,7 @@ const Page = () => {
       <EnhancedHeading  />
         <div className='px-4 py-16 sm:px-6 lg:px-8'>
           <div className='flex flex-col'>
+           <br />
             {/* Main content area */}
             <div className='flex-grow'>
               {isMounted && items.length === 0 ? (
