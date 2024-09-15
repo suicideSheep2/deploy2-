@@ -48,11 +48,13 @@ const ProductReel = ({
     setIsOpen(false);
   };
 
+// see here for adding 
   const sortOptions = [
     { value: 'recent', label: 'Recent' },
     { value: 'oldest', label: 'Oldest' },
     { value: 'alphabetical', label: 'A-Z' },
     { value: 'reverse-alphabetical', label: 'Z-A' },
+    { value: 'random', label: 'random' },
   ];
 
   return (

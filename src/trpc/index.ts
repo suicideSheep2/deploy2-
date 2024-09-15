@@ -6,7 +6,7 @@ import { authRouter } from './auth-router'
 
 export const appRouter = router({
   auth: authRouter,
-  
+
   // ... other routers
 
   getInfiniteProducts: publicProcedure
@@ -26,7 +26,6 @@ export const appRouter = router({
       const payload = await getPayloadClient()
 
       const parsedQueryOpts: Record<string, { equals: string }> = {}
-
       Object.entries(queryOpts).forEach(([key, value]) => {
         parsedQueryOpts[key] = {
           equals: value,
@@ -35,7 +34,7 @@ export const appRouter = router({
 
       const page = cursor || 1
 
-      let sortOption = '-createdAt' // Default to most recent
+      let sortOption: string = '-createdAt' // Default sort
 
       switch (sort) {
         case 'recent':
@@ -45,14 +44,15 @@ export const appRouter = router({
           sortOption = 'createdAt'
           break
         case 'alphabetical':
-          sortOption = 'title'
+          sortOption = 'name'
           break
         case 'reverse-alphabetical':
-          sortOption = '-title'
+          sortOption = '-name'
           break
         case 'random':
-           sortOption = '-id'
-           break
+          // For random, we'll keep the default sorting (by createdAt)
+          sortOption = '-createdAt'
+          break
       }
 
       const {
@@ -60,7 +60,7 @@ export const appRouter = router({
         hasNextPage,
         nextPage,
       } = await payload.find({
-        collection: 'products',  // You might want to rename this to 'poems' or 'literature'
+        collection: 'products', // You might want to rename this to 'poems' or 'literature'
         where: {
           approvedForSale: {
             equals: 'approved',
