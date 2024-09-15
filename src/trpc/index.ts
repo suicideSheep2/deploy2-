@@ -14,12 +14,14 @@ export const appRouter = router({
       z.object({
         limit: z.number().min(1).max(100),
         cursor: z.number().nullish(),
-        query: QueryValidator,
+        query: QueryValidator.extend({
+          excludeId: z.string().optional(),
+        }),
       })
     )
     .query(async ({ input }) => {
       const { query, cursor } = input
-      const { sort, limit, ...queryOpts } = query
+      const { sort, limit, excludeId, ...queryOpts } = query
 
       const payload = await getPayloadClient()
 
@@ -48,14 +50,9 @@ export const appRouter = router({
         case 'reverse-alphabetical':
           sortOption = '-title'
           break
-          // this would be useful to dispaly 
-          // content lsting in front page
-          // yup its kded up
         case 'random':
            sortOption = '-id'
            break
-          
-       
       }
 
       const {
@@ -69,6 +66,13 @@ export const appRouter = router({
             equals: 'approved',
           },
           ...parsedQueryOpts,
+          ...(excludeId
+            ? {
+                id: {
+                  not_equals: excludeId,
+                },
+              }
+            : {}),
         },
         sort: sortOption,
         depth: 1,

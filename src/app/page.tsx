@@ -28,7 +28,7 @@ const perks = [
     link: '#',
   },
 ];
-
+// @ts-ignore
 const PerkCard = ({ perk }) => {
   const isComingSoon = perk.name === 'Poetry Workshop';
 

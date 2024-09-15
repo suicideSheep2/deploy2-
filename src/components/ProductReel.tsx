@@ -13,6 +13,7 @@ interface ProductReelProps {
   title?: string;
   subtitle?: string;
   showSorting?: boolean;
+  excludeId?: string; // Add this line
 }
 
 const FALLBACK_LIMIT = 4;
