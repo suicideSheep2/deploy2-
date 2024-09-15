@@ -79,7 +79,14 @@ const EnhancedHeading = () => {
         <span className="bg-gradient-to-r from-black via-green-800 to-green-600 inline-block text-transparent bg-clip-text">
           Literary Odyssey
         </span>
+        {/* we're gona add a bit of text here fs */}
+        {/* make it kinda fit well */}
+        <div className='text-sm'>
+        <p >Discover your favourites</p>
+        </div>
       </motion.h1>
+      
+      
     </div>
   );
 };
