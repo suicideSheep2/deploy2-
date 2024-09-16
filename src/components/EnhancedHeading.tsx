@@ -16,23 +16,13 @@ const EnhancedHeading = () => {
   const [showIcon, setShowIcon] = useState(true);
 
   useEffect(() => {
-    const intervalDuration = 7000; // Total duration for one cycle
+    const intervalDuration = 7000;
 
     const interval = setInterval(() => {
-      // Show icon
       setShowIcon(true);
-
-      // After 2 seconds, hide icon and show quote
-      setTimeout(() => {
-        setShowIcon(false);
-      }, 2000);
-
-      // Update icon and quote for next cycle
+      setTimeout(() => setShowIcon(false), 2000);
       setCurrentIcon((prevIcon) => (prevIcon + 1) % iconComponents.length);
-      setCurrentQuote((prevQuote) => {
-        const nextIndex = (bookQuotes.indexOf(prevQuote) + 1) % bookQuotes.length;
-        return bookQuotes[nextIndex];
-      });
+      setCurrentQuote((prevQuote) => bookQuotes[(bookQuotes.indexOf(prevQuote) + 1) % bookQuotes.length]);
     }, intervalDuration);
 
     return () => clearInterval(interval);
@@ -42,7 +32,7 @@ const EnhancedHeading = () => {
 
   return (
     <div className="text-center mb-12 relative">
-      <div className="h-32 mb-4 flex items-center justify-center">
+      <div className="h-24 mb-6 flex items-center justify-center">
         <AnimatePresence mode="wait">
           {showIcon ? (
             <motion.div
@@ -52,7 +42,7 @@ const EnhancedHeading = () => {
               exit={{ scale: 0, rotate: 180 }}
               transition={{ duration: 0.5 }}
             >
-              <IconComponent size={20} className="text-green-600" />
+              <IconComponent size={24} className="text-green-600" />
             </motion.div>
           ) : (
             <motion.div
@@ -63,30 +53,39 @@ const EnhancedHeading = () => {
               transition={{ duration: 0.5 }}
               className="max-w-md px-4"
             >
-              <p className="text-muted-foreground mb-1 text-sm italic">"{currentQuote.text}"</p>
-              <p className="text-xs text-green-600">- {currentQuote.author}</p>
+              <p className="text-muted-foreground mb-1 text-sm italic leading-relaxed">"{currentQuote.text}"</p>
+              <p className="text-xs text-green-600 font-medium">- {currentQuote.author}</p>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
       
-      <motion.h1
+      <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight relative"
+        className="space-y-2"
       >
-        <span className="bg-gradient-to-r from-black via-green-800 to-green-600 inline-block text-transparent bg-clip-text">
-          Literary Odyssey
-        </span>
-        {/* we're gona add a bit of text here fs */}
-        {/* make it kinda fit well */}
-        <div className='text-sm'>
-        <p >Discover your favourites</p>
-        </div>
-      </motion.h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight relative">
+          <span className="bg-gradient-to-r from-black via-green-800 to-green-600 inline-block text-transparent bg-clip-text">
+            Literary Odyssey
+          </span>
+        </h1>
+        <p className="text-sm sm:text-base text-green-700 font-medium tracking-wide">
+          Embark on a journey through words
+        </p>
+      </motion.div>
       
-      
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="mt-6 text-sm text-gray-600 max-w-md mx-auto"
+      >
+        Discover your favorites among timeless classics and contemporary gems. 
+       
+      </motion.div>
+      {/*  Let each page turn be a step into new worlds and perspectives. */}
     </div>
   );
 };
