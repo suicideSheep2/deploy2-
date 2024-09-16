@@ -22,15 +22,22 @@ const ProductsPage = ({
     ({ value }) => value === category
   )?.label
 
+  const pageTitle = label ?? 'Browse digital collections'
+
   return (
     <MaxWidthWrapper>
+      <div className="my-12 relative">
+        <h1 className="font-light text-2xl md:text-3xl text-gray-700 pb-2 inline-block">
+          {pageTitle}
+        </h1>
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent opacity-50"></div>
+      </div>
       <ProductReel
-        title={label ?? 'Browse digital collections'}
         query={{
           category,
           limit: 40,
           sort:
-            sort === 'desc' || sort === 'asc'
+            sort === 'recent' || sort === 'oldest'
               ? sort
               : undefined,
         }}
