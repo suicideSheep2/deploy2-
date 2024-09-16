@@ -7,8 +7,6 @@ import { authRouter } from './auth-router'
 export const appRouter = router({
   auth: authRouter,
 
-  // ... other routers
-
   getInfiniteProducts: publicProcedure
     .input(
       z.object({
@@ -21,7 +19,7 @@ export const appRouter = router({
     )
     .query(async ({ input }) => {
       const { query, cursor } = input
-      const { sort, limit, excludeId, ...queryOpts } = query
+      const { sort, limit = 10, excludeId, ...queryOpts } = query // Default limit to 10 if undefined
 
       const payload = await getPayloadClient()
 
@@ -35,7 +33,6 @@ export const appRouter = router({
       const page = cursor || 1
 
       let sortOption: string = '-createdAt' // Default sort
-
       switch (sort) {
         case 'recent':
           sortOption = '-createdAt'
@@ -49,18 +46,10 @@ export const appRouter = router({
         case 'reverse-alphabetical':
           sortOption = '-name'
           break
-        // case 'random':
-        //   // For random, we'll keep the default sorting (by createdAt)
-        //   sortOption = '-createdAt'
-        //   break
       }
 
-      const {
-        docs: items,
-        hasNextPage,
-        nextPage,
-      } = await payload.find({
-        collection: 'products', // You might want to rename this to 'poems' or 'literature'
+      const { docs: items, hasNextPage, nextPage } = await payload.find({
+        collection: 'products',
         where: {
           approvedForSale: {
             equals: 'approved',
@@ -76,15 +65,28 @@ export const appRouter = router({
         },
         sort: sortOption,
         depth: 1,
-        limit,
+        limit: limit * 2, // Fetch more items than needed
         page,
       })
 
+      let selectedItems = items
+
+      // If it's a recommendation query (i.e., excludeId is present), randomize the results
+      if (excludeId) {
+        const shuffledItems = items.sort(() => 0.5 - Math.random())
+        selectedItems = shuffledItems.slice(0, limit)
+      } else {
+        // For normal queries, just use the sorted results
+        selectedItems = items.slice(0, limit)
+      }
+
       return {
-        items,
+        items: selectedItems,
         nextPage: hasNextPage ? nextPage : null,
       }
     }),
+
+  // ... other routers and procedures ...
 })
 
 export type AppRouter = typeof appRouter
