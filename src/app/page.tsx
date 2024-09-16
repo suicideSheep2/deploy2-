@@ -18,7 +18,7 @@ const perks = [
     Icon: Paintbrush,
     description: 'Publish your content and connect with fellow writers for collaboration and feedback.',
     gradient: 'from-green-400 via-blue-500 to-purple-600',
-    link: '/sell' // Added link
+    link: '/sign-in' // Added link
   },
   {
     name: 'Poetry Workshop',

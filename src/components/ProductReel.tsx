@@ -54,7 +54,7 @@ const ProductReel = ({
     { value: 'oldest', label: 'Oldest' },
     { value: 'alphabetical', label: 'A-Z' },
     { value: 'reverse-alphabetical', label: 'Z-A' },
-    { value: 'random', label: 'random' },
+    // { value: 'random', label: 'random' },
   ];
 
   return (

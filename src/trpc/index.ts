@@ -49,10 +49,10 @@ export const appRouter = router({
         case 'reverse-alphabetical':
           sortOption = '-name'
           break
-        case 'random':
-          // For random, we'll keep the default sorting (by createdAt)
-          sortOption = '-createdAt'
-          break
+        // case 'random':
+        //   // For random, we'll keep the default sorting (by createdAt)
+        //   sortOption = '-createdAt'
+        //   break
       }
 
       const {
