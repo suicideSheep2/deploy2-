@@ -9,22 +9,20 @@ const BREADCRUMBS = [
 const ElegantBreadcrumbs = () => {
   return (
     <nav aria-label="Breadcrumb" className="mb-8 mt-8 flex justify-left">
-      <div className="bg-transparent bg-opacity-80 backdrop-blur-lg px-6 py-3 rounded-full shadow-md max-w-screen-lg">
+      <div 
+        className="bg-white/30 px-6 py-3 rounded-full shadow-md max-w-screen-lg border border-white/20 transition-transform duration-300 hover:shadow-md hover:scale-105"
+      >
         <ol className="flex items-center space-x-4">
           {BREADCRUMBS.map((breadcrumb, index) => (
             <li key={breadcrumb.id} className="flex items-center">
-              <Link 
+              <Link
                 href={breadcrumb.href}
-                className={`text-sm font-semibold transition-colors duration-300 ease-in-out
-                  ${index === BREADCRUMBS.length - 1 
-                    ? 'text-gray-800 cursor-default' 
-                    : 'text-gray-600 hover:text-green-600 hover:underline'}`
-                }
+                className="text-sm font-semibold text-gray-400 hover:text-green-600 duration-300 ease-in-out"
               >
                 {breadcrumb.name}
               </Link>
               {index < BREADCRUMBS.length - 1 && (
-                <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />
+                <ChevronRight className="h-4 w-4 text-gray-400 ml-5 flex-shrink-0 my-auto" />
               )}
             </li>
           ))}
