@@ -10,7 +10,7 @@ import AddToCartButton from '@/components/AddToCartButton';
 import ProductDescription from '@/components/ProductDescription'
 import React from 'react';
 import StyledProductDescription from '@/components/ui/styledPD'
-
+import ElegantBreadcrumbs from '@/components/ElegantBreadcrums'
 import fetch from 'node-fetch';
 
 
@@ -39,11 +39,6 @@ interface ProductReelProps {
   isMainPage: boolean;
   subtitle: string; // {{ edit_1 }} Ensure this is defined
 }
-
-const BREADCRUMBS = [
-  { id: 1, name: "Home", href: "/" },
-  { id: 2, name: "Products", href: "/products" },
-];
 
 // this is to get product access from backend reyy 
 const Page = async ({ params }: PageProps) => {
@@ -81,31 +76,13 @@ const Page = async ({ params }: PageProps) => {
   return (
 <MaxWidthWrapper className='bg-transparent'>
   <div className='bg-transparent '>
-    <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-3xl lg:px-8'>
+     {/* Breadcrumbs */}
+     <ElegantBreadcrumbs />
 
-      {/* Breadcrumbs */}
-      <ol className='flex items-center space-x-2 mb-2 mt-0'> {/* Set mt to 0 */}
-        {BREADCRUMBS.map((breadcrumb, i) => (
-          <li key={breadcrumb.href}>
-            <div className='flex items-center text-xl'> {/* Increased font size to text-xl */}
-              <Link 
-                href={breadcrumb.href}
-                className='font-medium text-lg text-muted-foreground hover:text-gray-900'> {/* Changed text size to text-lg */}
-                {breadcrumb.name}
-              </Link>
-              {i !== BREADCRUMBS.length - 1 ? (
-                <svg
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                  aria-hidden='true'
-                  className='ml-2 h-5 w-5 flex-shrink-0 text-gray-300'>
-                  <path d='M5.555 17.776l8-16 .894.448-8 16-.894-.448z' />
-                </svg>
-              ) : null }
-            </div>
-          </li>
-        ))}
-      </ol>
+    {/* <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-3xl lg:px-8'> */}
+
+      {/* Breadcrumbs
+      <ElegantBreadcrumbs /> */}
 
       {/* Product Image */}
       <div className='mt-4 aspect-square rounded-lg'>
@@ -168,7 +145,7 @@ const Page = async ({ params }: PageProps) => {
       subtitle={`Browse similar contents like '${product.name}'`} // {{ edit_2 }}
       showSorting={false} 
     />
-  </div>
+  {/* </div> */}
 </MaxWidthWrapper>
 
 
