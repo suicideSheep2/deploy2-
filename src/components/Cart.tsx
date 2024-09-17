@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react'
 import { useCart } from '@/hooks/use-cart'
 import { cn } from '@/lib/utils'
 
-const CartItem = ({ product, className }: { product: any; className?: string }) => {
+const CartItem = ({ product, className, onClose }: { product: any; className?: string; onClose: () => void }) => {
   const { removeItem } = useCart()
 
   return (
@@ -30,20 +30,22 @@ const CartItem = ({ product, className }: { product: any; className?: string }) 
       "border border-gray-200 hover:border-gray-300",
       className
     )}>
-      <Link href={`/product/${product.id}`} className="flex-grow flex items-center space-x-4">
-        <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
-          <Image
-            src={product.images[0].image.url || '/placeholder-image.jpg'}
-            alt={product.name}
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
-        <div className="flex-grow">
-          <h3 className="text-sm font-medium text-gray-900">{product.name}</h3>
-          <p className="mt-1 text-sm text-gray-500">{product.category}</p>
-        </div>
-      </Link>
+      <SheetClose asChild>
+        <Link href={`/product/${product.id}`} className="flex-grow flex items-center space-x-4" onClick={onClose}>
+          <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
+            <Image
+              src={product.images[0].image.url || '/placeholder-image.jpg'}
+              alt={product.name}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className="flex-grow">
+            <h3 className="text-sm font-medium text-gray-900">{product.name}</h3>
+            <p className="mt-1 text-sm text-gray-500">{product.category}</p>
+          </div>
+        </Link>
+      </SheetClose>
       <button
         onClick={(e) => {
           e.preventDefault();
@@ -62,22 +64,25 @@ const Cart = () => {
   const { items } = useCart()
   const itemCount = items.length
   const [isMounted, setIsMounted] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
   return (
-    <Sheet>
-      <SheetTrigger className='group -m-2 flex items-center p-2 relative'>
-    
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger className='group -m-2 flex items-center p-2 relative' onClick={() => setIsOpen(true)}>
         <Star
           aria-hidden='true'
           className='h-6 w-6 flex-shrink-0 text-green-600 group-hover:text-green-700'
         />
         <span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
-          {/* {isMounted && itemCount > 0 ? itemCount : ''}  */}
-          {/* Updated to show empty string if itemCount is 0 */}
+          {/* {isMounted && itemCount > 0 ? itemCount : ''} */}
         </span>
         <span className='absolute left-1/2 -translate-x-1/2 top-full mt-2 text-xs font-medium text-white bg-gray-800 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none'>
           Favourites
@@ -94,34 +99,31 @@ const Cart = () => {
             <>
               <ScrollArea className='flex-grow pr-6'>
                 <div className='space-y-4 pt-4'>
-                  <SheetClose asChild> 
-                     {/* // Wrapped entire list in SheetClose */}
-                    <div>
-                      {items.map(({ product }) => (
-                        <CartItem
-                          product={product}
-                          key={product.id}
-                        />
-                      ))}
-                    </div>
-                  </SheetClose>
+                  {items.map(({ product }) => (
+                    <CartItem
+                      product={product}
+                      key={product.id}
+                      onClose={handleClose}
+                    />
+                  ))}
                 </div>
               </ScrollArea>
               <div className='mt-6 space-y-4 pr-6'>
                 <Separator />
                 <SheetFooter>
-                <SheetTrigger asChild>
+                <SheetClose asChild>
                   <Link 
                     href='/cart'
                     className={buttonVariants({
                       variant: 'outline',
                       className: 'w-full bg-green-500 hover:bg-green-600 text-gray',
                     })}
+                    onClick={handleClose}
                   >
                     <Star className="w-4 h-4 mr-2" />
                     View All Favorites
                   </Link>
-                </SheetTrigger>
+                </SheetClose>
                 </SheetFooter>
               </div>
             </>
@@ -145,6 +147,7 @@ const Cart = () => {
                     size: 'sm',
                     className: 'text-sm text-muted-foreground',
                   })}
+                  onClick={handleClose}
                 >
                   Add items to your favourites
                 </Link>
