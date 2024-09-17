@@ -23,14 +23,21 @@ const Footer = () => {
               <h3 className="text-xl font-semibold text-gray-800 mb-4">UnwhisperedPerhaps</h3>
               <p className="text-md text-gray-600 mb-2">Contact us!</p>
               <Link
-                href="https://x.com/FellowTravell20" 
-                className="inline-flex items-center text-xl text-muted-foreground hover:text-gray-900"
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <p>X</p>
-               
-              </Link>
+          href="https://x.com/FellowTravell20"
+          className="inline-flex items-center space-x-2 text-muted-foreground hover:text-gray-900 transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            fill="currentColor"
+            className="w-5 h-5"
+          >
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+          
+        </Link>
             </div>
 
             {/* Empty Middle Column */}
