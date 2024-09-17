@@ -124,4 +124,4 @@ yeah cuz then it would be diff from cart and that's what we want full fav readin
 
 ####
 change the "Browse digital collections"
-to kinda more fitting Aesthetics
+to kinda more fitting Aesthetics maybe add same type of styling that's in productID title (home > products ) typa shit
