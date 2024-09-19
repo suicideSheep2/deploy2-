@@ -28,9 +28,9 @@ const NavItem = ({
   const handleClick = () => {
     // Navigate to the respective product page based on the category
     if (category.label === 'Poems') {
-      window.location.href = '/products?category=ui_kits'; // Update with the correct path
+      window.location.href = '/products?category=poems'; // Update with the correct path
     } else if (category.label === 'Novels') {
-      window.location.href = '/products?category=icons'; // Update with the correct path
+      window.location.href = '/products?category=novels'; // Update with the correct path
     } else {
       handleOpen(); // Fallback to the original behavior
     }

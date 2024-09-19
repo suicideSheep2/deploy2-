@@ -19,6 +19,7 @@ export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
   collections: [Users, Products, Media,],
   routes: {
+    // mauybe change here to /publish
     admin: '/sell',
   },
   admin: {

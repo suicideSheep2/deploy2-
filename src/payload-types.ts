@@ -62,7 +62,7 @@ export interface Product {
   } | null;
   description_html?: string | null;
   author: string;
-  category: 'ui_kits' | 'icons';
+  category: 'poems' | 'novels';
   approvedForSale?: ('pending' | 'approved' | 'denied') | null;
   images: {
     image: string | Media;

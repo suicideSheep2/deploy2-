@@ -15,6 +15,10 @@ export const Products: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
   },
+  labels: {
+    singular: 'Content',
+    plural: 'Contents',
+  },
   access: {
     // Restrict read access
     read: ({ req: { user } }) => {
@@ -84,7 +88,7 @@ export const Products: CollectionConfig = {
     },
     {
       name: 'description',
-      label: 'Your Content',
+      label: 'Content Description',
       type: 'richText',
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
@@ -102,14 +106,14 @@ export const Products: CollectionConfig = {
     },
     {
       name: 'category',
-      label: 'Category',
+      label: ' Content Category',
       type: 'select',
       options: PRODUCT_CATEGORIES.map(({ label, value }) => ({ label, value })),
       required: true,
     },
     {
       name: 'approvedForSale',
-      label: 'Product Status',
+      label: 'Content Status',
       type: 'select',
       defaultValue: 'pending',
       access: {
@@ -141,7 +145,7 @@ export const Products: CollectionConfig = {
     {
       name: 'images',
       type: 'array',
-      label: 'Content images',
+      label: 'Content Images',
       minRows: 1,
       maxRows: 4,
       required: true,
