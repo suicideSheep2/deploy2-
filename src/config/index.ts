@@ -1,47 +1,38 @@
-// gotta change here fr url for components 
-
 export const PRODUCT_CATEGORIES = [
-    {
-      label: 'Poems',
-      value: 'ui_kits' as const,
-      featured: [
-        {
-          name: 'Editor Picks',
-          href: `/products?category=ui_kits`,
-          imageSrc: '/nav/ui-kits/mixed.jpg',
-        },
-        {
-          name: 'Recently Added',
-          href: '/products?category=ui_kits&sort=desc',
-          imageSrc: '/nav/ui-kits/blue.jpg',
-        },
-        {
-          name: 'Best-rated',
-          href: '/products?category=ui_kits',
-          imageSrc: '/nav/ui-kits/purple.jpg',
-        },
-      ],
-    },
-    {
-      label: 'Novels',
-      value: 'icons' as const,
-      featured: [
-        {
-          name: 'Editor Picks',
-          href: `/products?category=icons`,
-          imageSrc: '/nav/icons/picks.jpg',
-        },
-        {
-          name: 'Recently Added',
-          href: '/products?category=icons&sort=desc',
-          imageSrc: '/nav/icons/new.jpg',
-        },
-        {
-          name: 'Best-rated',
-          href: '/products?category=icons',
-          imageSrc: '/nav/icons/bestsellers.jpg',
-        },
-      ],
-    },
-  ]
-  
+  {
+    label: 'Poems',
+    value: 'poems' as const,
+    featured: [
+      {
+        name: 'Editor Picks',
+        href: `/products?category=poems`,
+      },
+      {
+        name: 'Recently Added',
+        href: '/products?category=poems&sort=desc',
+      },
+      {
+        name: 'Best-rated',
+        href: '/products?category=poems',
+      },
+    ],
+  },
+  {
+    label: 'Novels',
+    value: 'novels' as const,
+    featured: [
+      {
+        name: 'Editor Picks',
+        href: `/products?category=novels`,
+      },
+      {
+        name: 'Recently Added',
+        href: '/products?category=novels&sort=desc',
+      },
+      {
+        name: 'Best-rated',
+        href: '/products?category=novels',
+      },
+    ],
+  },
+]
