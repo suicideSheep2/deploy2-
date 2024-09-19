@@ -149,5 +149,13 @@ after modifying paylaod use ;;;
  * DO NOT MODIFY IT BY HAND. Instead, modify your source Payload config,
  * and re-run `payload generate:types` to regenerate this file.
  */"
+ 
+ yarn payload generate:types
 
 display contents instead of "products"
+
+in mobile navbar in menu button selection of product and stuff seems wrong ... heading is rendered but not respective content..
+
+
+#### too much later into future
+for editor picks .. make seperate sort thing kinda like index..only used by admin which will pripritize to view content based on its value..
