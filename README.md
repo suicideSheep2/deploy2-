@@ -159,3 +159,6 @@ in mobile navbar in menu button selection of product and stuff seems wrong ... h
 
 #### too much later into future
 for editor picks .. make seperate sort thing kinda like index..only used by admin which will pripritize to view content based on its value..
+
+
+start fresh from main.. with a branch  and delete all products in db and start fres han see for yourself if it works
