@@ -15,13 +15,18 @@ import ReadingRecommendations from '@/components/ReadingR'
 import EnhancedHeading from '@/components/EnhancedHeading'
 
 const Page = () => {
-  const { items, removeItem } = useCart()
+  const { items, removeItem, validateItems } = useCart()
   const router = useRouter()
-  const [isMounted, setIsMounted] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    const validate = async () => {
+      setIsLoading(true)
+      await validateItems()
+      setIsLoading(false)
+    }
+    validate()
+  }, [validateItems])
 
   const handleCategoryClick = (category: string) => {
     router.push(`/products?category=${category}`)
@@ -31,16 +36,26 @@ const Page = () => {
     router.push(`/products?author=${encodeURIComponent(author)}`)
   }
 
+  if (isLoading) {
+    return (
+      <MaxWidthWrapper>
+        <div className='flex h-[calc(100vh-200px)] items-center justify-center'>
+          <span className='loading loading-spinner loading-lg'></span>
+        </div>
+      </MaxWidthWrapper>
+    )
+  }
+
   return (
     <MaxWidthWrapper>
       <div className='bg-transparent'>
-      <EnhancedHeading  />
+        <EnhancedHeading />
         <div className='px-4 py-16 sm:px-6 lg:px-8'>
           <div className='flex flex-col'>
-           <br />
+            <br />
             {/* Main content area */}
             <div className='flex-grow'>
-              {isMounted && items.length === 0 ? (
+              {items.length === 0 ? (
                 <div className='bg-gray-50 flex h-64 flex-col items-center justify-center space-y-1 rounded-lg border-2 border-dashed border-zinc-200 p-12'>
                   <div aria-hidden='true' className='relative mb-4 h-40 w-40 text-muted-foreground'>
                     <Image
@@ -57,7 +72,7 @@ const Page = () => {
                 </div>
               ) : (
                 <ul className='space-y-8'>
-                  {isMounted && items.map(({ product }) => {
+                  {items.map(({ product }) => {
                     const label = PRODUCT_CATEGORIES.find(
                       (c) => c.value === product.category
                     )?.label

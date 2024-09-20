@@ -11,25 +11,34 @@ const AddToFavoritesButton = ({
 }: {
   product: Product
 }) => {
-  const { addItem, removeItem, items } = useCart()
+  const { addItem, removeItem, items, validateItems } = useCart()
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
   const [isInFavorites, setIsInFavorites] = useState<boolean>(false)
   const [actionText, setActionText] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     setIsInFavorites(items.some(item => item.product.id === product.id))
   }, [items, product.id])
 
-  const handleToggleFavorites = () => {
+  const handleToggleFavorites = async () => {
+    setIsLoading(true)
     if (isInFavorites) {
       removeItem(product.id)
       setActionText('Removed from Favorites!')
     } else {
-      addItem(product)
-      setActionText('Added to Favorites!')
+      await validateItems() // Validate items before adding
+      const isValid = items.some(item => item.product.id === product.id)
+      if (!isValid) {
+        addItem(product)
+        setActionText('Added to Favorites!')
+      } else {
+        setActionText('Product no longer available')
+      }
     }
     setIsSuccess(true)
     setIsInFavorites(!isInFavorites)
+    setIsLoading(false)
     setTimeout(() => {
       setIsSuccess(false)
       setActionText('')
@@ -42,6 +51,7 @@ const AddToFavoritesButton = ({
       size='sm'
       variant='ghost'
       className='group relative'
+      disabled={isLoading}
     >
       <Star
         className={`h-5 w-5 transition-colors ${
@@ -49,8 +59,8 @@ const AddToFavoritesButton = ({
         }`}
       />
       <span className='absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100'>
-        {isSuccess 
-          ? actionText 
+        {isSuccess
+          ? actionText
           : (isInFavorites ? 'Remove from Favorites' : 'Add to Favorites')}
       </span>
     </Button>
