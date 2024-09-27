@@ -23,3 +23,6 @@ ability to add to favs before signing in yess
 fetch account favs after signing in
 #####
 remove fabs from local side after logging out
+####
+while adding to favs.... make the main star of cart glow a bit...
+so user would know where it kinda went ...to see if they wish ###great conce[pt]
