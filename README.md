@@ -7,7 +7,7 @@ stuffs and works to do on (from topmost priority to least one)
 
 <!-- nanh just add another catagory instead ...like : unlabelled or sth of same so -->
 
-####mistake 
+1....####mistake 
 if we add favs before login and we login it shows up after login... 
 butw if we log out they are still visible and if we delete them after logout too
 they disappear...
@@ -24,5 +24,10 @@ fetch account favs after signing in
 #####
 remove fabs from local side after logging out
 ####
+
+2...
 while adding to favs.... make the main star of cart glow a bit...
 so user would know where it kinda went ...to see if they wish ###great conce[pt]
+###
+
+3.add content category for unlabelled too and add it in mobile navbar.... yesss
