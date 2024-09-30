@@ -49,6 +49,7 @@
     "lint": "^0.8.19",
     "lucide-react": "^0.429.0",
     "next": "^14.2.9",
+    "node-fetch": "2",
     "nodemailer": "^6.9.14",
     "payload": "^2.26.0",
     "react": "^18",
