@@ -53,7 +53,7 @@ const EnhancedHeading = () => {
               transition={{ duration: 0.5 }}
               className="max-w-md px-4"
             >
-              <p className="text-muted-foreground mb-1 text-sm italic leading-relaxed">"{currentQuote.text}"</p>
+              <p className="text-muted-foreground mb-1 text-sm italic leading-relaxed">&ldquo;{currentQuote.text}&rdquo;</p>
               <p className="text-xs text-green-600 font-medium">- {currentQuote.author}</p>
             </motion.div>
           )}
@@ -83,9 +83,7 @@ const EnhancedHeading = () => {
         className="mt-6 text-sm text-gray-600 max-w-md mx-auto"
       >
         Discover your favorites among timeless classics and contemporary gems. 
-       
       </motion.div>
-      {/*  Let each page turn be a step into new worlds and perspectives. */}
     </div>
   );
 };

@@ -22,7 +22,7 @@ const ReadingRecommendations = () => {
           My Favorites
         </h2>
         <p className="text-sm text-gray-600 mb-6">
-          Some of my favorite books I've ever read, recommended for you!
+          Some of my favorite books I have ever read, recommended for you!
         </p>
         <ul className="space-y-4 mb-6">
           {visibleRecommendations.map((book, index) => (
