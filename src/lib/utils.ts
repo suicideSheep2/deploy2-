@@ -31,8 +31,8 @@ export function formatPrice (
 // modify it to suit your preference
 // fr broo this si shown when you share it as link 
   export function constructMetadata({
-    title = 'Uperhaps - the marketplace for digital assets',
-    description = 'Unwhispered is an open-source marketplace for high-quality digital goods.',
+    title = 'Uperhaps - your Digital Library',
+    description = 'Unwhispered is an open-source digital library for literary lovers.',
     image = '/thumbnail.png',
     icons = '/favicon.ico',
     noIndex = false,
