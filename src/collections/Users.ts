@@ -1,5 +1,4 @@
-// import { PrimaryActionEmailHtml } from '../components/emails/PrimaryActionEmail'
-import { PrimaryActionEmailHtml } from '@/components/emails/PrimaryActionEmail'
+import { PrimaryActionEmailHtml } from '../components/emails/PrimaryActionEmail'
 import { Access, CollectionConfig } from 'payload/types'
 
 const adminsAndUser: Access = ({ req: { user } }) => {
@@ -11,7 +10,6 @@ const adminsAndUser: Access = ({ req: { user } }) => {
     },
   }
 }
-
 
 export const Users: CollectionConfig = {
   slug: 'users',
