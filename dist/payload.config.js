@@ -13,7 +13,7 @@ var Products_1 = require("./collections/Products/Products");
 var Media_1 = require("./collections/Media");
 var richtext_lexical_1 = require("@payloadcms/richtext-lexical"); // Add this import
 dotenv_1.default.config({
-    path: path_1.default.resolve(__dirname, "../.ennv")
+    path: path_1.default.resolve(__dirname, "../.env")
 });
 exports.default = (0, config_1.buildConfig)({
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
