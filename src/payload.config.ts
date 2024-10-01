@@ -12,7 +12,7 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'; // Add this import
 
 
 dotenv.config({
-  path:path.resolve(__dirname, "../.ennv")
+  path:path.resolve(__dirname, "../.env")
 })
 
 export default buildConfig({
