@@ -52,8 +52,16 @@ uperhaps.com.np
 problem
 change the logo in the domain name and description too
 
+#### /sell change it to /publish
+
 ####
 
 sign-in/up is sth wrong ....make from primary email lol fix thqt shit
 
 ### id think items from database are being shown up currrently wtf lol
+
+https://uperhaps.up.railway.app
+
+### in moblie phone if me align u...perhaps in middle it might look a bit better
+
+....try it locally firstly
