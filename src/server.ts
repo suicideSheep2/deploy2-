@@ -37,11 +37,11 @@ const start = async () => {
     },
   })
 
-  // app.post(
-  //   '/api/webhooks/stripe',
-  //   webhookMiddleware,
-  //   stripeWebhookHandler
-  // )
+  app.post(
+    '/api/webhooks/stripe',
+    webhookMiddleware,
+
+  )
 
   const payload = await getPayloadClient({
     initOptions: {

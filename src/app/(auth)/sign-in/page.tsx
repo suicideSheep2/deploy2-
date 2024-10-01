@@ -62,7 +62,7 @@ const Page = () => {
         }
 
         if (isSeller) {
-          router.push('/sell')
+          router.push('/publish')
           return
         }
 

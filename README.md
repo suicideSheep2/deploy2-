@@ -65,3 +65,13 @@ https://uperhaps.up.railway.app
 ### in moblie phone if me align u...perhaps in middle it might look a bit better
 
 ....try it locally firstly
+
+##3done
+before deployment ... we need domain ...
+from resend we can't send email to other users expect onself haha
+
+
+small screen fixed in relative 
+backend /publish 
+authentication resolved
+primary email verification added

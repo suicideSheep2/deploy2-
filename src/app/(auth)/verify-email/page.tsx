@@ -2,6 +2,7 @@
 import VerifyEmail from '@/components/VerifyEmail'
 import Image from 'next/image'
 
+import React from 'react'
 interface PageProps {
   searchParams: {
     [key: string]: string | string[] | undefined
