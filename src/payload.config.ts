@@ -20,7 +20,7 @@ export default buildConfig({
   collections: [Users, Products, Media,],
   routes: {
     // mauybe change here to /publish
-    admin: '/sell',
+    admin: '/publish',
   },
   admin: {
     user: "users"

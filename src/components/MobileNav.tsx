@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useEffect, useState } from 'react';
 import { PRODUCT_CATEGORIES } from '@/config';
 import { Menu, ChevronRight } from 'lucide-react';
@@ -38,19 +37,29 @@ const MobileNav = () => {
 
   return (
     <div className="lg:hidden">
-      <button
-        id="menu-button"
-        type='button'
-        onClick={toggleNav}
-        className={cn(
-          'fixed top-3 left-0 z-50 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500',
-          isOpen && 'bg-gray-100'
-        )}
-        aria-label={isOpen ? 'Close menu' : 'Open menu'}
-        aria-expanded={isOpen}
-      >
-        <Menu className='h-6 w-6' aria-hidden='true' />
-      </button>
+      <div className="flex items-center justify-center px-4 py-2"> {/* Changed justify-between to justify-center */}
+        {/* Remove left text for small screens */}
+        <div className="hidden lg:block"> 
+          <Link href='/'>
+            <p className='font-semibold text-gray-800'>
+              Unwhispered<span className="text-green-600">Perhaps..</span>
+            </p>
+          </Link>
+        </div>
+        <button
+          id="menu-button"
+          type='button'
+          onClick={toggleNav}
+          className={cn(
+            'inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500',
+            isOpen && 'bg-gray-100'
+          )}
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isOpen}
+        >
+          <Menu className='h-6 w-6' aria-hidden='true' />
+        </button>
+      </div>
 
       <div
         id="mobile-nav"

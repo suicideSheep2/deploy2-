@@ -66,3 +66,15 @@ https://uperhaps.up.railway.app
 
 ....try it locally firstly
 
+<<<<<<< HEAD
+=======
+##3done
+before deployment ... we need domain ...
+from resend we can't send email to other users expect onself haha
+
+
+small screen fixed in relative 
+backend /publish 
+authentication resolved
+primary email verification added
+>>>>>>> bd29c038fa344df5da734954e5efe6a383665f75

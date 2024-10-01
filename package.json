@@ -53,7 +53,6 @@
     "nodemailer": "^6.9.14",
     "payload": "^2.26.0",
     "react": "^18",
-    "react-dom": "^18",
     "react-email-components": "^0.1.13",
     "react-hook-form": "^7.52.2",
     "react-tooltip": "^5.28.0",
