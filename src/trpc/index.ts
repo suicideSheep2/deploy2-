@@ -1,8 +1,8 @@
-import { z } from 'zod'
-import { publicProcedure, router } from './trpc'
-import { QueryValidator } from '../lib/validators/query-validator'
-import { getPayloadClient } from '../get-payload'
-import { authRouter } from './auth-router'
+import { z } from 'zod';
+import { publicProcedure, router } from './trpc';
+import { QueryValidator } from '../lib/validators/query-validator';
+import { getPayloadClient } from '../get-payload';
+import { authRouter } from './auth-router';
 
 export const appRouter = router({
   auth: authRouter,
@@ -18,34 +18,34 @@ export const appRouter = router({
       })
     )
     .query(async ({ input }) => {
-      const { query, cursor } = input
-      const { sort, limit = 10, excludeId, ...queryOpts } = query // Default limit to 10 if undefined
+      const { query, cursor } = input;
+      const { sort, limit = 10, excludeId, ...queryOpts } = query; // Default limit to 10 if undefined
 
-      const payload = await getPayloadClient()
+      const payload = await getPayloadClient();
 
-      const parsedQueryOpts: Record<string, { equals: string }> = {}
+      const parsedQueryOpts: Record<string, { equals: string }> = {};
       Object.entries(queryOpts).forEach(([key, value]) => {
         parsedQueryOpts[key] = {
           equals: value,
-        }
-      })
+        };
+      });
 
-      const page = cursor || 1
+      const page = cursor || 1;
 
-      let sortOption: string = '-createdAt' // Default sort
+      let sortOption: string = '-createdAt'; // Default sort
       switch (sort) {
         case 'recent':
-          sortOption = '-createdAt'
-          break
+          sortOption = '-createdAt';
+          break;
         case 'oldest':
-          sortOption = 'createdAt'
-          break
+          sortOption = 'createdAt';
+          break;
         case 'alphabetical':
-          sortOption = 'name'
-          break
+          sortOption = 'name';
+          break;
         case 'reverse-alphabetical':
-          sortOption = '-name'
-          break
+          sortOption = '-name';
+          break;
       }
 
       const { docs: items, hasNextPage, nextPage } = await payload.find({
@@ -67,26 +67,22 @@ export const appRouter = router({
         depth: 1,
         limit: limit * 2, // Fetch more items than needed
         page,
-      })
+      });
 
-      let selectedItems = items
+      let selectedItems = items;
 
       // If it's a recommendation query (i.e., excludeId is present), randomize the results
       if (excludeId) {
-        const shuffledItems = items.sort(() => 0.5 - Math.random())
-        selectedItems = shuffledItems.slice(0, limit)
+        const shuffledItems = items.sort(() => 0.5 - Math.random());
+        selectedItems = shuffledItems.slice(0, limit);
       } else {
         // For normal queries, just use the sorted results
-        selectedItems = items.slice(0, limit)
+        selectedItems = items.slice(0, limit);
       }
 
       return {
         items: selectedItems,
         nextPage: hasNextPage ? nextPage : null,
-      }
+      };
     }),
-
-  // ... other routers and procedures ...
-})
-
-export type AppRouter = typeof appRouter
+});
