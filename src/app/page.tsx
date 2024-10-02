@@ -4,6 +4,7 @@ import ProductReel from '@/components/ProductReel';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { BookOpen, Ghost, Paintbrush, Users } from 'lucide-react';
 import Link from 'next/link';
+import DebugQuery from '@/DebugQuery';
 
 const perks = [
   {
@@ -74,6 +75,8 @@ export default function Home() {
           href='/products?sort=recent'
           showSorting={false} 
         />
+          <DebugQuery />
+       
       </MaxWidthWrapper>
       
       <section className='border-t border-transparent py-28' style={{
