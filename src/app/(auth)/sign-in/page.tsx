@@ -37,7 +37,7 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
-  const { mutate: signIn, isLoading } = trpc.auth.signIn.useMutation({ // Changed 'authentication' to 'auth'
+  const { mutate: signIn, isLoading } = trpc.auth.signIn.useMutation({
     onSuccess: async () => {
       toast.success('Signed in successfully');
 
@@ -58,7 +58,7 @@ const Page = () => {
 
       router.push('/');
     },
-    onError: (err: { data?: { code?: string } }) => { // Explicitly typed 'err'
+    onError: (err) => {
       // If sign-in fails
       if (err.data?.code === 'UNAUTHORIZED') {
         toast.error('Invalid email or password.');
