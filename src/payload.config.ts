@@ -34,18 +34,6 @@ const mongooseOptions = {
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
   collections: [Users, Products, Media],
-
-  // added for trying
-  cors: [
-    'https://uperhaps.up.railway.app', // Your Railway app URL
-  ],
-  
-  csrf: [
-    'https://uperhaps.up.railway.app', // Your Railway app URL
-  ],
-
-
-
   routes: {
     admin: '/publish',
   },
