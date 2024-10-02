@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { TQueryValidator } from '@/lib/validators/query-validator'
 import { Product } from '@/payload-types'
 import { trpc } from '@/trpc/client'
@@ -8,33 +8,25 @@ import ProductListing from './ProductListing'
 import { ChevronDown } from 'lucide-react'
 
 interface ProductReelProps {
-  query: Partial<TQueryValidator>
-  href?: string
-  title?: string
-  subtitle?: string
-  showSorting?: boolean
+  query: TQueryValidator;
+  href?: string;
+  title?: string;
+  subtitle?: string;
+  showSorting?: boolean;
+  excludeId?: string; // Add this line
 }
 
-const FALLBACK_LIMIT = 4
+const FALLBACK_LIMIT = 4;
 
-const defaultQuery: TQueryValidator = {
-  category: undefined,
-  sort: 'recent',
-  limit: FALLBACK_LIMIT,
-}
-
-const ProductReel = ({
-  query: initialQuery,
-  href,
-  title,
+const ProductReel = ({ 
+  query: initialQuery, 
+  href, 
+  title, 
   subtitle,
-  showSorting = true,
+  showSorting = true
 }: ProductReelProps) => {
-  const [query, setQuery] = useState<TQueryValidator>({
-    ...defaultQuery,
-    ...initialQuery,
-  })
-  const [isOpen, setIsOpen] = useState(false)
+  const [query, setQuery] = useState<TQueryValidator>(initialQuery);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data: queryResults, isLoading } = trpc.getInfiniteProducts.useInfiniteQuery(
     {
@@ -44,26 +36,26 @@ const ProductReel = ({
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,
     }
-  )
+  );
 
-  const products = queryResults?.pages.flatMap(
-    (page) => page.items
-  ) as Product[] | undefined
+  const products = queryResults?.pages.flatMap((page) => page.items as unknown as Product[]) || [];
 
+  const handleSortChange = (newSort: string) => {
+    setQuery(prevQuery => ({
+      ...prevQuery,
+      sort: newSort as TQueryValidator['sort']
+    }));
+    setIsOpen(false);
+  };
+
+// see here for adding 
   const sortOptions = [
     { value: 'recent', label: 'Recent' },
     { value: 'oldest', label: 'Oldest' },
     { value: 'alphabetical', label: 'A-Z' },
     { value: 'reverse-alphabetical', label: 'Z-A' },
-  ]
-
-  const handleSortChange = (newSort: string) => {
-    setQuery((prevQuery) => ({
-      ...prevQuery,
-      sort: newSort as TQueryValidator['sort'],
-    }))
-    setIsOpen(false)
-  }
+    // { value: 'random', label: 'random' },
+  ];
 
   return (
     <section className='py-12'>
@@ -76,7 +68,7 @@ const ProductReel = ({
             <p className='mt-2 text-sm text-muted-foreground'>{subtitle}</p>
           )}
         </div>
-
+        
         <div className='flex items-center justify-between mt-4 md:mt-0 px-4 md:px-0'>
           {showSorting && (
             <div className="relative">
@@ -108,7 +100,7 @@ const ProductReel = ({
               href={href}
               className='hidden text-sm font-medium text-green-600 hover:text-green-700 md:block px-4 py-2 ml-4 transition duration-300 ease-in-out hover:underline'
             >
-              Shop the collection
+              Browse the collection
               <span aria-hidden='true'> &rarr;</span>
             </Link>
           )}
@@ -121,7 +113,7 @@ const ProductReel = ({
             {isLoading ? (
               Array.from({ length: query.limit ?? FALLBACK_LIMIT }).map((_, i) => (
                 <div key={i} className='animate-pulse'>
-                  <div className='aspect-square w-full overflow-hidden rounded-lg bg-gray-200'></div>
+                  <div className='aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200'></div>
                   <div className='mt-4 h-4 bg-gray-200 rounded w-3/4'></div>
                   <div className='mt-1 h-4 bg-gray-200 rounded w-1/2'></div>
                 </div>
@@ -129,7 +121,7 @@ const ProductReel = ({
             ) : products && products.length > 0 ? (
               products.map((product) => (
                 <ProductListing
-                  key={product.id}
+                  key={`product-${product.id}`}
                   product={product}
                   index={products.indexOf(product)}
                 />
@@ -143,7 +135,7 @@ const ProductReel = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ProductReel
+export default ProductReel;

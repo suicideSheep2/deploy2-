@@ -7,7 +7,7 @@ import { PRODUCT_CATEGORIES } from '@/config'
 import ImageSlider from './ImageSlider'
 
 interface ProductListingProps {
-  product: Product 
+  product: Product | null
   index: number
 }
 
