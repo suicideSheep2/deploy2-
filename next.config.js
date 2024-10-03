@@ -1,27 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
+	images: {
+		remotePatterns: [
+			{
+				protocol: "http",
+				hostname: "localhost",
+			},
             {
-                hostname: 'localhost',
-                pathname: '**',
-                port: '3000',
-                protocol: 'http',
+                protocol: "https",
+                hostname: "uperhaps.up.railway.app", 
+                
             },
-            {
-                hostname: 'uperhaps.up.railway.app', // Replace with your actual Railway domain
-                pathname: '**',
-                protocol: 'https',
-            },
-        ],
-    },
-    webpack: (config) => {
-        config.resolve.alias = {
-            ...config.resolve.alias,
-            'node-fetch': 'node-fetch/lib/index.js',
-        };
-        return config;
-    },
+		],
+	},
 };
 
 module.exports = nextConfig;
