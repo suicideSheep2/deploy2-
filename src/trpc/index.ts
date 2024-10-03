@@ -1,8 +1,9 @@
-import { z } from 'zod';
-import { publicProcedure, router } from './trpc';
-import { QueryValidator } from '../lib/validators/query-validator';
-import { getPayloadClient } from '../get-payload';
-import { authRouter } from './auth-router';
+import { z } from 'zod'
+import { publicProcedure, router } from './trpc'
+import { QueryValidator } from '../lib/validators/query-validator'
+import { getPayloadClient } from '../get-payload'
+import { Product } from '@/payload-types'
+import { authRouter } from './auth-router'
 
 export const appRouter = router({
   auth: authRouter,
@@ -18,8 +19,10 @@ export const appRouter = router({
       })
     )
     .query(async ({ input }) => {
+      console.log('Server received input:', input); // Add this logging
+
       const { query, cursor } = input;
-      const { sort, limit = 10, excludeId, ...queryOpts } = query; // Default limit to 10 if undefined
+      const { sort = 'recent', limit = 10, excludeId, ...queryOpts } = query;
 
       const payload = await getPayloadClient();
 
@@ -32,7 +35,7 @@ export const appRouter = router({
 
       const page = cursor || 1;
 
-      let sortOption: string = '-createdAt'; // Default sort
+      let sortOption: string = '-createdAt';
       switch (sort) {
         case 'recent':
           sortOption = '-createdAt';
@@ -48,44 +51,61 @@ export const appRouter = router({
           break;
       }
 
-      const { docs: items, hasNextPage, nextPage } = await payload.find({
-        collection: 'products',
-        where: {
-          approvedForSale: {
-            equals: 'approved',
+      try {
+        const {
+          docs: items,
+          hasNextPage,
+          nextPage,
+        } = await payload.find({
+          collection: 'products',
+          where: {
+            approvedForSale: {
+              equals: 'approved',
+            },
+            ...parsedQueryOpts,
+            ...(excludeId
+              ? {
+                  id: {
+                    not_equals: excludeId,
+                  },
+                }
+              : {}),
           },
-          ...parsedQueryOpts,
-          ...(excludeId
-            ? {
-                id: {
-                  not_equals: excludeId,
-                },
-              }
-            : {}),
-        },
-        sort: sortOption,
-        depth: 1,
-        limit: limit * 2, // Fetch more items than needed
-        page,
-      });
+          sort: sortOption,
+          depth: 1,
+          limit: limit * 2,
+          page,
+        });
 
-      let selectedItems = items;
+        // Define a runtime validation function to ensure items match the Product type
+        const isProduct = (item: any): item is Product => {
+          return item && 
+            typeof item.name === 'string' &&
+            typeof item.author === 'string' &&
+            Array.isArray(item.images) &&
+            typeof item.category === 'string';
+        };
 
-      // If it's a recommendation query (i.e., excludeId is present), randomize the results
-      if (excludeId) {
-        const shuffledItems = items.sort(() => 0.5 - Math.random());
-        selectedItems = shuffledItems.slice(0, limit);
-      } else {
-        // For normal queries, just use the sorted results
-        selectedItems = items.slice(0, limit);
+        // Filter and validate the items
+        let selectedItems = items.filter(isProduct);
+
+        // If excludeId is provided, shuffle and limit items
+        if (excludeId) {
+          const shuffledItems = selectedItems.sort(() => 0.5 - Math.random());
+          selectedItems = shuffledItems.slice(0, limit);
+        } else {
+          selectedItems = selectedItems.slice(0, limit);
+        }
+
+        return {
+          items: selectedItems,
+          nextPage: hasNextPage ? nextPage : null,
+        };
+      } catch (err) {
+        console.error('Error in getInfiniteProducts:', err);
+        throw err;
       }
-
-      return {
-        items: selectedItems,
-        nextPage: hasNextPage ? nextPage : null,
-      };
     }),
 });
 
-
-export type AppRouter = typeof appRouter
+export type AppRouter = typeof appRouter;
