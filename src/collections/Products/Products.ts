@@ -93,7 +93,7 @@ export const Products: CollectionConfig = {
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
-          // HTMLConverterFeature({}),
+          HTMLConverterFeature({}),
         ],
       }),
     },
