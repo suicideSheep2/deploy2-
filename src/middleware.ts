@@ -1,7 +1,3 @@
-// if user is logged in
-// user should't be able to see login button 
-// and vice versa
-
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSideUser } from './lib/payload-utils'
 
@@ -9,14 +5,27 @@ export async function middleware(req: NextRequest) {
   const { nextUrl, cookies } = req
   const { user } = await getServerSideUser(cookies)
 
-  if (
-    user &&
-    ['/sign-in', '/sign-up'].includes(nextUrl.pathname)
-  ) {
-    return NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/`
-    )
-  }
+  try {
+    if (
+      user &&
+      ['/sign-in', '/sign-up'].includes(nextUrl.pathname)
+    ) {
+      return NextResponse.redirect(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/`
+      )
+    }
 
-  return NextResponse.next()
+    return NextResponse.next()
+  } catch (error) {
+    console.error('Middleware error:', error)
+    
+    // Still redirect on error, but log it
+    if (['/sign-in', '/sign-up'].includes(nextUrl.pathname)) {
+      return NextResponse.redirect(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/`
+      )
+    }
+    
+    return NextResponse.next()
+  }
 }

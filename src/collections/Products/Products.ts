@@ -1,10 +1,9 @@
-import { Access, CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload/types';
 import { PRODUCT_CATEGORIES } from '../../config';
-import { Product, User } from '../../payload-types';
+import { Product } from '../../payload-types';
 import { BeforeChangeHook } from 'payload/dist/collections/config/types';
-import { lexicalEditor, HTMLConverterFeature, lexicalHTML } from '@payloadcms/richtext-lexical';
+import { lexicalEditor, HTMLConverterFeature } from '@payloadcms/richtext-lexical';
 
-// Hook to add the user to the product before saving
 const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
   const user = req.user;
   return { ...data, user: user.id };
@@ -20,40 +19,25 @@ export const Products: CollectionConfig = {
     plural: 'Contents',
   },
   access: {
-    // Restrict read access
     read: ({ req: { user } }) => {
-      if (user?.role === 'admin') {
-        return true; // Admins can see all products
-      }
-      // Regular users can only see their own products
+      if (user?.role === 'admin') return true;
       return {
         user: {
           equals: user?.id,
         },
       };
     },
-    // Restrict create access
-    create: ({ req: { user } }) => {
-      return Boolean(user); // All logged-in users can create products
-    },
-    // Restrict update access
+    create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => {
-      if (user?.role === 'admin') {
-        return true; // Admins can update any product
-      }
-      // Regular users can only update their own products
+      if (user?.role === 'admin') return true;
       return {
         user: {
           equals: user?.id,
         },
       };
     },
-    // Restrict delete access
     delete: ({ req: { user } }) => {
-      if (user?.role === 'admin') {
-        return true; // Admins can delete any product
-      }
-      // Regular users can only delete their own products
+      if (user?.role === 'admin') return true;
       return {
         user: {
           equals: user?.id,
@@ -62,12 +46,7 @@ export const Products: CollectionConfig = {
     },
   },
   hooks: {
-    beforeChange: [
-      addUser,
-      async (args) => {
-        // Add other hooks here if needed, e.g., Stripe integration
-      },
-    ],
+    beforeChange: [addUser],
   },
   fields: [
     {
@@ -77,7 +56,7 @@ export const Products: CollectionConfig = {
       required: true,
       hasMany: false,
       admin: {
-        condition: () => false, // Hide the field in the admin panel
+        condition: () => false,
       },
     },
     {
@@ -91,14 +70,19 @@ export const Products: CollectionConfig = {
       label: 'Content Description',
       type: 'richText',
       editor: lexicalEditor({
-        // debug:true,
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
-          // HTMLConverterFeature({}),
+          HTMLConverterFeature({}),
         ],
       }),
     },
-    lexicalHTML('description', { name: 'description_html' }),
+    {
+      name: 'description_html',
+      type: 'text',
+      admin: {
+        hidden: true,
+      },
+    },
     {
       name: 'author',
       label: 'Author',
@@ -107,7 +91,7 @@ export const Products: CollectionConfig = {
     },
     {
       name: 'category',
-      label: ' Content Category',
+      label: 'Content Category',
       type: 'select',
       options: PRODUCT_CATEGORIES.map(({ label, value }) => ({ label, value })),
       required: true,
@@ -119,9 +103,7 @@ export const Products: CollectionConfig = {
       defaultValue: 'pending',
       access: {
         create: ({ req }) => req.user.role === 'admin',
-        // changing to let know general users of their contnet status
-        read:() => true,
-        // read: ({ req }) => req.user.role === 'admin',
+        read: () => true,
         update: ({ req }) => req.user.role === 'admin',
       },
       options: [
@@ -137,11 +119,7 @@ export const Products: CollectionConfig = {
           label: 'Denied',
           value: 'denied',
         },
-      ], 
-      // noo this wont even show status for general users 
-      // admin: {
-      //   condition: ({ user }) => user.role === 'admin', // Only allow editing for admins
-      // },
+      ],
     },
     {
       name: 'images',

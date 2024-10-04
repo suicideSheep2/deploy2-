@@ -7,27 +7,23 @@ import dotenv from "dotenv"
 import { Products } from './collections/Products/Products'
 import { Media } from './collections/Media'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import type { Configuration } from 'webpack'
 
-// Fix the dotenv path and add error handling
 dotenv.config({
   path: path.resolve(__dirname, "../.env")
 })
 
-// Add some logging to help with debugging
 console.log('Starting Payload CMS...')
 console.log('Environment variables:')
 console.log('- MONGODB_URL:', process.env.MONGODB_URL ? 'Set' : 'Not set')
 console.log('- PAYLOAD_SECRET:', process.env.PAYLOAD_SECRET ? 'Set' : 'Not set')
 console.log('- NEXT_PUBLIC_SERVER_URL:', process.env.NEXT_PUBLIC_SERVER_URL)
 
-// Create MongoDB adapter with error handling
 const mongooseOptions = {
   connect: {
     timeout: 60000,
     retry: true,
     retryDelay: 1000,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
   },
 }
 
@@ -40,16 +36,26 @@ export default buildConfig({
   admin: {
     user: "users",
     bundler: webpackBundler(),
+    webpack: (config: Configuration) => ({
+      ...config,
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve?.alias,
+          'react': path.join(__dirname, '../node_modules/react'),
+          'react-dom': path.join(__dirname, '../node_modules/react-dom'),
+        },
+      },
+    }),
     meta: {
       titleSuffix: "- DigitalHippo",
       favicon: '/favicon.ico',
       ogImage: '/thumbnail.jpg',
     },
   },
-  rateLimit: {
-    max: 2000,
-  },
-  editor: lexicalEditor({}),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => defaultFeatures,
+  }),
   db: mongooseAdapter({
     url: process.env.MONGODB_URL!,
     ...mongooseOptions,
@@ -57,8 +63,5 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
-  // Add global error handler
-  onInit: async (payload) => {
-    payload.logger.info(`Payload initialized`)
-  },
+  debug: process.env.NODE_ENV === 'development',
 })

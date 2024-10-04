@@ -30,6 +30,19 @@ export type WebhookRequest = IncomingMessage & {
   rawBody: Buffer
 }
 
+// Add error logging middleware
+const errorLoggingMiddleware = (payload: any): express.ErrorRequestHandler => {
+  return (err, req, res, next) => {
+    payload.logger.error({
+      msg: 'An error occurred in the application',
+      error: err,
+      path: req.path,
+      method: req.method,
+    })
+    next(err)
+  }
+}
+
 const start = async () => {
   const webhookMiddleware = bodyParser.json({
     verify: (req: WebhookRequest, _, buffer) => {
@@ -40,7 +53,6 @@ const start = async () => {
   app.post(
     '/api/webhooks/stripe',
     webhookMiddleware,
-
   )
 
   const payload = await getPayloadClient({
@@ -51,8 +63,9 @@ const start = async () => {
       },
     },
   })
-//   you have to be logged in to go to cart page 
-// code implementation
+
+  // Add the error logging middleware after payload initialization
+  app.use(errorLoggingMiddleware(payload))
 
   if (process.env.NEXT_BUILD) {
     app.listen(PORT, async () => {
@@ -68,13 +81,9 @@ const start = async () => {
 
     return
   }
-// is this in wrong place uff? fk works leave it
-
 
   const cartRouter = express.Router()
-
   cartRouter.use(payload.authenticate)
-
   cartRouter.get('/', (req, res) => {
     const request = req as PayloadRequest
 
@@ -84,7 +93,7 @@ const start = async () => {
     const parsedUrl = parse(req.url, true)
     const { query } = parsedUrl
 
-    return nextApp.render(req, res, '/cart',parsedUrl.query)
+    return nextApp.render(req, res, '/cart', parsedUrl.query)
   })
 
   app.use('/cart', cartRouter)
