@@ -20,7 +20,7 @@ exports.default = (0, config_1.buildConfig)({
     collections: [Users_1.Users, Products_1.Products, Media_1.Media,],
     routes: {
         // mauybe change here to /publish
-        admin: '/sell',
+        admin: '/publish',
     },
     admin: {
         user: "users",
