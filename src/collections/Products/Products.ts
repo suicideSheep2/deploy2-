@@ -75,10 +75,25 @@ export const Products: CollectionConfig = {
           HTMLConverterFeature({}),
         ],
       }),
+      admin: {
+        // elements: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'ol', 'ul', 'link'],
+        // leaves: ['bold', 'italic', 'underline', 'strikethrough'],
+      },
     },
     {
       name: 'description_html',
-      type: 'text',
+      type: 'textarea',  // Changed from 'text' to 'textarea' for larger content
+      hooks: {
+        beforeChange: [
+          ({ value, originalDoc }) => {
+            // Don't override existing value if no new value is provided
+            if (!value && originalDoc?.description_html) {
+              return originalDoc.description_html;
+            }
+            return value;
+          },
+        ],
+      },
       admin: {
         hidden: true,
       },
