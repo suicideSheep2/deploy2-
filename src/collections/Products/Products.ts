@@ -91,9 +91,10 @@ export const Products: CollectionConfig = {
       label: 'Content Description',
       type: 'richText',
       editor: lexicalEditor({
+        // debug:true,
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
-          HTMLConverterFeature({}),
+          // HTMLConverterFeature({}),
         ],
       }),
     },
