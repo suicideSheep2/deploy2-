@@ -44,7 +44,8 @@ const Page = () => {
       await router.refresh();
 
       // Refresh the page (temporary hard reload solution)
-      window.location.reload();
+      // window.location.reload();
+      // lets see after this comment 
 
       if (origin) {
         router.push(`/${origin}`);
