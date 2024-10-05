@@ -47,7 +47,6 @@ export interface Product {
   name: string;
   description?: {
     root: {
-      type: string;
       children: {
         type: string;
         version: number;
@@ -56,13 +55,14 @@ export interface Product {
       direction: ('ltr' | 'rtl') | null;
       format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
+      type: string;
       version: number;
     };
     [k: string]: unknown;
   } | null;
   description_html?: string | null;
   author: string;
-  category: 'poems' | 'novels';
+  category: 'poems' | 'novels' | 'miscellaneous';
   approvedForSale?: ('pending' | 'approved' | 'denied') | null;
   images: {
     image: string | Media;

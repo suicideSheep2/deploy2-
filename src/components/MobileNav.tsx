@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import React, { useEffect, useState } from 'react';
 import { PRODUCT_CATEGORIES } from '@/config';
 import { Menu, ChevronRight } from 'lucide-react';
@@ -10,17 +11,21 @@ const MobileNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
+  // Close the nav when the pathname changes
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
+  // Handle clicking outside of the mobile nav
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const nav = document.getElementById('mobile-nav');
       const menuButton = document.getElementById('menu-button');
-      if (nav && !nav.contains(event.target as Node) && 
-          menuButton && !menuButton.contains(event.target as Node) && 
-          isOpen) {
+      if (
+        nav && !nav.contains(event.target as Node) &&
+        menuButton && !menuButton.contains(event.target as Node) &&
+        isOpen
+      ) {
         setIsOpen(false);
       }
     };
@@ -33,13 +38,12 @@ const MobileNav = () => {
     };
   }, [isOpen]);
 
-  const toggleNav = () => setIsOpen(prev => !prev);
+  const toggleNav = () => setIsOpen((prev) => !prev);
 
   return (
     <div className="lg:hidden">
-      <div className="flex items-center justify-center px-4 py-2"> {/* Changed justify-between to justify-center */}
-        {/* Remove left text for small screens */}
-        <div className="hidden lg:block"> 
+      <div className="flex items-center justify-center px-4 py-2">
+        <div className="hidden lg:block">
           <Link href='/'>
             <p className='font-semibold text-gray-800'>
               Unwhispered<span className="text-green-600">Perhaps..</span>
@@ -71,9 +75,10 @@ const MobileNav = () => {
       >
         <div className="h-full overflow-y-auto">
           <div className="px-4 py-6">
-            <nav className="mt-0"> 
-              {PRODUCT_CATEGORIES.map((category, index) => (
+            <nav className="mt-0">
+              {PRODUCT_CATEGORIES.map((category) => (
                 <div key={category.label} className="mb-6">
+                  {/* Conditionally render the category */}
                   <div className="flex justify-between items-center">
                     <h3 className="text-lg font-medium text-gray-900">
                       {category.label}
@@ -93,18 +98,17 @@ const MobileNav = () => {
                       </li>
                     ))}
                   </ul>
-                  {category.label === "Poems" && (
+                 {/* horizontal line after each category */}
                     <div className="my-4">
                       <hr className="border-t border-gray-300" />
                     </div>
-                  )}
                 </div>
               ))}
             </nav>
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-transparent border-t border-gray-200">
+        <div className="absolute bottom-5 left-0 right-0 p-4 bg-transparent border-t border-gray-200"> {/* Moved buttons up */}
           <div className="grid grid-cols-2 gap-4">
             <Link
               href="/sign-in"

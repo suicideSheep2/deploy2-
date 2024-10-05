@@ -11,10 +11,10 @@ export const PRODUCT_CATEGORIES = [
         name: 'Recently Added',
         href: '/products?category=poems&sort=desc',
       },
-      {
-        name: 'Best-rated',
-        href: '/products?category=poems',
-      },
+      // {
+      //   name: 'Best-rated',
+      //   href: '/products?category=poems',
+      // },
     ],
   },
   {
@@ -29,10 +29,28 @@ export const PRODUCT_CATEGORIES = [
         name: 'Recently Added',
         href: '/products?category=novels&sort=desc',
       },
+      // {
+      //   name: 'Best-rated',
+      //   href: '/products?category=novels',
+      // },
+    ],
+  },
+  {  //maybe draft would be better name ??
+    label: 'Miscellaneous',
+    value: 'miscellaneous' as const,
+    featured: [
       {
-        name: 'Best-rated',
-        href: '/products?category=novels',
+        name: 'Editor Picks',
+        href: `/products?category=miscellaneous`,
       },
+      {
+        name: 'Recently Added',
+        href: '/products?category=miscellaneous&sort=desc',
+      },
+      // {
+      //   name: 'Best-rated',
+      //   href: '/products?category=miscellaneous',
+      // },
     ],
   },
 ]

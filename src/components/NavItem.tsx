@@ -25,6 +25,11 @@ const NavItem = ({
   close,
   isOpen,
 }: NavItemProps) => {
+ // Skip rendering "Miscellaneous" category
+ if (category.label === 'Miscellaneous') {
+  return null;
+ }
+
   const handleClick = () => {
     // Navigate to the respective product page based on the category
     if (category.label === 'Poems') {
