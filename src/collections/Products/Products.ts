@@ -71,8 +71,8 @@ export const Products: CollectionConfig = {
       type: 'richText',
       editor: lexicalEditor({
         features: ({ defaultFeatures }) => [
-          // ...defaultFeatures,
-          // HTMLConverterFeature({}),
+          ...defaultFeatures,
+          HTMLConverterFeature({}),
         ],
       }),
     },
