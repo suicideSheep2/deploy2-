@@ -41,26 +41,27 @@ const Page = () => {
     onSuccess: async () => {
       toast.success('Signed in successfully');
 
+      // Soft refresh
       await router.refresh();
 
-      // Refresh the page (temporary hard reload solution)
-      // window.location.reload();
-      // lets see after this comment 
+      // Delay to allow for state updates
+      setTimeout(() => {
+        // Navigate to the appropriate page
+        if (origin) {
+          router.push(`/${origin}`);
+        } else if (isSeller) {
+          router.push('/publish');
+        } else {
+          router.push('/');
+        }
 
-      if (origin) {
-        router.push(`/${origin}`);
-        return;
-      }
-
-      if (isSeller) {
-        router.push('/publish');
-        return;
-      }
-
-      router.push('/');
+        // Hard refresh after a short delay
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      }, 300);
     },
     onError: (err) => {
-      // If sign-in fails
       if (err.data?.code === 'UNAUTHORIZED') {
         toast.error('Invalid email or password.');
       } else {
@@ -70,7 +71,6 @@ const Page = () => {
   });
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    // Check for valid email and password before submitting
     if (!email || !password) {
       toast.error('Both email and password are required.');
       return;
