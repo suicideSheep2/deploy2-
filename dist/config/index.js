@@ -14,10 +14,10 @@ exports.PRODUCT_CATEGORIES = [
                 name: 'Recently Added',
                 href: '/products?category=poems&sort=desc',
             },
-            {
-                name: 'Best-rated',
-                href: '/products?category=poems',
-            },
+            // {
+            //     name: 'Best-rated',
+            //     href: '/products?category=poems',
+            // },
         ],
     },
     {
@@ -32,10 +32,28 @@ exports.PRODUCT_CATEGORIES = [
                 name: 'Recently Added',
                 href: '/products?category=novels&sort=desc',
             },
-            {
-                name: 'Best-rated',
-                href: '/products?category=novels',
-            },
+            // {
+            //     name: 'Best-rated',
+            //     href: '/products?category=novels',
+            // },
         ],
     },
+    {  
+        label: 'Miscellaneous',
+        value: 'miscellaneous' ,
+        featured: [
+          {
+            name: 'Editor Picks',
+            href: `/products?category=miscellaneous`,
+          },
+          {
+            name: 'Recently Added',
+            href: '/products?category=miscellaneous&sort=desc',
+          },
+          // {
+          //   name: 'Best-rated',
+          //   href: '/products?category=miscellaneous',
+          // },
+        ],
+      },
 ];
