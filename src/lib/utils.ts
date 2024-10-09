@@ -60,10 +60,10 @@ export function formatPrice (
         title,
         description,
         images: [image],
-        creator: '@bhabuk',
+        creator: '@Bhabuk',
       },
       icons,
-      metadataBase: new URL('https://digitalhippo.up.railway.app'),
+      metadataBase: new URL('https://uperhaps.up.railway.app'),
       ...(noIndex && {
         robots: {
           index: false,
