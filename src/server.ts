@@ -93,10 +93,10 @@ const start = async () => {
     const parsedUrl = parse(req.url, true)
     const { query } = parsedUrl
 
-    return nextApp.render(req, res, '/favorites', parsedUrl.query)
+    return nextApp.render(req, res, '/cart', parsedUrl.query)
   })
 
-  app.use('/favorites', cartRouter)
+  app.use('/cart', cartRouter)
   app.use(
     '/api/trpc',
     trpcExpress.createExpressMiddleware({

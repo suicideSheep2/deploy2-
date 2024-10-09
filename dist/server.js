@@ -134,9 +134,9 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                         return res.redirect('/sign-in?origin=cart');
                     var parsedUrl = (0, url_1.parse)(req.url, true);
                     var query = parsedUrl.query;
-                    return next_utils_1.nextApp.render(req, res, '/favorites', parsedUrl.query);
+                    return next_utils_1.nextApp.render(req, res, '/cart', parsedUrl.query);
                 });
-                app.use('/favorites', cartRouter);
+                app.use('/cart', cartRouter);
                 app.use('/api/trpc', trpcExpress.createExpressMiddleware({
                     router: trpc_1.appRouter,
                     createContext: createContext,
