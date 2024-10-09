@@ -5,13 +5,17 @@ export async function middleware(req: NextRequest) {
   const { nextUrl, cookies } = req
   const { user } = await getServerSideUser(cookies)
 
+  const isAuthPage = ['/sign-in', '/sign-up'].includes(nextUrl.pathname)
+  const isProtectedRoute = ['/favorites'].includes(nextUrl.pathname)
+
   try {
-    if (
-      user &&
-      ['/sign-in', '/sign-up'].includes(nextUrl.pathname)
-    ) {
+    if (user && isAuthPage) {
+      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/`)
+    }
+
+    if (!user && isProtectedRoute) {
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/`
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/sign-in?callbackUrl=${nextUrl.pathname}`
       )
     }
 
@@ -19,13 +23,14 @@ export async function middleware(req: NextRequest) {
   } catch (error) {
     console.error('Middleware error:', error)
     
-    // Still redirect on error, but log it
-    if (['/sign-in', '/sign-up'].includes(nextUrl.pathname)) {
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/`
-      )
+    if (isAuthPage) {
+      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/`)
     }
     
     return NextResponse.next()
   }
+}
+
+export const config = {
+  matcher: ['/sign-in', '/sign-up', '/favorites'],
 }

@@ -54,10 +54,13 @@ export const authRouter = router({
       return { success: true }
     }),
 
-  signIn: publicProcedure
-    .input(AuthCredentialsValidator)
+  
+    signIn: publicProcedure
+    .input(AuthCredentialsValidator.extend({
+      callbackUrl: z.string().optional()
+    }))
     .mutation(async ({ input, ctx }) => {
-      const { email, password } = input
+      const { email, password, callbackUrl } = input
       const { res } = ctx
 
       const payload = await getPayloadClient()
@@ -72,7 +75,7 @@ export const authRouter = router({
           res,
         })
 
-        return { success: true }
+        return { success: true, callbackUrl }
       } catch (err) {
         throw new TRPCError({ code: 'UNAUTHORIZED' })
       }
