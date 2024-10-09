@@ -20,7 +20,6 @@ const Page = () => {
   const router = useRouter();
   const isSeller = searchParams.get('as') === 'seller';
   const origin = searchParams.get('origin');
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
 
   const continueAsSeller = () => {
     router.push('?as=seller');
@@ -48,9 +47,7 @@ const Page = () => {
       // Delay to allow for state updates
       setTimeout(() => {
         // Navigate to the appropriate page
-        if (callbackUrl) {
-          router.push(callbackUrl);
-        } else if (origin) {
+        if (origin) {
           router.push(`/${origin}`);
         } else if (isSeller) {
           router.push('/publish');
@@ -78,7 +75,7 @@ const Page = () => {
       toast.error('Both email and password are required.');
       return;
     }
-    signIn({ email, password, callbackUrl });
+    signIn({ email, password });
   };
 
   return (
