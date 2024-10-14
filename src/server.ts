@@ -88,7 +88,7 @@ const start = async () => {
     const request = req as PayloadRequest
 
     if (!request.user)
-      return res.redirect('/sign-in?origin=cart')
+      return res.redirect('/sign-in?origin=favorites')
 
     const parsedUrl = parse(req.url, true)
     const { query } = parsedUrl
