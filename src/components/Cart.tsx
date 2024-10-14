@@ -43,14 +43,23 @@ const CartItem = ({
           className="flex-grow flex items-center space-x-4"
           onClick={onClose}
         >
-          <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
-            <Image
-              src={product.images[0].image.url || '/placeholder-image.jpg'}
-              alt={product.name}
-              fill
-              className="object-cover"
-            />
-          </div>
+         <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
+  {product.images && product.images[0] && product.images[0].image && product.images[0].image.url ? (
+    <Image
+      src={product.images[0].image.url}
+      alt={product.name}
+      fill
+      className="object-cover"
+    />
+  ) : (
+    <Image
+      src="/placeholder-image.jpg" // Fallback image
+      alt="Placeholder"
+      fill
+      className="object-cover"
+    />
+  )}
+</div>
           <div className="flex-grow">
             <h3 className="text-sm font-medium text-gray-900">{product.name}</h3>
             <p className="mt-1 text-sm text-gray-500">{product.category}</p>
