@@ -30,30 +30,12 @@ export type WebhookRequest = IncomingMessage & {
   rawBody: Buffer
 }
 
-// Add error logging middleware
-const errorLoggingMiddleware = (payload: any): express.ErrorRequestHandler => {
-  return (err, req, res, next) => {
-    payload.logger.error({
-      msg: 'An error occurred in the application',
-      error: err,
-      path: req.path,
-      method: req.method,
-    })
-    next(err)
-  }
-}
-
 const start = async () => {
   const webhookMiddleware = bodyParser.json({
     verify: (req: WebhookRequest, _, buffer) => {
       req.rawBody = buffer
     },
   })
-
-  app.post(
-    '/api/webhooks/stripe',
-    webhookMiddleware,
-  )
 
   const payload = await getPayloadClient({
     initOptions: {
@@ -64,39 +46,35 @@ const start = async () => {
     },
   })
 
-  // Add the error logging middleware after payload initialization
-  app.use(errorLoggingMiddleware(payload))
-
   if (process.env.NEXT_BUILD) {
     app.listen(PORT, async () => {
-      payload.logger.info(
-        'Next.js is building for production'
-      )
-
+      payload.logger.info('Next.js is building for production')
       // @ts-expect-error
       await nextBuild(path.join(__dirname, '../'))
-
       process.exit()
     })
-
     return
   }
 
   const cartRouter = express.Router()
   cartRouter.use(payload.authenticate)
+
   cartRouter.get('/', (req, res) => {
     const request = req as PayloadRequest
-
-    if (!request.user)
-      return res.redirect('/sign-in?origin=favorites')
-
     const parsedUrl = parse(req.url, true)
     const { query } = parsedUrl
 
-    return nextApp.render(req, res, '/favorites', parsedUrl.query)
+    if (!request.user) {
+      // Store the intended destination in the session or query parameter
+      return res.redirect('/sign-in?origin=favorites')
+    }
+
+    // User is authenticated, render the favorites page
+    return nextApp.render(req, res, '/favorites', query)
   })
 
   app.use('/favorites', cartRouter)
+
   app.use(
     '/api/trpc',
     trpcExpress.createExpressMiddleware({
@@ -109,7 +87,6 @@ const start = async () => {
 
   nextApp.prepare().then(() => {
     payload.logger.info('Next.js started')
-
     app.listen(PORT, async () => {
       payload.logger.info(
         `Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`
