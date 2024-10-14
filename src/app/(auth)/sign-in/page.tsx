@@ -22,8 +22,8 @@ const Page = () => {
   const origin = searchParams.get('origin')
 
   useEffect(() => {
-    if (origin === 'favorites') {
-      localStorage.setItem('intendedDestination', '/favorites')
+    if (origin) {
+      localStorage.setItem('intendedDestination', `/${origin}`)
     }
   }, [origin])
 
@@ -54,8 +54,6 @@ const Page = () => {
         if (intendedDestination) {
           localStorage.removeItem('intendedDestination')
           router.push(intendedDestination)
-        } else if (origin) {
-          router.push(`/${origin}`)
         } else if (isSeller) {
           router.push('/publish')
         } else {
@@ -84,7 +82,8 @@ const Page = () => {
     <div className="container relative flex pt-20 flex-col items-center justify-center lg:px-0">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col items-center space-y-2 text-center">
-          <Icons.logo className="h-20 w-20" />
+          {/* <Icons.logo className="h-20 w-20" /> */}
+          <img src="/favicon.ico" alt="image"  className='h-20 w-20'/>
           <h1 className="text-2xl font-semibold tracking-tight">
             Sign in to your {isSeller ? 'publisher' : ''} account
           </h1>
