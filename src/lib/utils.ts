@@ -1,6 +1,3 @@
-// tbh uselsess for my  kind of idea and need to write from scratch
-// this is for price which is kinda useless for my project haha
-
 import { type ClassValue, clsx } from "clsx"
 import { Metadata } from "next/types"
 import { twMerge } from "tailwind-merge"
@@ -9,67 +6,94 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatPrice (
-  price: number | string,
-  options: {
-    currency?: "USD" | "EUR"|"GBP"|"BTD",
-    notation?: Intl.NumberFormatOptions["notation"]
-  } = {}
-) {
-  const {currency = "USD", notation="compact "} = options
-
-  const numericPrice =
-   typeof price == "string" ? parseFloat(price): price
-
-  return new Intl.NumberFormat("en-US", {
-    style: 'currency' ,
-    currency,
-    // notation,
-    maximumFractionDigits: 2,
-  }).format(numericPrice)
-  }
-// modify it to suit your preference
-// fr broo this si shown when you share it as link 
-  export function constructMetadata({
-    title = 'Uperhaps - your Digital Library',
-    description = 'Unwhispered is an open-source digital library for literary lovers.',
-    image = '/thumbnail.png',
-    icons = '/favicon.ico',
-    noIndex = false,
-  }: {
-    title?: string
-    description?: string
-    image?: string
-    icons?: string
-    noIndex?: boolean
-  } = {}): Metadata {
-    return {
+export function constructMetadata({
+  title = 'Uperhaps - Your Digital Library',
+  description = 'Unwhispered Perhaps; an open-source digital library for literary lovers and writers.',
+  image = '/thumbnail.jpg',
+  icons = '/favicon.ico',
+  noIndex = false,
+  type = 'website',
+  siteName = 'Uperhaps',
+  locale = 'en_US',
+  url = 'https://uperhaps.up.railway.app',
+}: {
+  title?: string
+  description?: string
+  image?: string
+  icons?: string
+  noIndex?: boolean
+  type?: 'website' | 'article' | 'book' | 'profile'
+  siteName?: string
+  locale?: string
+  url?: string
+} = {}): Metadata {
+  return {
+    title,
+    description,
+    openGraph: {
       title,
       description,
-      openGraph: {
-        title,
-        description,
-        images: [
-          {
-            url: image,
-          },
-        ],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title,
-        description,
-        images: [image],
-        creator: '@Bhabuk',
-      },
-      icons,
-      metadataBase: new URL('https://uperhaps.up.railway.app'),
-      ...(noIndex && {
-        robots: {
-          index: false,
-          follow: false,
+      type,
+      siteName,
+      locale,
+      url,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
         },
-      }),
-    }
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+      creator: '@Bhabuk',
+    },
+    other: {
+      'og:image:width': '1200',
+      'og:image:height': '630',
+      'og:site_name': siteName,
+      'og:locale': locale,
+      'og:url': url,
+      'theme-color': '#ffffff', // Adjust this to match your site's theme color
+    },
+    icons,
+    metadataBase: new URL(url),
+    alternates: {
+      canonical: url,
+    },
+    ...(noIndex && {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }),
   }
-  
+}
+
+export function getStructuredData(data: {
+  title: string
+  description: string
+  image: string
+  datePublished: string
+  dateModified: string
+  authorName: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
+    description: data.description,
+    image: data.image,
+    datePublished: data.datePublished,
+    dateModified: data.dateModified,
+    author: [{
+      '@type': 'Person',
+      name: data.authorName,
+    }],
+  }
+}
