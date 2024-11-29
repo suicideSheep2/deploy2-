@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function constructMetadata({
   title = 'Uperhaps - Your Digital Library',
-  description = 'Unwhispered Perhaps; an open-source digital library for literary lovers and writers.',
+  description = 'Unleash your creativity and immerse yourself in the world of poetry and literature with UnwhisperedPerhaps... Sign up today and start your literary journey with us!',
   image = '/thumbnail.jpg',
   icons = '/favicon.ico',
   noIndex = false,

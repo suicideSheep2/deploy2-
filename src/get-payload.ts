@@ -49,7 +49,7 @@ export const getPayloadClient = async ({
             email: {
                 transport: transporter,
                 // here we have to have own domain like uperhaps.com
-                fromAddress: 'onboarding@resend.dev',
+                fromAddress: 'bhabukb.com.np',
                 fromName: 'UPerhaps',
               },
             secret: process.env.PAYLOAD_SECRET,

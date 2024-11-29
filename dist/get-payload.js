@@ -104,7 +104,7 @@ var getPayloadClient = function () {
                         cached.promise = payload_1.default.init(__assign({ email: {
                                 transport: transporter,
                                 // here we have to have own domain like uperhaps.com
-                                fromAddress: 'onboarding@resend.dev',
+                                fromAddress: 'bhabukb.com.np',
                                 fromName: 'UPerhaps',
                             }, secret: process.env.PAYLOAD_SECRET, local: (initOptions === null || initOptions === void 0 ? void 0 : initOptions.express) ? false : true }, (initOptions || {})));
                     }
