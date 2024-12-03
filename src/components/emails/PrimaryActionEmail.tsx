@@ -24,14 +24,14 @@ export const EmailTemplate = ({
   href,
 }: EmailTemplateProps) => {
   const email = {
-    preview: "The marketplace for high-quality digital goods.",
+    preview: "The marketplace for high-quality digital contents.",
     body: [
       {
         type: 'img',
         src: `${process.env.NEXT_PUBLIC_SERVER_URL}/hippo-newsletter-sign-up.png`,
         width: 150,
         height: 150,
-        alt: 'DigitalHippo',
+        alt: 'Uperhaps',
         style: logo
       },
       {
@@ -41,7 +41,7 @@ export const EmailTemplate = ({
       },
       {
         type: 'text',
-        value: `Welcome to DigitalHippo, the marketplace for high quality digital goods. Use the button below to ${actionLabel}.`,
+        value: `Welcome to Uperhaps, your digital library for high quality literary contents. Use the button below to ${actionLabel}.`,
         style: paragraph
       },
       {
@@ -52,7 +52,7 @@ export const EmailTemplate = ({
       },
       {
         type: 'text',
-        value: 'Best,\nThe DigitalHippo team',
+        value: 'Best,\nThe Uperhaps team',
         style: paragraph
       },
       {

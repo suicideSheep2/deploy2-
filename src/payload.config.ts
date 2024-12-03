@@ -48,7 +48,7 @@ export default buildConfig({
       },
     }),
     meta: {
-      titleSuffix: "- DigitalHippo",
+      titleSuffix: "- Uperhaps",
       favicon: '/favicon.ico',
       ogImage: '/thumbnail.jpg',
     },
