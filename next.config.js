@@ -4,7 +4,7 @@ const nextConfig = {
       remotePatterns: [
         {
           protocol: "https",
-          hostname: "poetry-web2.vercel.app/",
+          hostname: "poetry-web2-production.up.railway.app",
         },
       ],
     },
