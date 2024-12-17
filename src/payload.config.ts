@@ -28,13 +28,16 @@ const mongooseOptions = {
 }
 
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'https://uperhaps.up.railway.app',
   collections: [Users, Products, Media],
   routes: {
     admin: '/publish',
   },
   admin: {
     user: "users",
+    // added 
+    disable:false,
+    // till here
     bundler: webpackBundler(),
     webpack: (config: Configuration) => ({
       ...config,
