@@ -1,108 +1,60 @@
 "use client"
-// completely useless remove the whole damn page  fr
-// this gives the property of image sliding like aribian b n b 
-// modify it later to fit ypur preference duh for sure modify itt
 
 import Image from 'next/image'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import type SwiperType from 'swiper'
-import { useEffect, useState } from 'react'
-import { Pagination } from 'swiper/modules'
 import { cn } from '@/lib/utils'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ImageSliderProps {
   urls: string[]
-  className?: string; // Add the className prop
+  className?: string
 }
 
-const ImageSlider = ({ urls }: ImageSliderProps) => {
-  const [swiper, setSwiper] = useState<null | SwiperType>(
-    null
-  )
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  const [slideConfig, setSlideConfig] = useState({
-    isBeginning: true,
-    isEnd: activeIndex === (urls.length ?? 0) - 1,
-  })
-
-  useEffect(() => {
-    swiper?.on('slideChange', ({ activeIndex }) => {
-      setActiveIndex(activeIndex)
-      setSlideConfig({
-        isBeginning: activeIndex === 0,
-        isEnd: activeIndex === (urls.length ?? 0) - 1,
-      })
-    })
-  }, [swiper, urls])
-
-  const activeStyles =
-    'active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-square h-8 w-8 z-50 place-items-center rounded-full border-2 bg-white border-zinc-300'
-  const inactiveStyles = 'hidden text-gray-400'
+const ImageSlider = ({ urls, className }: ImageSliderProps) => {
+  if (!urls.length) return null
+  
+  if (urls.length === 1) {
+    return (
+      <div className={cn('group relative aspect-square rounded-xl overflow-hidden', className)}>
+        <Image
+          fill
+          src={urls[0]}
+          alt="Image"
+          className="object-cover transition-all duration-300 group-hover:scale-[1.02]"
+        />
+      </div>
+    )
+  }
 
   return (
-    <div className='group relative bg-zinc-100 aspect-square overflow-hidden rounded-xl'>
-      <div className='absolute z-10 inset-0 opacity-0 group-hover:opacity-100 transition'>
-        <button
-          onClick={(e) => {
-            e.preventDefault()
-            swiper?.slideNext()
-          }}
-          className={cn(
-            activeStyles,
-            'right-3 transition',
-            {
-              [inactiveStyles]: slideConfig.isEnd,
-              'hover:bg-primary-300 text-primary-800 opacity-100':
-                !slideConfig.isEnd,
-            }
-          )}
-          aria-label='next image'>
-          <ChevronRight className='h-4 w-4 text-zinc-700' />{' '}
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault()
-            swiper?.slidePrev()
-          }}
-          className={cn(activeStyles, 'left-3 transition', {
-            [inactiveStyles]: slideConfig.isBeginning,
-            'hover:bg-primary-300 text-primary-800 opacity-100':
-              !slideConfig.isBeginning,
-          })}
-          aria-label='previous image'>
-          <ChevronLeft className='h-4 w-4 text-zinc-700' />{' '}
-        </button>
-      </div>
-
-      <Swiper
-        pagination={{
-          renderBullet: (_, className) => {
-            return `<span class="rounded-full transition ${className}"></span>`
-          },
-        }}
-        onSwiper={(swiper) => setSwiper(swiper)}
-        spaceBetween={50}
-        modules={[Pagination]}
-        slidesPerView={1}
-        className='h-full w-full'>
-        {urls.map((url, i) => (
-          <SwiperSlide
-            key={i}
-            className='-z-10 relative h-full w-full'>
+    <div className={cn('grid gap-[2px] rounded-xl overflow-hidden group', className, {
+      'grid-cols-2 grid-rows-2 aspect-square': urls.length === 4,
+      'grid-cols-2 aspect-[2/1]': urls.length === 1,
+      '[grid-template-areas:"main_top""main_bottom"] md:grid-cols-2 aspect-[1/1.1]': urls.length === 3,
+    })}>
+      {urls.map((url, i) => {
+        const isFirst = i === 0
+        const isThree = urls.length === 3
+        
+        return (
+          <div
+            key={url}
+            style={isFirst && isThree ? { gridArea: 'main' } : undefined}
+            className={cn(
+              'relative overflow-hidden',
+              'transition-all duration-300',
+              {
+                'row-span-2': isFirst && isThree,
+                'hover:z-10 hover:brightness-110': true,
+              }
+            )}>
             <Image
               fill
-              loading='eager'
-              className='-z-10 h-full w-full object-cover object-center'
               src={url}
-              alt='Product image'
+              alt={`Image ${i + 1}`}
+              className="object-cover"
             />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          </div>
+        )
+      })}
     </div>
   )
 }
