@@ -25,9 +25,9 @@ const ImageSlider = ({ urls, className }: ImageSliderProps) => {
   }
 
   return (
-    <div className={cn('grid gap-[2px] rounded-xl overflow-hidden group', className, {
+    <div className={cn('grid gap-[2px] rounded-xl overflow-hidden bg-black', className, {
       'grid-cols-2 grid-rows-2 aspect-square': urls.length === 4,
-      'grid-cols-2 aspect-[2/1]': urls.length === 1,
+      'grid-cols-2 aspect-[2/1]': urls.length === 0,
       '[grid-template-areas:"main_top""main_bottom"] md:grid-cols-2 aspect-[1/1.1]': urls.length === 3,
     })}>
       {urls.map((url, i) => {
@@ -43,7 +43,7 @@ const ImageSlider = ({ urls, className }: ImageSliderProps) => {
               'transition-all duration-300',
               {
                 'row-span-2': isFirst && isThree,
-                'hover:z-10 hover:brightness-110': true,
+                'hover:z-10 hover:brightness-120': true,
               }
             )}>
             <Image

@@ -14,6 +14,7 @@ import { trpc } from '@/trpc/client'
 import { toast } from 'sonner'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
+import Image from 'next/image'
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -83,7 +84,9 @@ const Page = () => {
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col items-center space-y-2 text-center">
           {/* <Icons.logo className="h-20 w-20" /> */}
-          <img src="/favicon.ico" alt="image"  className='h-20 w-20'/>
+          <Image 
+             src="/favicon.ico" alt="Logo" width={80}  height={80} className="h-20 w-20" priority
+            />
           <h1 className="text-2xl font-semibold tracking-tight">
             Sign in to your {isSeller ? 'publisher' : ''} account
           </h1>
