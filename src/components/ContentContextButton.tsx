@@ -83,10 +83,10 @@ const ContentContextButton = ({
       </button>
 
       {isOpen && (
-        <div className="absolute top-full right-0 mt-4 w-72 rounded-2xl bg-white/30 backdrop-blur-md
+        <div className="absolute top-full right-0 mt-4 rounded-2xl bg-white/30 backdrop-blur-md
                        border border-white/20 shadow-xl transition-all duration-300
                        animate-in slide-in-from-top-5 fade-in-20 z-50
-                       md:w-64 w-73">
+                       w-80 md:w-96">
           <div className="p-4 space-y-4 max-h-[80vh]">
             <div className="border-b border-gray-200/30 pb-2">
               <h3 className="text-lg font-serif text-gray-700">{title}</h3>
