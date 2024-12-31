@@ -1,3 +1,4 @@
+
 import ImageSlider from '@/components/ImageSlider'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import ProductReel from '@/components/ProductReel'
@@ -85,7 +86,12 @@ const Page = async ({ params }: PageProps) => {
             
             {/* Right side - Content Context */}
             <div className="flex-1 mt-8 mb-8">
-              <ContentContextButton />
+            <ContentContextButton 
+  category={product?.category?.toString() || 'Uncategorized'}
+  title={product?.name?.toString() || 'Untitled'}
+  author={product?.author?.toString() || 'Unknown Author'}
+  description={product?.description?.toString() || 'No description available'}
+/>
             </div>
           </div>
 
