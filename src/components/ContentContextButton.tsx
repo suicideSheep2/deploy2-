@@ -7,7 +7,7 @@ interface ContentContextButtonProps {
   category?: string;
   title?: string;
   author?: string;
-  description?: string | object;  // Adding object type to handle potential object descriptions
+  description?: string | object;
 }
 
 const ContentContextButton = ({ 
@@ -19,7 +19,17 @@ const ContentContextButton = ({
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // Handle click outside
+  // Debug logging
+  useEffect(() => {
+    console.log('Debug Props:', {
+      category,
+      title,
+      author,
+      description,
+      descriptionType: typeof description,
+    });
+  }, [category, title, author, description]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -31,35 +41,20 @@ const ContentContextButton = ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Ensure description is a string
-  const getDescriptionString = (desc: string | object | null | undefined) => {
-    if (!desc) return 'No description available'
-    if (typeof desc === 'string') return desc
-    if (typeof desc === 'object') {
-      // If it's an object, try to get a meaningful string representation
-      try {
-        return JSON.stringify(desc)
-      } catch {
-        return 'Description available'
-      }
-    }
-    return 'No description available'
-  }
-
   const safeCategory = typeof category === 'string' ? category : 'Uncategorized'
   const safeAuthor = typeof author === 'string' ? author : 'Unknown Author'
-  const safeDescription = getDescriptionString(description)
 
   const contextInfo = {
     timeToRead: "4 min read",
     genre: safeCategory,
     mood: safeAuthor,
     themes: [safeCategory],
-    writtenOn: safeDescription
+    // Temporarily using author instead of description for testing
+    writtenOn: `By: ${safeAuthor}` // Changed this line for testing
   }
 
   return (
-    <div className="relative flex justify-end w-full" ref={dropdownRef}> {/* Changed to flex with justify-end */}
+    <div className="relative flex justify-end w-full" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="bg-white/30 px-6 py-3 rounded-full shadow-md border border-white/20
