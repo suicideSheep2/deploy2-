@@ -30,6 +30,7 @@ const ImageSlider = ({ urls, className }: ImageSliderProps) => {
       'grid-cols-2 aspect-[2/1]': urls.length === 0,
       '[grid-template-areas:"main_top""main_bottom"] md:grid-cols-2 aspect-[1/1.1]': urls.length === 3,
     })}>
+      {/* still need hardcorded configuration for 2 images layout */}
       {urls.map((url, i) => {
         const isFirst = i === 0
         const isThree = urls.length === 3
