@@ -10,10 +10,15 @@ interface ImageSliderProps {
 
 const ImageSlider = ({ urls, className }: ImageSliderProps) => {
   if (!urls.length) return null
-  
+
   if (urls.length === 1) {
     return (
-      <div className={cn('group relative aspect-square rounded-xl overflow-hidden', className)}>
+      <div className={cn(
+        'group relative aspect-square rounded-xl overflow-hidden',
+        'max-w-xl w-full', // Reduced max width, removed mx-auto
+        'lg:max-w-2xl', // Smaller on large screens
+        className
+      )}>
         <Image
           fill
           src={urls[0]}
@@ -25,16 +30,21 @@ const ImageSlider = ({ urls, className }: ImageSliderProps) => {
   }
 
   return (
-    <div className={cn('grid gap-[2px] rounded-xl overflow-hidden bg-black', className, {
-      'grid-cols-2 grid-rows-2 aspect-square': urls.length === 4,
-      'grid-cols-2 aspect-[2/1]': urls.length === 0,
-      '[grid-template-areas:"main_top""main_bottom"] md:grid-cols-2 aspect-[1/1.1]': urls.length === 3,
-    })}>
-      {/* still need hardcorded configuration for 2 images layout */}
+    <div className={cn(
+      'grid gap-[2px] rounded-xl overflow-hidden bg-black',
+      'max-w-xl w-full', // Reduced max width, removed mx-auto
+      'lg:max-w-2xl', // Smaller on large screens
+      className,
+      {
+        'grid-cols-2 grid-rows-2 aspect-square': urls.length === 4,
+        'grid-cols-2 aspect-[2/1]': urls.length === 2,
+        '[grid-template-areas:"main_top""main_bottom"] md:grid-cols-2 aspect-[1/1.1]': urls.length === 3,
+      }
+    )}>
       {urls.map((url, i) => {
         const isFirst = i === 0
         const isThree = urls.length === 3
-        
+
         return (
           <div
             key={url}
@@ -44,7 +54,7 @@ const ImageSlider = ({ urls, className }: ImageSliderProps) => {
               'transition-all duration-300',
               {
                 'row-span-2': isFirst && isThree,
-                'hover:z-10 hover:brightness-120': true,
+                'hover:z-10 hover:brightness-110': true,
               }
             )}>
             <Image

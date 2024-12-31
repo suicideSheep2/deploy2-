@@ -12,7 +12,7 @@ import React from 'react';
 import StyledProductDescription from '@/components/ui/styledPD'
 import ElegantBreadcrumbs from '@/components/ElegantBreadcrums'
 import fetch from 'node-fetch';
-
+import ContentContextButton from '@/components/ContentContextButton'
 
 interface Product {
   id: string;
@@ -73,28 +73,32 @@ const Page = async ({ params }: PageProps) => {
   )
     .filter(Boolean) as string[]
 
-  return (
-<MaxWidthWrapper className='bg-transparent'>
-  <div className='bg-transparent '>
-     {/* Breadcrumbs */}
-     <ElegantBreadcrumbs />
-
-    {/* <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-3xl lg:px-8'> */}
-
-      {/* Breadcrumbs
-      <ElegantBreadcrumbs /> */}
+    return (
+      <MaxWidthWrapper className='bg-transparent'>
+        <div className='bg-transparent'>
+          {/* Navigation Container */}
+          <div className="flex justify-between items-center">
+            {/* Left side - Breadcrumbs */}
+            <div className="flex-1">
+              <ElegantBreadcrumbs />
+            </div>
+            
+            {/* Right side - Content Context */}
+            <div className="flex-1 mt-8 mb-8">
+              <ContentContextButton />
+            </div>
+          </div>
 
       {/* Product Image */}
-      <div className='mt-4 aspect-square rounded-lg'>
-        <ImageSlider urls={validUrls} />
-      </div>
+      <div className='mt-4 max-w-xl'>
+          <ImageSlider urls={validUrls} />
+        </div>
 
-      {/* Product Details */}
-      <div className='mt-6'>
-     <h1 className='text-2xl font-serif font-bold text-grey-400;'>
-       {product.name as string}
-        </h1>
-
+        {/* Product Details */}
+        <div className='mt-4'>
+          <h1 className='text-2xl font-serif font-bold text-grey-400'>
+            {product.name as string}
+          </h1>
 
 
 
