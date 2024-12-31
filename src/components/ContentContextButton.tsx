@@ -19,12 +19,22 @@ const ContentContextButton = ({
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // Auto-open effect
+  // Auto-open effect - only for larger screens
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpen(true)
-    }, 500)
-    return () => clearTimeout(timer)
+    const handleResize = () => {
+      if (window.innerWidth >= 768) { // md breakpoint
+        const timer = setTimeout(() => {
+          setIsOpen(true)
+        }, 500)
+        return () => clearTimeout(timer)
+      } else {
+        setIsOpen(false)
+      }
+    }
+
+    handleResize() // Initial check
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
@@ -53,19 +63,21 @@ const ContentContextButton = ({
     <div className="relative flex justify-end w-full" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`group px-6 py-3 rounded-full shadow-md border border-white/20
+        className={`group rounded-full shadow-md border border-white/20
                    transition-all duration-300 hover:shadow-lg hover:scale-105
-                   flex items-center space-x-2 backdrop-blur-sm
+                   flex items-center backdrop-blur-sm
                    hover:border-green-400/20
+                   md:px-6 md:py-3 
+                   px-3 py-2 
                    ${isOpen ? 'bg-white/30' : 'bg-white/10 hover:bg-white/30'}`}
       >
         <span className="text-sm font-semibold text-gray-400 transition-colors duration-300 
-                       group-hover:text-green-800">
+                       group-hover:text-green-800 hidden md:block">
           Context
         </span>
         <ChevronDown
           className={`h-4 w-4 text-gray-400 flex-shrink-0 transition-all duration-300
-                    group-hover:text-green-800
+                    group-hover:text-green-800 md:ml-2
                     ${isOpen ? 'rotate-180' : 'rotate-0'}`}
         />
       </button>
@@ -73,7 +85,8 @@ const ContentContextButton = ({
       {isOpen && (
         <div className="absolute top-full right-0 mt-4 w-72 rounded-2xl bg-white/30 backdrop-blur-md
                        border border-white/20 shadow-xl transition-all duration-300
-                       animate-in slide-in-from-top-5 fade-in-20 z-50">
+                       animate-in slide-in-from-top-5 fade-in-20 z-50
+                       md:w-64 w-73">
           <div className="p-4 space-y-4 max-h-[80vh]">
             <div className="border-b border-gray-200/30 pb-2">
               <h3 className="text-lg font-serif text-gray-700">{title}</h3>

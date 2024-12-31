@@ -15,8 +15,11 @@ const ImageSlider = ({ urls, className }: ImageSliderProps) => {
     return (
       <div className={cn(
         'group relative aspect-square rounded-xl overflow-hidden',
-        'max-w-xl w-full', // Reduced max width, removed mx-auto
-        'lg:max-w-2xl', // Smaller on large screens
+        'w-full max-w-xl mx-auto', // Mobile base size
+        'md:max-w-3xl', // Increased medium size
+        'lg:max-w-5xl', // Much larger for lg screens
+        'xl:max-w-6xl', // Even larger for xl
+        '2xl:max-w-7xl', // Maximum size for 2xl
         className
       )}>
         <Image
@@ -32,8 +35,11 @@ const ImageSlider = ({ urls, className }: ImageSliderProps) => {
   return (
     <div className={cn(
       'grid gap-[2px] rounded-xl overflow-hidden bg-black',
-      'max-w-xl w-full', // Reduced max width, removed mx-auto
-      'lg:max-w-2xl', // Smaller on large screens
+      'w-full max-w-xl mx-auto', // Mobile base size
+      'md:max-w-3xl', // Increased medium size
+      'lg:max-w-5xl', // Much larger for lg screens
+      'xl:max-w-6xl', // Even larger for xl
+      '2xl:max-w-7xl', // Maximum size for 2xl
       className,
       {
         'grid-cols-2 grid-rows-2 aspect-square': urls.length === 4,
