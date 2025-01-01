@@ -180,6 +180,35 @@ exports.Products = {
             }),
             required: true,
         },
+        // Add these fields in the fields array, before the approvedForSale field
+{
+    name: 'themes',
+    label: 'Content Themes',
+    type: 'select',
+    hasMany: true,
+    options: config_1.PRODUCT_THEMES.map(function (_a) {
+        var label = _a.label, value = _a.value;
+        return ({ label: label, value: value });
+    }),
+    required: true,
+    admin: {
+        description: 'Select one or more themes that best describe your content'
+    }
+},
+{
+    name: 'excerpt',
+    type: 'textarea',
+    maxLength: 200
+},
+{
+    name: 'publishedDate',
+    type: 'date'
+},
+{
+    name: 'context',
+    label: 'Written Context',
+    type: 'text'
+},
         {
             name: 'approvedForSale',
             label: 'Content Status',

@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import { PRODUCT_CATEGORIES } from '../../config';
+import { PRODUCT_CATEGORIES, PRODUCT_THEMES } from '../../config';
 import { Product } from '../../payload-types';
 import { BeforeChangeHook } from 'payload/dist/collections/config/types';
 import { lexicalEditor, HTMLConverterFeature } from '@payloadcms/richtext-lexical';
@@ -95,6 +95,32 @@ export const Products: CollectionConfig = {
       type: 'select',
       options: PRODUCT_CATEGORIES.map(({ label, value }) => ({ label, value })),
       required: true,
+    },
+    {
+      name: 'context',
+      label: 'Written Context',
+      type: 'text',
+      
+    },
+    {
+      name: 'themes',
+      label: 'Content Themes',
+      type: 'select',
+      hasMany: true,
+      options: PRODUCT_THEMES.map(({ label, value }) => ({ label, value })),
+      required: true,
+      admin: {
+        description: 'Select one or more themes that best describe your content'
+      }
+    },
+    {
+      name: 'excerpt',
+      type: 'textarea',
+      maxLength: 200
+    },
+    {
+      name: 'publishedDate',
+      type: 'date'
     },
     {
       name: 'approvedForSale',

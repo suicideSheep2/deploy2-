@@ -23,7 +23,10 @@ interface Product {
   category: string;
   author: string;
   images: Array<{ image: string | { url: string } }>;
-  // Add any other fields your product has
+  context: string;
+  themes: string[];
+  excerpt: string;
+  publishedDate: string;
 }
 
 interface PageProps {
@@ -87,11 +90,14 @@ const Page = async ({ params }: PageProps) => {
             {/* Right side - Content Context */}
             <div className="flex-1 mt-8 mb-8">
             <ContentContextButton 
-  category={product?.category?.toString() || 'Uncategorized'}
-  title={product?.name?.toString() || 'Untitled'}
-  author={product?.author?.toString() || 'Unknown Author'}
-  description={product?.description?.toString() || 'No description available'}
-/>
+              name={product.name as string}
+              category={product.category as string}
+              author={product.author as string}
+              themes={product.themes as string[]}
+              excerpt={product.excerpt as string}
+              context={product.context as string}
+              publishedDate={product.publishedDate as string}
+            />
             </div>
           </div>
 
@@ -130,7 +136,7 @@ const Page = async ({ params }: PageProps) => {
           <div className='flex items-center space-x-4'>
             <div className="group relative">
               <span className='text-sm text-muted-foreground'>
-                © {product.author as string}
+                © {product.context as string}
               </span>
               <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
               Copyright Content

@@ -1,28 +1,33 @@
 "use client"
 
-import { ChevronDown, BookOpen, Feather, Clock, Heart } from 'lucide-react'
+import { ChevronDown, BookOpen, Feather, Clock, Heart, Calendar } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 
 interface ContentContextButtonProps {
+  name?: string;
   category?: string;
-  title?: string;
   author?: string;
-  description?: string | object;
+  themes?: string[];
+  excerpt?: string;
+  context?: string;
+  publishedDate?: string;
 }
 
 const ContentContextButton = ({ 
+  name = 'Untitled', 
   category = 'Uncategorized', 
-  title = 'Untitled', 
-  author = 'Unknown Author', 
-  description = 'No description available' 
+  author = 'Unknown Author',
+  themes = [],
+  excerpt = 'No excerpt available',
+  context = '',
+  publishedDate = ''
 }: ContentContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // Auto-open effect - only for larger screens
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) { // md breakpoint
+      if (window.innerWidth >= 768) {
         const timer = setTimeout(() => {
           setIsOpen(true)
         }, 500)
@@ -32,7 +37,7 @@ const ContentContextButton = ({
       }
     }
 
-    handleResize() // Initial check
+    handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
@@ -48,16 +53,7 @@ const ContentContextButton = ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const safeCategory = typeof category === 'string' ? category : 'Uncategorized'
-  const safeAuthor = typeof author === 'string' ? author : 'Unknown Author'
-
-  const contextInfo = {
-    timeToRead: "4 min read",
-    genre: safeCategory,
-    mood: safeAuthor,
-    themes: [safeCategory],
-    writtenOn: `By: ${safeAuthor}`
-  }
+  const formattedDate = publishedDate ? new Date(publishedDate).toLocaleDateString() : 'Date not available'
 
   return (
     <div className="relative flex justify-end w-full" ref={dropdownRef}>
@@ -89,7 +85,7 @@ const ContentContextButton = ({
                        w-80 md:w-96">
           <div className="p-4 space-y-4 max-h-[80vh]">
             <div className="border-b border-gray-200/30 pb-2">
-              <h3 className="text-lg font-serif text-gray-700">{title}</h3>
+              <h3 className="text-lg font-serif text-gray-700">{name}</h3>
             </div>
 
             <div className="space-y-3 overflow-y-auto pr-2 max-h-[60vh] 
@@ -101,22 +97,19 @@ const ContentContextButton = ({
                           [&::-webkit-scrollbar-thumb]:hover:bg-white/30
                           hover:[&::-webkit-scrollbar-thumb]:bg-white/40
                           transition-all duration-300">
-              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg 
-                            transition-colors duration-200">
-                <Clock className="h-4 w-4" />
-                <span className="text-sm">{contextInfo.timeToRead}</span>
+              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
+                <Calendar className="h-4 w-4" />
+                <span className="text-sm">{formattedDate}</span>
               </div>
 
-              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg 
-                            transition-colors duration-200">
+              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
                 <BookOpen className="h-4 w-4" />
-                <span className="text-sm">{contextInfo.genre}</span>
+                <span className="text-sm">{category}</span>
               </div>
 
-              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg 
-                            transition-colors duration-200">
+              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
                 <Heart className="h-4 w-4" />
-                <span className="text-sm">{contextInfo.mood}</span>
+                <span className="text-sm">{author}</span>
               </div>
 
               <div className="space-y-2 p-2 rounded-lg">
@@ -125,7 +118,7 @@ const ContentContextButton = ({
                   <span className="text-sm">Themes</span>
                 </div>
                 <div className="flex flex-wrap gap-2 pl-7">
-                  {contextInfo.themes.map((theme, index) => (
+                  {themes.map((theme, index) => (
                     <span
                       key={`${theme}-${index}`}
                       className="px-2 py-1 text-xs rounded-full bg-white/30 text-gray-600
@@ -138,11 +131,21 @@ const ContentContextButton = ({
                 </div>
               </div>
 
-              <div className="bg-white/10 p-4 rounded-lg">
-                <div className="text-sm text-gray-600 leading-relaxed">
-                  {contextInfo.writtenOn}
+              {excerpt && (
+                <div className="bg-white/10 p-4 rounded-lg">
+                  <div className="text-sm text-gray-600 leading-relaxed">
+                    {excerpt}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {context && (
+                <div className="bg-white/10 p-4 rounded-lg mt-2">
+                  <div className="text-sm text-gray-600 leading-relaxed">
+                    Written Context: {context}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

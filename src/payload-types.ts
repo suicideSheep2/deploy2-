@@ -63,6 +63,21 @@ export interface Product {
   description_html?: string | null;
   author: string;
   category: 'poems' | 'novels' | 'miscellaneous';
+  context?: string | null;
+  themes: (
+    | 'romance'
+    | 'mystery'
+    | 'nature'
+    | 'contemporary'
+    | 'historical'
+    | 'social_issues'
+    | 'fantasy'
+    | 'philosophy'
+    | 'personal_growth'
+    | 'cultural'
+  )[];
+  excerpt?: string | null;
+  publishedDate?: string | null;
   approvedForSale?: ('pending' | 'approved' | 'denied') | null;
   images: {
     image: string | Media;
