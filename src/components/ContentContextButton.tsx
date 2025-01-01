@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown, BookOpen, Feather, Heart, Calendar } from 'lucide-react'
+import { ChevronDown, BookOpen, Feather, Clock, Heart, Calendar } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 
 interface ContentContextButtonProps {
@@ -53,11 +53,7 @@ const ContentContextButton = ({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const formattedDate = publishedDate ? new Date(publishedDate).toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  }) : 'Date not available'
+  const formattedDate = publishedDate ? new Date(publishedDate).toLocaleDateString() : 'Date not available'
 
   return (
     <div className="relative flex justify-end w-full" ref={dropdownRef}>
@@ -87,70 +83,70 @@ const ContentContextButton = ({
                        border border-white/20 shadow-xl transition-all duration-300
                        animate-in slide-in-from-top-5 fade-in-20 z-50
                        w-80 md:w-96">
-          <div className="p-6 space-y-6 max-h-[80vh]">
-            {/* Header Section */}
-            <div className="space-y-2">
-              <h3 className="text-xl font-serif text-gray-800 leading-tight">{name}</h3>
-              <div className="flex items-center space-x-2 text-gray-500">
+          <div className="p-4 space-y-4 max-h-[80vh]">
+            <div className="border-b border-gray-200/30 pb-2">
+              <h3 className="text-lg font-serif text-gray-700">{name}</h3>
+            </div>
+
+            <div className="space-y-3 overflow-y-auto pr-2 max-h-[60vh] 
+                          [&::-webkit-scrollbar]:w-1.5
+                          [&::-webkit-scrollbar-track]:bg-transparent
+                          [&::-webkit-scrollbar-thumb]:bg-white/20
+                          [&::-webkit-scrollbar-thumb]:rounded-full
+                          [&::-webkit-scrollbar]:hover:w-1.5
+                          [&::-webkit-scrollbar-thumb]:hover:bg-white/30
+                          hover:[&::-webkit-scrollbar-thumb]:bg-white/40
+                          transition-all duration-300">
+              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
                 <Calendar className="h-4 w-4" />
-                <span className="text-sm font-light">{formattedDate}</span>
+                <span className="text-sm">{formattedDate}</span>
               </div>
-            </div>
 
-            {/* Metadata Row */}
-            <div className="flex items-center justify-between px-4 py-3 bg-white/20 rounded-xl">
-              <div className="flex items-center space-x-2">
-                <BookOpen className="h-4 w-4 text-gray-600" />
-                <span className="text-sm text-gray-600">{category}</span>
+              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
+                <BookOpen className="h-4 w-4" />
+                <span className="text-sm">{category}</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <Heart className="h-4 w-4 text-gray-600" />
-                <span className="text-sm text-gray-600">{author}</span>
-              </div>
-            </div>
 
-            {/* Themes Section */}
-            {themes.length > 0 && (
-              <div className="space-y-3">
-                <div className="flex items-center space-x-2 text-gray-600">
+              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
+                <Heart className="h-4 w-4" />
+                <span className="text-sm">{author}</span>
+              </div>
+
+              <div className="space-y-2 p-2 rounded-lg">
+                <div className="flex items-center space-x-3 text-gray-600">
                   <Feather className="h-4 w-4" />
-                  <span className="text-sm font-medium">Themes</span>
+                  <span className="text-sm">Themes</span>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 pl-7">
                   {themes.map((theme, index) => (
                     <span
                       key={`${theme}-${index}`}
-                      className="px-3 py-1 text-xs rounded-full bg-white/40 text-gray-700
+                      className="px-2 py-1 text-xs rounded-full bg-white/30 text-gray-600
                                hover:bg-green-100/50 hover:text-green-800 hover:scale-105
-                               transition-all duration-200 cursor-pointer
-                               border border-white/50 backdrop-blur-sm"
+                               transition-all duration-200 cursor-pointer"
                     >
                       {theme}
                     </span>
                   ))}
                 </div>
               </div>
-            )}
 
-            {/* Excerpt Section */}
-            {excerpt && (
-              <div className="bg-gradient-to-br from-white/20 to-white/10 p-6 rounded-xl
-                            backdrop-blur-sm border border-white/30 shadow-inner">
-                <div className="font-serif text-sm text-gray-700 leading-relaxed italic 
-                              tracking-wide first-letter:text-lg first-letter:font-medium">
+              {excerpt && (
+                <div className="bg-white/10 p-4 rounded-lg">
+                  <div className="text-sm text-gray-600 leading-relaxed italic">
                   &ldquo;{excerpt}&rdquo;
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Context Section */}
-            {context && (
-              <div className="bg-white/10 p-4 rounded-xl">
-                <div className="text-sm text-gray-600 leading-relaxed">
-                  {context}
+              {context && (
+                <div className="bg-white/10 p-4 rounded-lg mt-2">
+                  <div className="text-sm text-gray-600 leading-relaxed">
+                    Written Context: {context}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       )}
