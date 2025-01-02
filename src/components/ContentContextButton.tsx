@@ -124,12 +124,12 @@ const ContentContextButton = ({
                     <BookOpen className="h-4 w-4" />
                     <span className="text-sm">{category}</span>
                   </div>
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 
+                  {/* <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 
                                 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-1
                                 opacity-0 group-hover:opacity-100 transition-opacity duration-300 
                                 whitespace-nowrap pointer-events-none">
                     Category
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="group relative">
@@ -137,21 +137,21 @@ const ContentContextButton = ({
                                 text-gray-600 hover:text-green-800 hover:bg-white/50 
                                 transition-all duration-200 shadow-sm
                                 hover:shadow-md hover:scale-105">
-                    <Heart className="h-4 w-4" />
-                    <span className="text-sm">{author}</span>
+                    {/* <Heart className="h-4 w-4" /> */}
+                    <span className="text-sm"> ©{author}</span>
                   </div>
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 
+                  {/* <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 
                                 bg-gray-800 text-white text-xs rounded py-1 px-2 mb-1
                                 opacity-0 group-hover:opacity-100 transition-opacity duration-300 
                                 whitespace-nowrap pointer-events-none">
                     Author
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="[&>button]:bg-transparent [&>button]:hover:bg-transparent [&>button]:border-none">
-                  <AddToCartButton
+                  {/* <AddToCartButton
                     //@ts-ignore
-                    product={product} />
+                    product={product} /> */}
                 </div>
               </div>
 
