@@ -1,7 +1,7 @@
 "use client"
-
-import { ChevronDown, BookOpen, Feather, Clock, Heart, Calendar } from 'lucide-react'
+import { ChevronDown, BookOpen, Feather, Heart, Quote, PenSquare } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
+import AddToCartButton from '@/components/AddToCartButton'
 
 interface ContentContextButtonProps {
   name?: string;
@@ -10,6 +10,21 @@ interface ContentContextButtonProps {
   themes?: string[];
   excerpt?: string;
   context?: string;
+  publishedDate?: string;
+  product?: any;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  description?: string;
+  description_html?: string;
+  category: string;
+  author: string;
+  images?: Array<{ image: string | { url: string } }>;
+  context?: string;
+  themes?: string[];
+  excerpt?: string;
   publishedDate?: string;
 }
 
@@ -20,7 +35,8 @@ const ContentContextButton = ({
   themes = [],
   excerpt = 'No excerpt available',
   context = '',
-  publishedDate = ''
+  publishedDate = '',
+  product
 }: ContentContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -84,8 +100,9 @@ const ContentContextButton = ({
                        animate-in slide-in-from-top-5 fade-in-20 z-50
                        w-80 md:w-96">
           <div className="p-4 space-y-4 max-h-[80vh]">
-            <div className="border-b border-gray-200/30 pb-2">
+            <div className="space-y-1">
               <h3 className="text-lg font-serif text-gray-700">{name}</h3>
+              <p className="text-sm text-gray-400">{formattedDate}</p>
             </div>
 
             <div className="space-y-3 overflow-y-auto pr-2 max-h-[60vh] 
@@ -97,33 +114,59 @@ const ContentContextButton = ({
                           [&::-webkit-scrollbar-thumb]:hover:bg-white/30
                           hover:[&::-webkit-scrollbar-thumb]:bg-white/40
                           transition-all duration-300">
-              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
-                <Calendar className="h-4 w-4" />
-                <span className="text-sm">{formattedDate}</span>
+              
+              <div className="flex items-center gap-4">
+                <div className="group relative">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/40
+                                text-gray-600 hover:text-green-800 hover:bg-white/50 
+                                transition-all duration-200 shadow-sm
+                                hover:shadow-md hover:scale-105">
+                    <BookOpen className="h-4 w-4" />
+                    <span className="text-sm">{category}</span>
+                  </div>
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 
+                                bg-gray-800 text-white text-xs rounded py-1 px-2 mb-1
+                                opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                                whitespace-nowrap pointer-events-none">
+                    Category
+                  </div>
+                </div>
+
+                <div className="group relative">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/40
+                                text-gray-600 hover:text-green-800 hover:bg-white/50 
+                                transition-all duration-200 shadow-sm
+                                hover:shadow-md hover:scale-105">
+                    <Heart className="h-4 w-4" />
+                    <span className="text-sm">{author}</span>
+                  </div>
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 
+                                bg-gray-800 text-white text-xs rounded py-1 px-2 mb-1
+                                opacity-0 group-hover:opacity-100 transition-opacity duration-300 
+                                whitespace-nowrap pointer-events-none">
+                    Author
+                  </div>
+                </div>
+
+                <div className="[&>button]:bg-transparent [&>button]:hover:bg-transparent [&>button]:border-none">
+                  <AddToCartButton
+                    //@ts-ignore
+                    product={product} />
+                </div>
               </div>
 
-              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
-                <BookOpen className="h-4 w-4" />
-                <span className="text-sm">{category}</span>
-              </div>
-
-              <div className="flex items-center space-x-3 text-gray-600 p-2 rounded-lg">
-                <Heart className="h-4 w-4" />
-                <span className="text-sm">{author}</span>
-              </div>
-
-              <div className="space-y-2 p-2 rounded-lg">
-                <div className="flex items-center space-x-3 text-gray-600">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-gray-600">
                   <Feather className="h-4 w-4" />
                   <span className="text-sm">Themes</span>
                 </div>
-                <div className="flex flex-wrap gap-2 pl-7">
+                <div className="flex flex-wrap gap-2">
                   {themes.map((theme, index) => (
                     <span
                       key={`${theme}-${index}`}
-                      className="px-2 py-1 text-xs rounded-full bg-white/30 text-gray-600
-                               hover:bg-green-100/50 hover:text-green-800 hover:scale-105
-                               transition-all duration-200 cursor-pointer"
+                      className="px-3 py-1.5 text-sm rounded-full bg-white/40 text-gray-600
+                               hover:text-green-800 hover:bg-white/50 transition-all duration-200 
+                               cursor-pointer shadow-sm hover:shadow-md hover:scale-105"
                     >
                       {theme}
                     </span>
@@ -132,17 +175,29 @@ const ContentContextButton = ({
               </div>
 
               {excerpt && (
-                <div className="bg-white/10 p-4 rounded-lg">
-                  <div className="text-sm text-gray-600 leading-relaxed italic">
-                  &ldquo;{excerpt}&rdquo;
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <Quote className="h-4 w-4 text-gray-600" />
+                    <h4 className="text-sm font-medium text-gray-600">Excerpt</h4>
+                  </div>
+                  <div className="bg-white/10 p-4 rounded-lg">
+                    <div className="text-sm text-gray-600 leading-relaxed italic">
+                      &ldquo;{excerpt}&rdquo;
+                    </div>
                   </div>
                 </div>
               )}
 
               {context && (
-                <div className="bg-white/10 p-4 rounded-lg mt-2">
-                  <div className="text-sm text-gray-600 leading-relaxed">
-                    Written Context: {context}
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <PenSquare className="h-4 w-4 text-gray-600" />
+                    <h4 className="text-sm font-medium text-gray-600">Written Context</h4>
+                  </div>
+                  <div className="bg-white/10 p-4 rounded-lg">
+                    <div className="text-sm text-gray-600 leading-relaxed">
+                      {context}
+                    </div>
                   </div>
                 </div>
               )}

@@ -97,6 +97,7 @@ const Page = async ({ params }: PageProps) => {
               excerpt={product.excerpt as string}
               context={product.context as string}
               publishedDate={product.publishedDate as string}
+              product={product} 
             />
             </div>
           </div>
@@ -136,7 +137,7 @@ const Page = async ({ params }: PageProps) => {
           <div className='flex items-center space-x-4'>
             <div className="group relative">
               <span className='text-sm text-muted-foreground'>
-                © {product.context as string}
+                © {product.author as string}
               </span>
               <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
               Copyright Content
