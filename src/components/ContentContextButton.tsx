@@ -192,7 +192,7 @@ const ContentContextButton = ({
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <PenSquare className="h-4 w-4 text-gray-600" />
-                    <h4 className="text-sm font-medium text-gray-600">Written Context</h4>
+                    <h4 className="text-sm font-medium text-gray-600">Context</h4>
                   </div>
                   <div className="bg-white/10 p-4 rounded-lg">
                     <div className="text-sm text-gray-600 leading-relaxed">
