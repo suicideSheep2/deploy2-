@@ -10,6 +10,7 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -19,6 +20,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 var __generator = (this && this.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
@@ -46,6 +48,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+
 var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -55,19 +58,60 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Products = void 0;
+
 var config_1 = require("../../config");
 var richtext_lexical_1 = require("@payloadcms/richtext-lexical");
-// Hook to add the user to the product before saving
-var addUser = function (_a) { return __awaiter(void 0, [_a], void 0, function (_b) {
-    var user;
-    var req = _b.req, data = _b.data;
-    return __generator(this, function (_c) {
-        user = req.user;
-        return [2 /*return*/, __assign(__assign({}, data), { user: user.id })];
+
+// Function to count words in Lexical editor content
+var countWordsInRichText = function(content) {
+    if (!content || typeof content !== 'object') return 0;
+
+    if (content.html) {
+        var strippedHtml = content.html.replace(/<[^>]*>/g, ' ');
+        return strippedHtml.trim().split(/\s+/).filter(Boolean).length;
+    }
+
+    if (!content?.root?.children) return 0;
+
+    var extractTextFromNode = function(node) {
+        if (typeof node === 'string') return node;
+        if (typeof node?.text === 'string') return node.text;
+        if (Array.isArray(node?.children)) {
+            return node.children.map(extractTextFromNode).join(' ');
+        }
+        return '';
+    };
+
+    var text = content.root.children.map(extractTextFromNode).join(' ');
+    return text.trim().split(/\s+/).filter(Boolean).length;
+};
+
+// Combined hook to update both user and fields before change
+var updateFieldsBeforeChange = function(_a) {
+    var req = _a.req, data = _a.data, operation = _a.operation;
+    return __awaiter(void 0, void 0, void 0, function() {
+        var user;
+        return __generator(this, function(_b) {
+            user = req.user;
+            
+            // Update word count if description exists
+            if (data.description) {
+                data.descriptionWordCount = countWordsInRichText(data.description);
+            }
+
+            // Set or update publishedDate
+            if (operation === 'create' || !data.publishedDate) {
+                data.publishedDate = new Date().toISOString();
+            }
+
+            return [2 /*return*/, __assign(__assign({}, data), { user: user.id })];
+        });
     });
-}); };
+};
+
 exports.Products = {
     slug: 'products',
     admin: {
@@ -78,60 +122,46 @@ exports.Products = {
         plural: 'Contents',
     },
     access: {
-        // Restrict read access
-        read: function (_a) {
+        read: function(_a) {
             var user = _a.req.user;
-            if ((user === null || user === void 0 ? void 0 : user.role) === 'admin') {
-                return true; // Admins can see all products
+            if (user?.role === 'admin') {
+                return true;
             }
-            // Regular users can only see their own products
             return {
                 user: {
-                    equals: user === null || user === void 0 ? void 0 : user.id,
+                    equals: user?.id,
                 },
             };
         },
-        // Restrict create access
-        create: function (_a) {
+        create: function(_a) {
             var user = _a.req.user;
-            return Boolean(user); // All logged-in users can create products
+            return Boolean(user);
         },
-        // Restrict update access
-        update: function (_a) {
+        update: function(_a) {
             var user = _a.req.user;
-            if ((user === null || user === void 0 ? void 0 : user.role) === 'admin') {
-                return true; // Admins can update any product
+            if (user?.role === 'admin') {
+                return true;
             }
-            // Regular users can only update their own products
             return {
                 user: {
-                    equals: user === null || user === void 0 ? void 0 : user.id,
+                    equals: user?.id,
                 },
             };
         },
-        // Restrict delete access
-        delete: function (_a) {
+        delete: function(_a) {
             var user = _a.req.user;
-            if ((user === null || user === void 0 ? void 0 : user.role) === 'admin') {
-                return true; // Admins can delete any product
+            if (user?.role === 'admin') {
+                return true;
             }
-            // Regular users can only delete their own products
             return {
                 user: {
-                    equals: user === null || user === void 0 ? void 0 : user.id,
+                    equals: user?.id,
                 },
             };
         },
     },
     hooks: {
-        beforeChange: [
-            addUser,
-            function (args) { return __awaiter(void 0, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    return [2 /*return*/];
-                });
-            }); },
-        ],
+        beforeChange: [updateFieldsBeforeChange], // Combined hooks into one
     },
     fields: [
         {
@@ -141,7 +171,7 @@ exports.Products = {
             required: true,
             hasMany: false,
             admin: {
-                condition: function () { return false; }, // Hide the field in the admin panel
+                condition: function() { return false; },
             },
         },
         {
@@ -154,16 +184,32 @@ exports.Products = {
             name: 'description',
             label: 'Content Description',
             type: 'richText',
-            editor: (0, richtext_lexical_1.lexicalEditor)({
-                features: function (_a) {
+            editor: richtext_lexical_1.lexicalEditor({
+                features: function(_a) {
                     var defaultFeatures = _a.defaultFeatures;
                     return __spreadArray(__spreadArray([], defaultFeatures, true), [
-                        (0, richtext_lexical_1.HTMLConverterFeature)({}),
+                        richtext_lexical_1.HTMLConverterFeature({}),
                     ], false);
                 },
             }),
         },
-        (0, richtext_lexical_1.lexicalHTML)('description', { name: 'description_html' }),
+        {
+            name: 'descriptionWordCount',
+            label: 'Description Word Count',
+            type: 'number',
+            admin: {
+                readOnly: true,
+                hidden: false,
+                description: 'Automatically calculated word count',
+            },
+        },
+        {
+            name: 'description_html',
+            type: 'textarea',
+            admin: {
+                hidden: true,
+            },
+        },
         {
             name: 'author',
             label: 'Author',
@@ -172,57 +218,58 @@ exports.Products = {
         },
         {
             name: 'category',
-            label: ' Content Category',
+            label: 'Content Category',
             type: 'select',
-            options: config_1.PRODUCT_CATEGORIES.map(function (_a) {
+            options: config_1.PRODUCT_CATEGORIES.map(function(_a) {
                 var label = _a.label, value = _a.value;
                 return ({ label: label, value: value });
             }),
             required: true,
         },
-        // Add these fields in the fields array, before the approvedForSale field
-{
-    name: 'themes',
-    label: 'Content Themes',
-    type: 'select',
-    hasMany: true,
-    options: config_1.PRODUCT_THEMES.map(function (_a) {
-        var label = _a.label, value = _a.value;
-        return ({ label: label, value: value });
-    }),
-    required: true,
-    admin: {
-        description: 'Select one or more themes that best describe your content'
-    }
-},
-{
-    name: 'excerpt',
-    type: 'textarea',
-    maxLength: 200
-},
-{
-    name: 'publishedDate',
-    type: 'date'
-},
-{
-    name: 'context',
-    label: 'Written Context',
-    type: 'text'
-},
+        {
+            name: 'themes',
+            label: 'Content Themes',
+            type: 'select',
+            hasMany: true,
+            options: config_1.PRODUCT_THEMES.map(function(_a) {
+                var label = _a.label, value = _a.value;
+                return ({ label: label, value: value });
+            }),
+            required: true,
+            admin: {
+                description: 'Select one or more themes that best describe your content'
+            }
+        },
+        {
+            name: 'excerpt',
+            type: 'textarea',
+            maxLength: 200
+        },
+        {
+            name: 'publishedDate',
+            type: 'date',
+            admin: {
+                readOnly: true,
+                description: 'Automatically set on creation and updates'
+            }
+        },
+        {
+            name: 'context',
+            label: 'Written Context',
+            type: 'text'
+        },
         {
             name: 'approvedForSale',
             label: 'Content Status',
             type: 'select',
             defaultValue: 'pending',
             access: {
-                create: function (_a) {
+                create: function(_a) {
                     var req = _a.req;
                     return req.user.role === 'admin';
                 },
-                // changing to let know general users of their contnet status
-                read: function () { return true; },
-                // read: ({ req }) => req.user.role === 'admin',
-                update: function (_a) {
+                read: function() { return true; },
+                update: function(_a) {
                     var req = _a.req;
                     return req.user.role === 'admin';
                 },
@@ -241,10 +288,6 @@ exports.Products = {
                     value: 'denied',
                 },
             ],
-            // noo this wont even show status for general users 
-            // admin: {
-            //   condition: ({ user }) => user.role === 'admin', // Only allow editing for admins
-            // },
         },
         {
             name: 'images',

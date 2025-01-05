@@ -60,11 +60,13 @@ export interface Product {
     };
     [k: string]: unknown;
   } | null;
+  descriptionWordCount?: number | null;
   description_html?: string | null;
   author: string;
   category: 'poems' | 'novels' | 'miscellaneous';
   context?: string | null;
   themes: (
+    | 'love'
     | 'romance'
     | 'mystery'
     | 'nature'
@@ -75,6 +77,15 @@ export interface Product {
     | 'philosophy'
     | 'personal_growth'
     | 'cultural'
+    | 'monologue'
+    | 'monotone'
+    | 'self_doubt'
+    | 'mental_health'
+    | 'beauty'
+    | 'elegance'
+    | 'grace'
+    | 'exquisiteness'
+    | 'charm'
   )[];
   excerpt?: string | null;
   publishedDate?: string | null;

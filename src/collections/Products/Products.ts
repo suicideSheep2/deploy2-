@@ -9,6 +9,43 @@ const addUser: BeforeChangeHook<Product> = async ({ req, data }) => {
   return { ...data, user: user.id };
 };
 
+const countWordsInRichText = (content: any): number => {
+  if (!content || typeof content !== 'object') return 0;
+  
+  if (content.html) {
+    const strippedHtml = content.html.replace(/<[^>]*>/g, ' ');
+    return strippedHtml.trim().split(/\s+/).filter(Boolean).length;
+  }
+
+  if (!content?.root?.children) return 0;
+
+  const extractTextFromNode = (node: any): string => {
+    if (typeof node === 'string') return node;
+    if (typeof node?.text === 'string') return node.text;
+    if (Array.isArray(node?.children)) {
+      return node.children.map(extractTextFromNode).join(' ');
+    }
+    return '';
+  };
+
+  const text = content.root.children.map(extractTextFromNode).join(' ');
+  return text.trim().split(/\s+/).filter(Boolean).length;
+};
+
+const updateFieldsBeforeChange: BeforeChangeHook<Product> = async ({ data, operation }) => {
+  // Update word count if description exists
+  if (data.description) {
+    data.descriptionWordCount = countWordsInRichText(data.description);
+  }
+
+  // Set or update publishedDate
+  if (operation === 'create' || !data.publishedDate) {
+    data.publishedDate = new Date().toISOString();
+  }
+
+  return data;
+};
+
 export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
@@ -46,7 +83,7 @@ export const Products: CollectionConfig = {
     },
   },
   hooks: {
-    beforeChange: [addUser],
+    beforeChange: [addUser, updateFieldsBeforeChange],
   },
   fields: [
     {
@@ -77,8 +114,18 @@ export const Products: CollectionConfig = {
       }),
     },
     {
+      name: 'descriptionWordCount',
+      label: 'Description Word Count',
+      type: 'number',
+      admin: {
+        readOnly: true,
+        hidden: false,
+        description: 'Automatically calculated word count',
+      },
+    },
+    {
       name: 'description_html',
-      type: 'textarea', //changed
+      type: 'textarea',
       admin: {
         hidden: true,
       },
@@ -100,7 +147,6 @@ export const Products: CollectionConfig = {
       name: 'context',
       label: 'Written Context',
       type: 'text',
-      
     },
     {
       name: 'themes',
@@ -120,7 +166,11 @@ export const Products: CollectionConfig = {
     },
     {
       name: 'publishedDate',
-      type: 'date'
+      type: 'date',
+      admin: {
+        readOnly: true,
+        description: 'Automatically set on creation and updates'
+      }
     },
     {
       name: 'approvedForSale',
@@ -167,5 +217,6 @@ export const Products: CollectionConfig = {
         },
       ],
     },
+    
   ],
 };

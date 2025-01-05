@@ -11,7 +11,9 @@ interface ContentContextButtonProps {
   excerpt?: string;
   context?: string;
   publishedDate?: string;
+  descriptionWordCount?: number;
   product?: any;
+
 }
 
 interface Product {
@@ -36,10 +38,13 @@ const ContentContextButton = ({
   excerpt = 'No excerpt available',
   context = '',
   publishedDate = '',
+  descriptionWordCount = 0,
   product
 }: ContentContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const displayWordCount = descriptionWordCount || 0;  // Ensure we always have a number
 
   useEffect(() => {
     const handleResize = () => {
@@ -98,7 +103,7 @@ const ContentContextButton = ({
         <div className="absolute top-full right-0 mt-4 rounded-2xl bg-white/30 backdrop-blur-md
                        border border-white/20 shadow-xl transition-all duration-300
                        animate-in slide-in-from-top-5 fade-in-20 z-50
-                       w-80 md:w-96">
+                       sm:w-120 w-80 md:w-96">
           <div className="p-4 space-y-4 max-h-[80vh]">
             <div className="space-y-1">
               <h3 className="text-lg font-serif text-gray-700">{name}</h3>
@@ -148,12 +153,13 @@ const ContentContextButton = ({
                   </div> */}
                 </div>
 
-                <div className="[&>button]:bg-transparent [&>button]:hover:bg-transparent [&>button]:border-none">
-                  {/* <AddToCartButton
-                    //@ts-ignore
-                    product={product} /> */}
+                {displayWordCount > 0 && (
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/40 text-gray-600 hover:text-green-800 hover:bg-white/50 transition-all duration-200 shadow-sm hover:shadow-md hover:scale-105">
+                  <PenSquare className="h-4 w-4" />
+                  <span className="text-sm">{displayWordCount} words</span>
                 </div>
-              </div>
+              )}
+            </div>
 
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-gray-600">
@@ -187,7 +193,20 @@ const ContentContextButton = ({
                   </div>
                 </div>
               )}
-
+                
+                {/* {displayWordCount > 0 && (
+      <div className="space-y-1">
+        <div className="flex items-center gap-2">
+          <PenSquare className="h-4 w-4 text-gray-600" />
+          <h4 className="text-sm font-medium text-gray-600">
+            Word Count
+          </h4>
+        </div>
+        <div className="text-sm text-gray-600 bg-white/10 p-2 rounded">
+          {displayWordCount.toLocaleString()} words
+        </div>
+      </div>
+    )} */}
               {context && (
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">

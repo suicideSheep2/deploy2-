@@ -27,6 +27,7 @@ interface Product {
   themes: string[];
   excerpt: string;
   publishedDate: string;
+  descriptionWordCount: number; // Add this
 }
 
 interface PageProps {
@@ -98,6 +99,7 @@ const Page = async ({ params }: PageProps) => {
               context={product.context as string}
               publishedDate={product.publishedDate as string}
               product={product} 
+              descriptionWordCount={product.descriptionWordCount as number || 0}
             />
             </div>
           </div>
