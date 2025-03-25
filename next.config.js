@@ -8,7 +8,7 @@ const nextConfig = {
           },
           {
           protocol: "https",
-          hostname: "poetry-web2-production.up.railway.app",
+          hostname: "zooming-rebirth-production-6e37.up.railway.app",
         },
       ],
     },
